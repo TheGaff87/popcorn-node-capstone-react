@@ -6,7 +6,7 @@ import Chat from "./Chat";
 import Player from "./Player";
 
 
-import "./App.css";
+import "../App.css";
 
 export default function Main() {
   return (

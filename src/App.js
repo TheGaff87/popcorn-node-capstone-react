@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import Landing from "./Landing";
-import Login from "./LoginForm";
-import Signup from "./SignupForm";
-import SearchPage from "./SearchPage";
-import Watchlist from "./Watchlist";
-import Footer from "./Footer";
-import Main from "./Main";
+import Landing from "./components/Landing";
+import Login from "./components/LoginForm";
+import Signup from "./components/SignupForm";
+import SearchPage from "./components/SearchPage";
+import Watchlist from "./components/Watchlist";
+import Footer from "./components/Footer";
+import Main from "./components/Main";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
