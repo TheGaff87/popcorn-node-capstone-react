@@ -1,35 +1,34 @@
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
 import Benefits from "./InfoBene";
 import Details from "./InfoDetail";
+
+import { Link } from "react-router-dom";
 
 export default function SignupForm() {
   return (
     <div>
-      <Header />
       <Benefits />
-      <form class="signup">
+      <form className="signup">
         <fieldset>
-          <div class="flex">
+          <div className="flex">
             <legend>Signup</legend>
-            <label for="">
+            <label htmlFor="">
               First name
               <input type="text" />
             </label>
-            <label for="">
+            <label htmlFor="">
               Last name
               <input type="text" />
             </label>
-            <label for="">
+            <label htmlFor="">
               Username
               <input type="text" />
             </label>
-            <label for="">
+            <label htmlFor="">
               Email
               <input type="email" />
             </label>
-            <label for="">
+            <label htmlFor="">
               Password
               <input type="password" />
             </label>
@@ -38,7 +37,7 @@ export default function SignupForm() {
         <button>Submit</button>
       </form>
       <Details />
-      <Footer />
+      <Link to="/login">Have an account? Login!</Link>
     </div>
   );
 }

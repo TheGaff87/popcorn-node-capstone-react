@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Welcome(props) {
   return (
     <p className="welcome">
       Welcome, {props.person}!
-      <a className="account" href="/login-registration.html">Logout | Login</a>
+      <Link className="account" to="/login">Logout</Link>
     </p>
   );
 }

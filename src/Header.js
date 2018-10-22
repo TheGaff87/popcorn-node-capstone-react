@@ -1,15 +1,21 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 export default function Header() {
   return (
-    <header>
-      <h1>Popcorn</h1>
-
-      <nav>
-        <a href="/searchsaved.html">Search</a>
-        <a href="/searchsaved.html">Watchlist</a>
-        <a href="/searchsaved.html">Favorites</a>
-      </nav>
-    </header>
+    <nav>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/search">Search</Link>
+        </li>
+        <li>
+          <Link to="/watchlist">Watchlist</Link>
+        </li>
+      </ul>
+    </nav>
   );
 }

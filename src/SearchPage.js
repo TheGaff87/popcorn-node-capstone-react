@@ -3,7 +3,6 @@ import Welcome from "./Welcome";
 import Header from "./Header";
 import SearchForm from "./SearchForm";
 import Videos from './Videos';
-import Footer from "./Footer";
 
 export default function SearchPage(props) {
   return (
@@ -15,7 +14,6 @@ export default function SearchPage(props) {
           <SearchForm />
           <Videos />
       </section>
-      <Footer />
     </div>
   );
 }

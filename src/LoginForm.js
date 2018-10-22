@@ -1,23 +1,22 @@
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
 import Benefits from "./InfoBene";
 import Details from "./InfoDetail";
+
+import { Link } from "react-router-dom";
 
 export default function LoginForm() {
   return (
     <div>
-      <Header />
       <Benefits />
-      <form class="login">
+      <form className="login">
         <fieldset>
-          <div class="flex">
+          <div className="flex">
             <legend>Login</legend>
-            <label for="">
+            <label htmlFor="">
               Email
               <input type="email" />
             </label>
-            <label for="">
+            <label htmlFor="">
               Password
               <input type="password" />
             </label>
@@ -26,7 +25,8 @@ export default function LoginForm() {
         <button>Submit</button>
       </form>
       <Details />
-      <Footer />
+      <Link to="/signup">Don't have an account? Sign up!</Link>
+      <Link to="/landing">Return to Landing Page</Link>
     </div>
   );
 }

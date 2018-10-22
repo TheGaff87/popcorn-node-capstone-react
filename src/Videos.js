@@ -4,7 +4,7 @@ export default function Videos() {
   return (
     <div className="container">
       <div className="item">
-        1 <span style="font-size: 14px"> Play + Add to Watchlist</span>
+        1 Play + Add to Watchlist
       </div>
       <div className="item">2</div>
       <div className="item">3</div>
