@@ -3,7 +3,7 @@ import Nav from "./Nav";
 import SearchForm from "./SearchForm";
 import Videos from './Videos';
 
-import './SearchPage.css';
+import './VideoPages.css';
 
 export default function SearchPage(props) {
   return (

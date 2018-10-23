@@ -14,13 +14,3 @@
     border: 5px solid var(--gray);
     height: 180px;
 }
-
-.form-search, .watchlist {
-    background: var(--bluet);
-    padding: 20px;
-}
-
-.form-search h2, .watchlist h2 {
-    color: var(--blue);
-}
-

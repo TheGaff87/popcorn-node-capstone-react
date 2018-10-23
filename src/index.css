@@ -4,9 +4,12 @@
   --green: rgb(169, 255, 69);
   --mint: rgb(191, 255, 252);
   --pink: rgb(255, 48, 172);
+  --pinkt: rgba(255, 48, 172, .5);
   --yellow: rgba(255, 227, 29, 1);
+  --yellowt: rgba(255, 227, 29, .5);
   --blue: rgb(42, 166, 255);
   --bluet: rgba(42, 166, 255, .3);
+  --turqt: rgba(75, 255, 231, 0.2);
 
 
 }
@@ -18,7 +21,7 @@ html {
 body {
   background-color: var(--dkgre);
   background-image: url('assets/topography.svg'),
-  linear-gradient(160deg, rgba(191, 255, 252, 1), rgb(255, 232, 167));
+  linear-gradient(160deg, rgb(160, 7, 142), rgb(61, 150, 121));
   background-size: 340px, auto;
   background-attachment: fixed;
   margin: 0;
@@ -46,6 +49,9 @@ ul {
 }
 
 button {
+  background: var(--pink);
+  border: 0;
+  border-radius: 2px;
   cursor: pointer;
 }
 
@@ -67,16 +73,10 @@ fieldset {
   border: 0;
 }
 
-form {
-  background: var(--gray);
-  padding: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 label, input {
   height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 

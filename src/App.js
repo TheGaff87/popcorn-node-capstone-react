@@ -18,7 +18,10 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          <Route exact path="/" render={() => <Welcome person="Rochelle" />}/>
+          <Route exact path="/" render={() => <Welcome person={"Rochelle"} />}/>
+          {/* // login user {user}*/}
+          {/* // grab from db user name */}
+          {/* then the name gets stored in a prop */}
           <header>
             <h1><Link to="/">Popcorn</Link></h1>
             <Route exact path="/" component={Nav} />

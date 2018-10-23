@@ -22,8 +22,9 @@ export default function LoginForm() {
           </fieldset>
           <button>Submit</button>
         </form>
-        <Link to="/signup">Don't have an account? Sign up! </Link>
-        <Link to="/landing">Return to Landing Page</Link>
+        <nav>
+          <Link to="/signup">Don't have an account? <span>Sign up!</span> </Link>
+        </nav>
       </div>
       <Details />
     </section>

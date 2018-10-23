@@ -12,10 +12,6 @@ export default function SignupForm() {
         <form className="signup">
           <fieldset>
             <div className="flex">
-              <label htmlFor="name">First name</label>
-              <input id="name" type="text" />
-              <label htmlFor="">Last name</label>
-              <input type="text" />
               <label htmlFor="">Username</label>
               <input type="text" />
               <label htmlFor="">Email</label>
@@ -26,7 +22,9 @@ export default function SignupForm() {
           </fieldset>
           <button>Submit</button>
         </form>
-      <Link to="/login">Have an account? Login!</Link>
+        <nav>
+          <Link to="/login">Have an account? <span>Login!</span></Link>
+        </nav>
       </div>
       <Details />
     </section>
