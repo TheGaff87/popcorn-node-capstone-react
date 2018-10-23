@@ -1,0 +1,44 @@
+.chat-container {
+    background-color: var(--navy);
+    min-height: 360px;
+}
+
+.chat-container button {
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.chat-container button:hover::after {
+    content: 'Sync up your videos';
+    position: absolute;
+    width: 160px;
+    left: 55px;
+}
+
+.chat-box {
+    background: white;
+    position: relative;
+    z-index: 2;
+    height: calc(360px - 40px);
+}
+
+.chat-box div {
+    padding: 8px;
+}
+
+.chat-box div p {
+    margin: 0;
+}
+
+.chat-box div:nth-child(1) {
+    background: var(--gray);
+}
+
+.chat-box div:nth-child(2) {
+    background: var(--ltgray);
+}
+
+.chat-container, .chat-box {
+    padding: 20px;
+    overflow: hidden;
+}

@@ -2,10 +2,12 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-export default function Header() {
+import "./Nav.css";
+
+export default function Nav() {
   return (
     <nav>
-      <ul>
+      <ul className="nav-items">
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -14,6 +16,9 @@ export default function Header() {
         </li>
         <li>
           <Link to="/watchlist">Watchlist</Link>
+        </li>
+        <li>
+          <Link className="account" to="/login">Logout</Link>
         </li>
       </ul>
     </nav>

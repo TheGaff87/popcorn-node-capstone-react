@@ -1,15 +1,15 @@
 import React from "react";
 
+import './Video.css';
+
 export default function Videos() {
   return (
-    <div className="container">
-      <div className="item">
-        1 Play + Add to Watchlist
-      </div>
-      <div className="item">2</div>
-      <div className="item">3</div>
-      <div className="item">4</div>
-      <div className="item">5</div>
+    <div className="video-container">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
     </div>
   );
 }

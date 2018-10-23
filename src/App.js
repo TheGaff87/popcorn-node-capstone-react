@@ -6,6 +6,8 @@ import SearchPage from "./components/SearchPage";
 import Watchlist from "./components/Watchlist";
 import Footer from "./components/Footer";
 import Main from "./components/Main";
+import Welcome from "./components/Welcome";
+import Nav from "./components/Nav";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -15,8 +17,12 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <h1>Popcorn</h1>
+        <div className="container">
+          <Route exact path="/" render={() => <Welcome person="Rochelle" />}/>
+          <header>
+            <h1>Popcorn</h1>
+            <Route exact path="/" component={Nav} />
+          </header>
           <Route exact path="/landing" component={Landing} />
           <Route exact path="/" component={Main} />
           <Route exact path="/login" component={Login} />

@@ -4,12 +4,12 @@ import { expect } from 'chai';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 
-import Header from '../components/Header';
+import Nav from '../components/Nav';
 
 
-describe('<Header />', () => {
-    it('renders <Header /> components', () => {
-        shallow(<Header />);
+describe('<Nav />', () => {
+    it('renders <Nav /> components', () => {
+        shallow(<Nav />);
     });
 });
 

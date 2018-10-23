@@ -1,0 +1,15 @@
+.search-video {
+    background: var(--gray);
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.search-video input {
+    width: 100%;
+}
+
+label[for="video-title"] {
+    width: 320px;
+}

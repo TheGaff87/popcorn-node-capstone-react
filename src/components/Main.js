@@ -1,23 +1,19 @@
 import React from "react";
-import Welcome from "./Welcome";
-import Header from "./Header";
+// import Welcome from "./Welcome";
+// import Nav from "./Nav";
 import SearchForm from "./SearchForm";
 import Chat from "./Chat";
 import Player from "./Player";
 
-
-import "../App.css";
+import './Main.css';
 
 export default function Main() {
   return (
     <main>
-      <Welcome />
-      <Header />
       <SearchForm />
       <section className="interactive">
         <Player />
         <Chat />
-        <form className="sync-form" />
       </section>
     </main>
   );

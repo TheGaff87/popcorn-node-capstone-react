@@ -1,0 +1,32 @@
+.player-container {
+    background-color: var(--navy);
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+/* actually for iframe; need placeholder */
+.player, iframe {
+    background: var(--navy);
+    border: 2px solid black;
+    height: 180px;
+    width: 320px;
+    margin: 0 auto;
+}
+
+@media (min-width: 420px) {
+/* actually for iframe; need placeholder */
+    .player, iframe {
+        height: 360px;
+        width: 100%;
+    }
+}
+
+@media (min-width: 640px) {
+    /* actually for iframe; need placeholder */
+    .player, iframe {
+        width: 640px;
+        height: 360px;
+    }
+}

@@ -1,0 +1,53 @@
+nav {
+    display: flex;
+    height: 40px;
+}
+
+nav,
+.nav-items {
+    width: 100%;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-items {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+nav li {
+    display: inline-block;
+    position: relative;
+}
+
+nav li::after {
+    content: '';
+    border-bottom: 3px solid var(--lav);
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    transition: all .5s;
+}
+
+nav li:hover::after {
+    width: 80%;
+    transition: all .5s;
+}
+
+
+@media (min-width: 480px) {
+    .nav-items {
+        justify-content: flex-end;
+    }
+
+    nav li {
+        padding: 0 10px;
+    }
+}

@@ -1,16 +1,18 @@
 import React from "react";
 
+import './Chat.css';
+
 export default function Chat(props) {
   return (
     <div className="chat-container">
-      <button id="sync">Sync Up</button>
+      <button id="sync">Sync</button>
       <div className="chat-box">
         <div>
-          <span>Joe</span>
+          <span>Joe 12:45pm</span>
           <p>How are you?</p>
         </div>
         <div>
-          <span>Jane</span>
+          <span>Jane 12:46pm</span>
           <p>Great! Ready to watch a vid?</p>
         </div>
         <div>

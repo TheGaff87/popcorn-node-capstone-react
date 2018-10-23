@@ -1,14 +1,14 @@
 import React from "react";
-import Welcome from "./Welcome";
-import Header from "./Header";
+import Nav from "./Nav";
 import SearchForm from "./SearchForm";
 import Videos from './Videos';
+
+import './SearchPage.css';
 
 export default function SearchPage(props) {
   return (
     <div>
-      <Welcome />
-      <Header />
+      <Nav />
       <section className="form-search">
           <h2>Search</h2>
           <SearchForm />

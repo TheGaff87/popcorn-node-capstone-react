@@ -1,0 +1,9 @@
+footer {
+    background: var(--purp);
+    color: white;
+    padding: 20px;
+}
+
+footer a {
+    padding: 0 10px;
+}
