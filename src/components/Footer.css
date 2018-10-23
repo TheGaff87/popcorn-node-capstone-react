@@ -1,6 +1,8 @@
 footer {
     background: var(--pink);
     color: white;
+    display: flex;
+    align-items: center;
     padding: 20px;
     height: 20px;
 }

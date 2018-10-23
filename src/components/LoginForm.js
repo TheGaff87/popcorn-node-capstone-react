@@ -4,25 +4,20 @@ import Details from "./InfoDetail";
 
 import { Link } from "react-router-dom";
 
-import "./Login.css";
+import "./Forms.css";
 
 export default function LoginForm() {
   return (
-    <div className="login-landing">
+    <section className="form-landing">
       <Benefits />
       <div className="form-container">
         <form className="login">
           <fieldset>
-            <legend>Login</legend>
             <div className="flex">
-              <label htmlFor="">
-                Email
-              </label>
-                <input type="email" />
-              <label htmlFor="">
-                Password
-              </label>
-                <input type="password" />
+              <label htmlFor="email">Email</label>
+              <input type="email" />
+              <label htmlFor="password">Password</label>
+              <input type="password" />
             </div>
           </fieldset>
           <button>Submit</button>
@@ -31,6 +26,6 @@ export default function LoginForm() {
         <Link to="/landing">Return to Landing Page</Link>
       </div>
       <Details />
-    </div>
+    </section>
   );
 }

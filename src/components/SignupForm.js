@@ -6,38 +6,29 @@ import { Link } from "react-router-dom";
 
 export default function SignupForm() {
   return (
-    <div>
+    <section className="form-landing">
       <Benefits />
-      <form className="signup">
-        <fieldset>
-          <div className="flex">
-            <legend>Signup</legend>
-            <label htmlFor="">
-              First name
+      <div className="form-container">
+        <form className="signup">
+          <fieldset>
+            <div className="flex">
+              <label htmlFor="name">First name</label>
+              <input id="name" type="text" />
+              <label htmlFor="">Last name</label>
               <input type="text" />
-            </label>
-            <label htmlFor="">
-              Last name
+              <label htmlFor="">Username</label>
               <input type="text" />
-            </label>
-            <label htmlFor="">
-              Username
-              <input type="text" />
-            </label>
-            <label htmlFor="">
-              Email
+              <label htmlFor="">Email</label>
               <input type="email" />
-            </label>
-            <label htmlFor="">
-              Password
+              <label htmlFor="">Password</label>
               <input type="password" />
-            </label>
-          </div>
-        </fieldset>
-        <button>Submit</button>
-      </form>
-      <Details />
+            </div>
+          </fieldset>
+          <button>Submit</button>
+        </form>
       <Link to="/login">Have an account? Login!</Link>
-    </div>
+      </div>
+      <Details />
+    </section>
   );
 }

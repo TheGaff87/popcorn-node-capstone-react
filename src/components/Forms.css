@@ -1,4 +1,4 @@
-.login-landing {
+.form-landing {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -8,19 +8,15 @@
     min-height: calc(100vh - 100px);
 }
 
-.form-container {
+.form-container, .login, .signup {
     background: white;
 }
 
-.login {
-    padding: 10px;
-    display: flex;
+.login, .signup {
     flex-direction: column;
-    /* flex-wrap: wrap; */
     justify-content: space-around;
     height: 400px;
 }
-
 
 .login .flex {
     display: flex;

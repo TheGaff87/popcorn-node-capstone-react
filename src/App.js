@@ -9,7 +9,7 @@ import Main from "./components/Main";
 import Welcome from "./components/Welcome";
 import Nav from "./components/Nav";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import "./App.css";
 
@@ -20,7 +20,7 @@ class App extends Component {
         <div className="container">
           <Route exact path="/" render={() => <Welcome person="Rochelle" />}/>
           <header>
-            <h1>Popcorn</h1>
+            <h1><Link to="/">Popcorn</Link></h1>
             <Route exact path="/" component={Nav} />
           </header>
           <Route exact path="/landing" component={Landing} />

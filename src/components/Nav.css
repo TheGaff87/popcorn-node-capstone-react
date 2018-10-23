@@ -27,7 +27,7 @@ nav li {
 
 nav li::after {
     content: '';
-    border-bottom: 3px solid var(--blue);
+    border-bottom: 3px solid var(--pink);
     position: absolute;
     bottom: -3px;
     left: 50%;
