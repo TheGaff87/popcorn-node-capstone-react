@@ -12,7 +12,7 @@ export default function Chat(props) {
           <p>How are you?</p>
         </div>
         <div>
-          <span>Jane 12:46pm</span>
+          <span>Jane 12:46pm</span> 
           <p>Great! Ready to watch a vid?</p>
         </div>
         <div>
