@@ -1,5 +1,4 @@
 import React from "react";
-import Welcome from "./Welcome";
 import Nav from "./Nav";
 import Videos from './Videos';
 

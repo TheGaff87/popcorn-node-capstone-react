@@ -1,5 +1,5 @@
 .player-container {
-    background-color: var(--navy);
+    background-color: var(--bluet);
     width: 100%;
     text-align: center;
     margin: 0 auto;
@@ -8,7 +8,7 @@
 
 /* actually for iframe; need placeholder */
 .player, iframe {
-    background: var(--navy);
+    background: var(--ltgray);
     border: 2px solid black;
     height: 180px;
     width: 320px;

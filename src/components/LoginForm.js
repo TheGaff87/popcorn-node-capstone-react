@@ -4,29 +4,33 @@ import Details from "./InfoDetail";
 
 import { Link } from "react-router-dom";
 
+import "./Login.css";
+
 export default function LoginForm() {
   return (
-    <div>
+    <div className="login-landing">
       <Benefits />
-      <form className="login">
-        <fieldset>
-          <div className="flex">
+      <div className="form-container">
+        <form className="login">
+          <fieldset>
             <legend>Login</legend>
-            <label htmlFor="">
-              Email
-              <input type="email" />
-            </label>
-            <label htmlFor="">
-              Password
-              <input type="password" />
-            </label>
-          </div>
-        </fieldset>
-        <button>Submit</button>
-      </form>
+            <div className="flex">
+              <label htmlFor="">
+                Email
+              </label>
+                <input type="email" />
+              <label htmlFor="">
+                Password
+              </label>
+                <input type="password" />
+            </div>
+          </fieldset>
+          <button>Submit</button>
+        </form>
+        <Link to="/signup">Don't have an account? Sign up! </Link>
+        <Link to="/landing">Return to Landing Page</Link>
+      </div>
       <Details />
-      <Link to="/signup">Don't have an account? Sign up!</Link>
-      <Link to="/landing">Return to Landing Page</Link>
     </div>
   );
 }

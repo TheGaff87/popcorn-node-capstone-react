@@ -5,7 +5,7 @@ export default function InfoDetail() {
     <div className="info-detail">
       <ul>
         <li>Add Friends</li>
-        <li>Search &amp; Watch Videos</li>
+        <li>Watch Videos</li>
         <li>Chat!</li>
       </ul>
     </div>
