@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+
+import {connect} from 'react-redux';
+import {logUser} from './actions';
+
 import Landing from "./components/Landing";
 import Login from "./components/LoginForm";
 import Signup from "./components/SignupForm";
@@ -15,10 +19,12 @@ import "./App.css";
 
 class App extends Component {
   render() {
+    console.log(this.props);
+
     return (
       <Router>
         <div className="container">
-          <Route exact path="/" render={() => <Welcome person={"Rochelle"} />}/>
+          <Route exact path="/" render={() => <Welcome person={this.props.dispatch(logUser('Boston')).user} />}/>
           {/* // login user {user}*/}
           {/* // grab from db user name */}
           {/* then the name gets stored in a prop */}
@@ -39,4 +45,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {user: state.user}
+};
+
+export default connect(mapStateToProps)(App);
