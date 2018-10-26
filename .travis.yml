@@ -9,6 +9,6 @@ deploy:
   provider: heroku
   api_key:
     secure: jUW/twO5R3EAWAPN4izUlVTr2IxXRzcGT5Ls6+NTdRodHMHH4jLquct4S7yuvxJkKt014b0unA6dEwgZmUAvknF3t144bOUQS3txm3GCIxDfFlaor55e1ODXv5q7g6HMv/boIgpV+Shh6tqSIxfcb6sg/mwNkpDBhTDXbWms9GrmeZzsS7sfDkBevaOuqf/8go+/JI6eFKrQaK6oF9WgrpbwzosxYbSGGrsudb7nYQgJrApXTaBytqWR7LdZff3tKAoVfgBeJKDX+3ymBdJLSs/UeJLDAYF2J2sFBfZ1zGuW+EtG1DRrQSVqj6XQGtzid5Xc5Dx34M9+j0r1JPcZW6rpBXuT0bZd7ea7UzGBP9in9pS7XHj4Ur3MVpj8G+dq483hGbJJuL3Ylp5/4xdCiz0I16cOTxfZDbvc9v2FjmaMtxWJIUuU6S4FH514yi6TrAMVxqOANi4qd02F/SGRO3Tv0uRn00lAnCdrnxjIi0f2LUds0fd+OH63avv/ks44dMtitsPJJU/6HrgU+zW+WJunRnOQGyaGiy5veTewhaeZWPTKf0zvcKrLPamnSO9YCHn5rNFPYZvFNJU3/6PIt+a2GUbJl6QlTlKXkZgptiHiE6MUg9iCcT7ypVHzp0Gmg7WNsjMkAB4Y7vYaVeXe40eFzmf35nUJqFlC6ZIMM1Y=
-  app: morning-dusk-65136
+  app: popcorn-capstone
   on:
     repo: azureowl/popcorn-node-capstone-react
