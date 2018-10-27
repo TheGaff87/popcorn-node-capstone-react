@@ -3,14 +3,25 @@ import SearchForm from "./SearchForm";
 import Chat from "./Chat";
 import Player from "./Player";
 
-export default function Main() {
-  return (
-    <main>
-      <SearchForm />
-      <section className="interactive">
-        <Player />
-        <Chat />
-      </section>
-    </main>
-  );
+import {connect} from 'react-redux';
+import {searchVideos} from '../actions';
+
+export class Main extends React.Component {
+  onSearch(text) {
+    this.props.dispatch(searchVideos(text));
+  }
+
+  render() {
+    return (
+      <main>
+        <SearchForm onSearch={text => this.onSearch(text)}/>
+        <section className="interactive">
+          <Player />
+          <Chat />
+        </section>
+      </main>
+    );
+  }
 }
+
+export default connect()(Main);

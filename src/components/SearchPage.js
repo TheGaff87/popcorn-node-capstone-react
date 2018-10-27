@@ -1,20 +1,30 @@
 import React from "react";
 import Nav from "./Nav";
 import SearchForm from "./SearchForm";
-import Videos from './Videos';
+import Videos from "./Videos";
 
-import './VideoPages.css';
+import {connect} from 'react-redux';
+import {searchVideos} from '../actions';
 
-export default function SearchPage(props) {
-  return (
-    <div>
-      <Nav />
-      <section className="form-search">
+import "./VideoPages.css";
+
+export class SearchPage extends React.Component {
+  onSearch(text) {
+    this.props.dispatch(searchVideos(text));
+  }
+
+  render() {
+    return (
+      <div>
+        <Nav />
+        <section className="form-search">
           <h2>Search</h2>
-          <SearchForm />
+          <SearchForm onSearch={text => this.onSearch(text)}/>
           <Videos />
-      </section>
-    </div>
-  );
+        </section>
+      </div>
+    );
+  }
 }
 
+export default connect()(SearchPage);
