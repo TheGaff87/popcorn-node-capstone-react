@@ -1,4 +1,4 @@
-import {API_ORIGIN} from '../config';
+import { API_ORIGIN } from "../config";
 
 /*
  * action types
@@ -16,55 +16,48 @@ export const APPEND_RESULTS = "APPEND_RESULTS";
  * action creators
  */
 
-export const logUser = (user) => (
-    {
-        type: LOG_USER,
-        user
+export const logUser = user => ({
+  type: LOG_USER,
+  user
+});
+
+export const updateTime = time => ({
+  type: UPDATE_TIME,
+  time
+});
+
+export const getWatchlist = (videos, list) => ({
+  type: GET_WATCHLIST,
+  list
+});
+
+export const deleteFromWatchlist = (videos, list) => ({
+  type: DELETE_VIDEO,
+  list
+});
+
+export const addToWatchlist = (videos, list) => ({
+  type: ADD_VIDEO,
+  list
+});
+
+export const appendResults = () => ({
+  type: APPEND_RESULTS
+});
+
+export const searchVideos = text => dispatch => {
+  console.log(text, API_ORIGIN);
+  fetch(`${API_ORIGIN}/videos/${text}`, {
+    mode: "cors",
+    headers: {
+      "Access-Control-Allow-Origin": "*"
     }
-);
-
-export const updateTime = (time) => (
-    {
-        type: UPDATE_TIME,
-        time
-    }
-);
-
-export const getWatchlist = (videos, list) => (
-    {
-        type: GET_WATCHLIST,
-        list
-    }
-);
-
-export const deleteFromWatchlist = (videos, list) => (
-    {
-        type: DELETE_VIDEO,
-        list
-    }
-);
-
-export const addToWatchlist = (videos, list) => (
-    {
-        type: ADD_VIDEO,
-        list
-    }
-);
-
-export const appendResults = () => (
-    {
-        type: APPEND_RESULTS
-    }
-);
-
-export const searchVideos = (text) => dispatch => {
-    console.log(text);
-    fetch(`${API_ORIGIN}/${text}`)
-        .then(data => {
-            console.log(data);
-
-        })
-        .catch(err => {
-            console.log('uh-oh', err);
-        });
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => {
+      console.log("uh-oh", err);
+    });
 };
