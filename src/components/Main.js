@@ -24,4 +24,12 @@ export class Main extends React.Component {
   }
 }
 
-export default connect()(Main);
+export const mapStateToProps = state => ({
+  videos: state.videos,
+  user: state.user,
+  loading: state.loading,
+  error: state.error
+});
+
+
+export default connect(mapStateToProps)(Main);

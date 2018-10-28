@@ -9,7 +9,7 @@ export const UPDATE_TIME = "UPDATE_TIME";
 export const GET_WATCHLIST = "GET_WATCHLIST";
 export const DELETE_VIDEO = "DELETE_VIDEO";
 export const ADD_VIDEO = "ADD_VIDEO";
-export const SEARCH_VIDEO = "SEARCH_VIDEO";
+export const SEARCH_VIDEOS_REQUEST = 'SEARCH_VIDEOS_REQUEST';
 export const APPEND_RESULTS = "APPEND_RESULTS";
 
 /*
@@ -26,36 +26,43 @@ export const updateTime = time => ({
   time
 });
 
-export const getWatchlist = (videos, list) => ({
+export const getWatchlist = (videos) => ({
   type: GET_WATCHLIST,
-  list
+  videos
 });
 
-export const deleteFromWatchlist = (videos, list) => ({
+export const deleteFromWatchlist = (videos) => ({
   type: DELETE_VIDEO,
-  list
+  videos
 });
 
-export const addToWatchlist = (videos, list) => ({
+export const addToWatchlist = (videos) => ({
   type: ADD_VIDEO,
-  list
+  videos
 });
 
-export const appendResults = () => ({
-  type: APPEND_RESULTS
+export const searchVideosRequest = () => ({
+    type: SEARCH_VIDEOS_REQUEST
+});
+
+export const appendResults = (videos) => ({
+  type: APPEND_RESULTS,
+  videos
 });
 
 export const searchVideos = text => dispatch => {
-  console.log(text, API_ORIGIN);
-  fetch(`${API_ORIGIN}/videos/${text}`, {
-    mode: "cors",
-    headers: {
-      "Access-Control-Allow-Origin": "*"
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
+  console.log('searchVideos is dispatched!');
+  dispatch(searchVideosRequest());
+  fetch(`${API_ORIGIN}/videos/${text}`)
+    .then(res => {
+        if (!res.ok) {
+            return Promise.reject(res.statusText);
+        }
+        return res.json();
+    })
+    .then(res => {
+        // console.log(res.response);
+        dispatch(appendResults(res.response.body));
     })
     .catch(err => {
       console.log("uh-oh", err);

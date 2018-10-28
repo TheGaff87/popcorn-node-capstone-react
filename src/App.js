@@ -19,8 +19,6 @@ import "./App.css";
 
 class App extends Component {
   render() {
-    console.log(this.props);
-
     return (
       <Router>
         <div className="container">
@@ -45,9 +43,8 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {user: state.user}
-};
+export const mapStateToProps = state => ({
+  user: state.user
+});
 
 export default connect(mapStateToProps)(App);

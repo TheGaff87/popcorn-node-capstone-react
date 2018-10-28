@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 
-import Main from '../components/Main';
+import {Main} from '../components/Main';
 import SearchForm from "../components/SearchForm";
 import Chat from "../components/Chat";
 import Player from "../components/Player";

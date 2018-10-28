@@ -1,15 +1,11 @@
 import React from "react";
 
-import './Video.css';
+import "./Video.css";
 
-export default function Videos() {
+export default function Videos(props) {
+
   return (
-    <div className="video-container">
-      <div className="item">1</div>
-      <div className="item">2</div>
-      <div className="item">3</div>
-      <div className="item">4</div>
-      <div className="item">5</div>
-    </div>
+    <div></div>
+
   );
 }

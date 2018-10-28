@@ -1,16 +1,49 @@
 .video-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, 320px);
     grid-gap: 20px;
     margin-top: 10px;
+    justify-content: space-around;
 }
 
 .item {
-    background-color: var(--purp);
+    background: black;
     border-radius: 3px;
-    display: grid;
+    display: flex;
     justify-content: center;
     align-items: center;
     border: 5px solid var(--gray);
     height: 180px;
+    position: relative;
+    transition: .4s;
+}
+
+.item:hover img {
+    opacity: .1;
+    transition: .4s;
+}
+
+.item:hover h3 {
+    opacity: 1;
+    transition: .4s;
+}
+
+.item img {
+    height: 100%;
+    width: 100%;
+}
+
+.item h3 {
+    color: var(--ltgray);
+    position: absolute;
+    margin: 0;
+    padding: 20px;
+    opacity: 0;
+}
+
+.item button {
+    background: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
