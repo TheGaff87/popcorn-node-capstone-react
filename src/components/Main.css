@@ -1,0 +1,29 @@
+.results-dropdown {
+    background: white;
+    border-color: #CCCCCC;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top: 0;
+    border-style: solid;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+    height: 150px;
+    overflow: auto;
+    font-size: 12px;
+    position: absolute;
+    transform: translate(0, 94px);
+}
+
+.results-dropdown h3 {
+    margin: 0;
+}
+
+.results-dropdown li {
+    margin-bottom: 10px;
+}
+
+.results-dropdown li:hover {
+    color: var(--pink);
+}

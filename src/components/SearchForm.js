@@ -26,7 +26,9 @@ export default class SearchForm extends React.Component {
             type="text"
             placeholder="What do you want to watch right now?"
             ref={input => this.textInput = input}
+            autoComplete="off"
           />
+        {this.props.results}
         </label>
         <button>Search</button>
       </form>
