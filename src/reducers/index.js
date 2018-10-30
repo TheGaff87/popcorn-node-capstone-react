@@ -4,7 +4,8 @@ const initialState = {
     user: null,
     videos: [],
     chatHistory: [],
-    loading: false
+    loading: false,
+    videoId: ''
 };
 
 export const reducer = (state=initialState, action) => {
@@ -13,6 +14,13 @@ export const reducer = (state=initialState, action) => {
         return Object.assign({}, state, {
             loading: true,
             error: null
+        });
+    }
+
+    if (action.type === actions.PLAY_VIDEO) {
+        console.log("play video!", action.id)
+        return Object.assign({}, state, {
+            videoId: action.id
         });
     }
 

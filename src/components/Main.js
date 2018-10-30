@@ -5,7 +5,7 @@ import Player from "./Player";
 import Spinner from "react-spinkit";
 
 import { connect } from "react-redux";
-import { searchVideos } from "../actions";
+import { searchVideos, playVideo } from "../actions";
 
 import './Main.css';
 
@@ -15,7 +15,8 @@ export class Main extends React.Component {
   }
 
   getVideo(target) {
-    console.log(target);
+    const id = target[0].id;
+    this.props.dispatch(playVideo(id));
   }
 
   renderResults() {
@@ -26,12 +27,12 @@ export class Main extends React.Component {
         <Spinner className="spinner'" name="three-bounce" color="fuchsia" />
       );
     }
-    console.log("****************Videos****************", this.props.videos);
+    
     if (this.props.videos.items) {
       const videos = this.props.videos.items.map((video, index) => {
         return (
           <li key={index}>
-            <button type="button" onClick={(e) => this.getVideo(e.target)}>
+            <button type="button" onClick={(e) => this.getVideo(e.currentTarget.children)}>
               <h3 id={video.id.videoId}>{video.snippet.title}</h3>
             </button>
           </li>
@@ -47,7 +48,7 @@ export class Main extends React.Component {
       <main>
         <SearchForm onSearch={text => this.onSearch(text)} results={this.renderResults()} />
         <section className="interactive">
-          <Player />
+          <Player videoId={this.props.videoId}/>
           <Chat />
         </section>
       </main>
@@ -59,7 +60,8 @@ export const mapStateToProps = state => ({
   videos: state.videos,
   user: state.user,
   loading: state.loading,
-  error: state.error
+  error: state.error,
+  videoId: state.videoId
 });
 
 export default connect(mapStateToProps)(Main);

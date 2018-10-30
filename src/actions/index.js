@@ -6,6 +6,7 @@ import { API_ORIGIN } from "../config";
 
 export const LOG_USER = "LOG_USER";
 export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
+export const PLAY_VIDEO = "PLAY_VIDEO";
 export const UPDATE_TIME = "UPDATE_TIME";
 export const GET_WATCHLIST = "GET_WATCHLIST";
 export const DELETE_VIDEO = "DELETE_VIDEO";
@@ -24,6 +25,11 @@ export const signupRequest =  () => ({
 export const logUser = user => ({
   type: LOG_USER,
   user
+});
+
+export const playVideo = id => ({
+  type: PLAY_VIDEO,
+  id
 });
 
 export const updateTime = time => ({
