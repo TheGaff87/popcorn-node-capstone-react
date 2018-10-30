@@ -24,6 +24,10 @@
     margin-bottom: 10px;
 }
 
-.results-dropdown li:hover {
+.results-dropdown button:hover {
     color: var(--pink);
+}
+
+.results-dropdown button {
+    background: transparent;
 }

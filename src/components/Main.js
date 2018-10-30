@@ -14,6 +14,10 @@ export class Main extends React.Component {
     this.props.dispatch(searchVideos(text));
   }
 
+  getVideo(target) {
+    console.log(target);
+  }
+
   renderResults() {
     console.log("Inside Main search form: ", this.props);
 
@@ -27,7 +31,9 @@ export class Main extends React.Component {
       const videos = this.props.videos.items.map((video, index) => {
         return (
           <li key={index}>
-            <h3>{video.snippet.title}</h3>
+            <button type="button" onClick={(e) => this.getVideo(e.target)}>
+              <h3 id={video.id.videoId}>{video.snippet.title}</h3>
+            </button>
           </li>
         );
       });
