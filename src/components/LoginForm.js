@@ -23,7 +23,7 @@ export default function LoginForm() {
           <button>Submit</button>
         </form>
         <nav>
-          <Link to="/signup">Don't have an account? <span>Sign up!</span> </Link>
+          <Link to="/auth/signup">Don't have an account? <span>Sign up!</span> </Link>
         </nav>
       </div>
       <Details />

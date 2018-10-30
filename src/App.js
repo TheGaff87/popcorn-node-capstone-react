@@ -19,10 +19,11 @@ import "./App.css";
 
 class App extends Component {
   render() {
+    console.log(this.props);
     return (
       <Router>
         <div className="container">
-          <Route exact path="/" render={() => <Welcome person={this.props.dispatch(logUser('Boston')).user} />}/>
+          <Route exact path="/" render={() => <Welcome person={this.props.user} />}/>
           {/* // login user {user}*/}
           {/* // grab from db user name */}
           {/* then the name gets stored in a prop */}
@@ -33,7 +34,7 @@ class App extends Component {
           <Route exact path="/landing" component={Landing} />
           <Route exact path="/" component={Main} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/auth/signup" component={Signup} />
           <Route exact path="/search" component={SearchPage} />
           <Route exact path="/watchlist" component={Watchlist} />
           <Footer />

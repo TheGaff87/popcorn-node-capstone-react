@@ -5,6 +5,7 @@ import { API_ORIGIN } from "../config";
 */
 
 export const LOG_USER = "LOG_USER";
+export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
 export const UPDATE_TIME = "UPDATE_TIME";
 export const GET_WATCHLIST = "GET_WATCHLIST";
 export const DELETE_VIDEO = "DELETE_VIDEO";
@@ -15,6 +16,11 @@ export const APPEND_RESULTS = "APPEND_RESULTS";
 /*
  * action creators
  */
+
+export const signupRequest = user => ({
+  type: SIGNUP_REQUEST,
+  user
+});
 
 export const logUser = user => ({
   type: LOG_USER,
@@ -50,6 +56,33 @@ export const appendResults = (videos) => ({
   videos
 });
 
+export const signupUser = user => dispatch => {
+  console.log('signupUser is dispatched!');
+  dispatch(signupRequest());
+  console.log(user);
+  fetch(`${API_ORIGIN}/auth/signup`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  })
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
+      console.log(res);
+      return res.json();
+    })
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log('actions index.js line 74', err);
+    })
+};
+
+
 export const searchVideos = text => dispatch => {
   console.log('searchVideos is dispatched!');
   dispatch(searchVideosRequest());
@@ -65,6 +98,6 @@ export const searchVideos = text => dispatch => {
         dispatch(appendResults(res.response.body));
     })
     .catch(err => {
-      console.log("uh-oh", err);
+      console.log('actions index.js line 94', err);
     });
 };

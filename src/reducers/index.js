@@ -9,11 +9,12 @@ const initialState = {
 
 export const reducer = (state=initialState, action) => {
     console.log(action);
-    if (action.type === actions.LOG_USER) {
-        console.log('Changing Log User!', action.user);
+    if (action.type === actions.SIGNUP_REQUEST) {
+        console.log('Signing up User!', action.user);
 
         return Object.assign({}, state, {
-            user: action.user
+            loading: true,
+            error: null
         });
     }
 
