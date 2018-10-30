@@ -23,7 +23,7 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          <Route exact path="/" render={() => <Welcome person={this.props.user} />}/>
+          <Route exact path="/" render={() => <Welcome person={this.props.loggedIn} />}/>
           {/* // login user {user}*/}
           {/* // grab from db user name */}
           {/* then the name gets stored in a prop */}
@@ -45,7 +45,7 @@ class App extends Component {
 }
 
 export const mapStateToProps = state => ({
-  user: state.user
+  loggedIn: state.user
 });
 
 export default connect(mapStateToProps)(App);

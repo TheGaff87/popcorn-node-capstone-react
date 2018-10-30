@@ -17,9 +17,8 @@ export const APPEND_RESULTS = "APPEND_RESULTS";
  * action creators
  */
 
-export const signupRequest = user => ({
-  type: SIGNUP_REQUEST,
-  user
+export const signupRequest =  () => ({
+  type: SIGNUP_REQUEST
 });
 
 export const logUser = user => ({
@@ -59,7 +58,7 @@ export const appendResults = (videos) => ({
 export const signupUser = user => dispatch => {
   console.log('signupUser is dispatched!');
   dispatch(signupRequest());
-  console.log(user);
+  console.log('From from: ', user);
   fetch(`${API_ORIGIN}/auth/signup`, {
     method: 'POST',
     headers: {
@@ -71,11 +70,11 @@ export const signupUser = user => dispatch => {
       if (!res.ok) {
         return Promise.reject(res.statusText);
       }
-      console.log(res);
       return res.json();
     })
     .then(res => {
       console.log(res);
+      dispatch(logUser(user.username));
     })
     .catch(err => {
       console.log('actions index.js line 74', err);
@@ -86,7 +85,6 @@ export const signupUser = user => dispatch => {
 export const searchVideos = text => dispatch => {
   console.log('searchVideos is dispatched!');
   dispatch(searchVideosRequest());
-
 
   fetch(`${API_ORIGIN}/videos/${text}`, {
       mode: 'cors',

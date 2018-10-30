@@ -2,9 +2,9 @@ import React from "react";
 import Benefits from "./InfoBene";
 import Details from "./InfoDetail";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { signupUser } from "../actions";
+import { signupUser, logUser } from "../actions";
 
 export class SignupForm extends React.Component {
   constructor(props) {
@@ -15,15 +15,20 @@ export class SignupForm extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     const inputs = [this.username, this.email, this.password];
-    this.props.dispatch(signupUser({
+    const user = {
       username: this.username.value,
       email: this.email.value,
       password: this.password.value,
-    }));
+    };
+    this.props.dispatch(signupUser(user));
+    console.log(this.props);
     inputs.map(input => input.value = '');
   }
 
   render() {
+    if (this.props.loggedIn) {
+      return <Redirect to="/" />;
+    }
     return (
       <section className="form-landing">
         <Benefits />
@@ -53,7 +58,7 @@ export class SignupForm extends React.Component {
 
 export const mapStateToProps = state => ({
   videos: state.videos,
-  user: state.user,
+  loggedIn: state.user,
   loading: state.loading,
   error: state.error
 });
