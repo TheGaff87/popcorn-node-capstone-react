@@ -58,7 +58,7 @@ export const appendResults = (videos) => ({
 export const signupUser = user => dispatch => {
   console.log('signupUser is dispatched!');
   dispatch(signupRequest());
-  console.log('From from: ', user);
+  console.log('LINE 61, actions file: ', user);
   fetch(`${API_ORIGIN}/auth/signup`, {
     method: 'POST',
     headers: {
@@ -76,9 +76,9 @@ export const signupUser = user => dispatch => {
       console.log(res);
       dispatch(logUser(user.username));
     })
-    .catch(err => {
-      console.log('actions index.js line 74', err);
-    })
+    .catch((res,err) => {
+      console.log('res: ', res);
+    });
 };
 
 
