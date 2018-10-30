@@ -86,7 +86,14 @@ export const signupUser = user => dispatch => {
 export const searchVideos = text => dispatch => {
   console.log('searchVideos is dispatched!');
   dispatch(searchVideosRequest());
-  fetch(`${API_ORIGIN}/videos/${text}`)
+
+
+  fetch(`${API_ORIGIN}/videos/${text}`, {
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin':'*'
+      }
+    })
     .then(res => {
         if (!res.ok) {
             return Promise.reject(res.statusText);
