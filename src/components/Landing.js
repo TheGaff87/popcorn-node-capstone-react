@@ -13,7 +13,7 @@ export default function Landing() {
         <h2>Welcome to Popcorn!</h2>
         <p>Popcorn is an entertainment app that allows users to chat with each other and watch YouTube videos together!</p>
         <nav>
-          <Link to="/login">Demo</Link>
+          <Link to="/auth/login">Demo</Link>
         </nav>
       </div>
       <Details />
