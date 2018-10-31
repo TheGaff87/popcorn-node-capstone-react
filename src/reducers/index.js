@@ -5,11 +5,11 @@ const initialState = {
     videos: [],
     chatHistory: [],
     loading: false,
+    currentVideo: '',
     videoId: 'M4Ufs7-FpvU'
 };
 
 export const reducer = (state=initialState, action) => {
-    console.log(action);
     if (action.type === actions.REQUEST) {
         return Object.assign({}, state, {
             loading: true,
@@ -18,9 +18,18 @@ export const reducer = (state=initialState, action) => {
     }
 
     if (action.type === actions.SELECT_VIDEO) {
-        console.log("play video!", action.id)
+        console.log("%%%%%%%%%%%%%%%%%%%%%% SELECT_VIDEO RAN!!!!!!");
         return Object.assign({}, state, {
-            videoId: action.id
+            videoId: action.currentVideo.id.videoId,
+            currentVideo: action.currentVideo
+        });
+    }
+
+
+    if (action.type === actions.ADD_VIDEO) {
+        console.log("%%%%%%%%%%%%%%%%%%%%%% ADD_VIDEO RAN!!!!!!");
+        return Object.assign({}, state, {
+            loading: false
         });
     }
 

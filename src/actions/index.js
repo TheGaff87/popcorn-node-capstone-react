@@ -18,7 +18,7 @@ export const CLEAR_RESULTS = "CLEAR_RESULTS";
  * action creators
  */
 
-export const request =  () => ({
+export const request = () => ({
   type: REQUEST
 });
 
@@ -27,9 +27,9 @@ export const logUser = user => ({
   user
 });
 
-export const selectVideo = id => ({
+export const selectVideo = currentVideo => ({
   type: SELECT_VIDEO,
-  id
+  currentVideo
 });
 
 export const updateTime = time => ({
@@ -37,46 +37,66 @@ export const updateTime = time => ({
   time
 });
 
-export const getWatchlist = (videos) => ({
+export const getWatchlist = videos => ({
   type: GET_WATCHLIST,
   videos
 });
 
-export const deleteFromWatchlist = (videos) => ({
+export const deleteFromWatchlist = videos => ({
   type: DELETE_VIDEO,
   videos
 });
 
-export const addToWatchlist = (videos) => ({
+export const addToWatchlist = video => ({
   type: ADD_VIDEO,
-  videos
+  video
 });
 
-
-export const appendResults = (videos) => ({
+export const appendResults = videos => ({
   type: APPEND_RESULTS,
   videos
 });
 
-export const clearResults = (videos) => ({
+export const clearResults = videos => ({
   type: CLEAR_RESULTS,
   videos
 });
 
-export const addVideo = () => dispatch => {
+export const addVideo = obj => dispatch => {
+  console.log('addVideo is dispatched!');
+  console.log(obj);
+  console.log(JSON.stringify(obj));
   dispatch(request());
-  // fetch POST a resource, video information, to the endpoint
-  // /videos/:id
+  fetch(`${API_ORIGIN}/videos`, {
+    method: 'POST',
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(obj)
+  })
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+        // const err = new Error('Missing `title` in request body');
+        // err.status = 400;
+      }
+      return res.json();
+    })
+    .then(res => {
+      console.log(res);
+      dispatch(addToWatchlist(res));
+    })
+    .catch(err => {
+      console.log("actions index.js line 94", err);
+    });
 };
 
 export const signupUser = user => dispatch => {
-  console.log('signupUser is dispatched!');
   dispatch(request());
-  console.log('LINE 61, actions file: ', user);
   fetch(`${API_ORIGIN}/auth/signup`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'content-type': 'application/json'
+      "content-type": "application/json"
     },
     body: JSON.stringify(user)
   })
@@ -87,36 +107,31 @@ export const signupUser = user => dispatch => {
       return res.json();
     })
     .then(res => {
-      console.log(res);
       dispatch(logUser(user.username));
     })
-    .catch((res,err) => {
-      console.log('res: ', res);
+    .catch((res, err) => {
+      console.log("res: ", res);
     });
 };
 
-
 export const searchVideos = text => dispatch => {
-  console.log('searchVideos is dispatched!');
   dispatch(request());
-
   fetch(`${API_ORIGIN}/videos/${text}`, {
-      mode: 'cors',
-      headers: {
-        'Access-Control-Allow-Origin':'*'
+    mode: "cors",
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
+  })
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
       }
+      return res.json();
     })
     .then(res => {
-        if (!res.ok) {
-            return Promise.reject(res.statusText);
-        }
-        return res.json();
-    })
-    .then(res => {
-        // console.log(res.response);
-        dispatch(appendResults(res.response.body));
+      dispatch(appendResults(res.response.body));
     })
     .catch(err => {
-      console.log('actions index.js line 94', err);
+      console.log("actions index.js line 94", err);
     });
 };

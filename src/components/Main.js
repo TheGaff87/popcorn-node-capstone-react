@@ -5,7 +5,7 @@ import Player from "./Player";
 import Spinner from "react-spinkit";
 
 import { connect } from "react-redux";
-import { searchVideos, selectVideo, clearResults, addToWatchlist } from "../actions";
+import { searchVideos, selectVideo, clearResults, addVideo } from "../actions";
 
 import './Main.css';
 
@@ -16,7 +16,10 @@ export class Main extends React.Component {
 
   getVideo(target) {
     const id = target[0].id;
-    this.props.dispatch(selectVideo(id));
+    const currentVideo = this.props.videos.items.find((video) => {
+      return video.id.videoId === id;
+    });
+    this.props.dispatch(selectVideo(currentVideo));
     this.clearDropdown();
   }
 
@@ -26,11 +29,16 @@ export class Main extends React.Component {
     }
   }
 
-  onAdd() {
+  onAdd(props) {
     // As a user, I should be able to add a video to my
     // favorites (create) so that I can access them later.
-    // this.props.dispatch(addVideo());
-    // videoID, title, thumbnail
+    const video = this.props.currentVideo.snippet;
+    const videoObj = {
+      id: this.props.videoId,
+      title: video.title,
+      thumbnail: video.thumbnails.medium.url
+    };
+    this.props.dispatch(addVideo(videoObj));
   }
 
   renderResults() {
@@ -58,13 +66,14 @@ export class Main extends React.Component {
 
   render() {
     if (this.props.videoId) {
+      // renders 'Add to Watchlist' btn only if there is a video selected
       console.log('line 54: ', this.props.videoId);
       return (
         <main>
           <SearchForm onSearch={text=> this.onSearch(text)} results={this.renderResults()} />
             <section className="interactive">
               <Player videoId={this.props.videoId} />
-              <div className="watchlist-btn"><button type="button" onClick={this.onAdd}>Add to Watchlist</button></div>
+              <div className="watchlist-btn"><button type="button" onClick={() => this.onAdd(this.props)}>Add to Watchlist</button></div>
               <Chat />
             </section>
         </main>
@@ -87,6 +96,7 @@ export const mapStateToProps = state => ({
   user: state.user,
   loading: state.loading,
   error: state.error,
+  currentVideo: state.currentVideo,
   videoId: state.videoId
 });
 
