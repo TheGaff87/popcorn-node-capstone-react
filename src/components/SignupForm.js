@@ -27,7 +27,7 @@ export class SignupForm extends React.Component {
 
   render() {
     if (this.props.loggedIn) {
-      return <Redirect to="/" />;
+      return <Redirect to="/user" />;
     }
     return (
       <section className="form-landing">

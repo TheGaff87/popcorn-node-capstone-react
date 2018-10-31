@@ -1,3 +1,4 @@
+import jwtDecode from 'jwt-decode';
 import { API_ORIGIN } from "../config";
 
 /*
@@ -13,6 +14,7 @@ export const DELETE_VIDEO = "DELETE_VIDEO";
 export const ADD_VIDEO = "ADD_VIDEO";
 export const APPEND_RESULTS = "APPEND_RESULTS";
 export const CLEAR_RESULTS = "CLEAR_RESULTS";
+
 
 /*
  * action creators
@@ -62,6 +64,23 @@ export const clearResults = videos => ({
   videos
 });
 
+export const AUTH_REQUEST = 'AUTH_REQUEST';
+export const authRequest = () => ({
+  type: AUTH_REQUEST
+});
+
+export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
+export const setAuthToken = (authToken) => ({
+    type: SET_AUTH_TOKEN,
+    authToken
+});
+
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const authSuccess = currentUser => ({
+    type: AUTH_SUCCESS,
+    currentUser
+});
+
 export const addVideo = obj => dispatch => {
   console.log('addVideo is dispatched!');
   console.log(obj);
@@ -88,6 +107,32 @@ export const addVideo = obj => dispatch => {
     })
     .catch(err => {
       console.log("actions index.js line 94", err);
+    });
+};
+
+const storeAuthInfo = (authToken, dispatch) => {
+  console.log(authToken);
+  const decodedToken = jwtDecode(authToken);
+  console.log(decodedToken);
+  dispatch(setAuthToken(authToken));
+  dispatch(authSuccess(decodedToken));
+  // saveAuthToken(authToken);
+};
+
+export const login = user => dispatch => {
+  console.log(user);
+  dispatch(request());
+  fetch(`${API_ORIGIN}/auth/login`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(user)
+  })
+    .then(res => res.json())
+    .then(authToken => storeAuthInfo(authToken.token, dispatch))
+    .catch((res, err) => {
+      console.log("res: ", res);
     });
 };
 

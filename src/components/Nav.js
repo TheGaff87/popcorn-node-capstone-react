@@ -18,7 +18,7 @@ export default function Nav() {
           <Link to="/watchlist">Watchlist</Link>
         </li>
         <li>
-          <Link className="account" to="/login">Logout</Link>
+          <Link className="account" to="/auth/login">Logout</Link>
         </li>
       </ul>
     </nav>

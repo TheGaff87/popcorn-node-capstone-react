@@ -2,31 +2,64 @@ import React from "react";
 import Benefits from "./InfoBene";
 import Details from "./InfoDetail";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { login } from "../actions";
 
 import "./Forms.css";
 
-export default function LoginForm() {
-  return (
-    <section className="form-landing">
-      <Benefits />
-      <div className="form-container">
-        <form className="login">
-          <fieldset>
-            <div className="flex">
-              <label htmlFor="email">Email</label>
-              <input type="email" />
-              <label htmlFor="password">Password</label>
-              <input type="password" />
-            </div>
-          </fieldset>
-          <button>Submit</button>
-        </form>
-        <nav>
-          <Link to="/auth/signup">Don't have an account? <span>Sign up!</span> </Link>
-        </nav>
-      </div>
-      <Details />
-    </section>
-  );
+export class LoginForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    const inputs = [this.email, this.password];
+    const user = {
+      email: this.email.value,
+      password: this.password.value,
+    };
+    this.props.dispatch(login(user));
+    console.log(this.props);
+    inputs.map(input => input.value = '');
+  }
+
+  render() {
+    if (this.props.loggedIn) {
+      return <Redirect to="/user" />;
+    }
+    return (
+      <section className="form-landing">
+        <Benefits />
+        <div className="form-container">
+          <form className="login" onSubmit={this.onSubmit}>
+            <fieldset>
+              <div className="flex">
+                <label htmlFor="email">Email</label>
+                <input type="email" id="email" ref={input => this.email = input}/>
+                <label htmlFor="password">Password</label>
+                <input type="password" id="password" ref={input => this.password = input}/>
+              </div>
+            </fieldset>
+            <button>Submit</button>
+          </form>
+          <nav>
+            <Link to="/auth/signup">Don't have an account? <span>Sign up!</span> </Link>
+          </nav>
+        </div>
+        <Details />
+      </section>
+    );
+  }
 }
+
+export const mapStateToProps = state => ({
+  videos: state.videos,
+  loggedIn: state.user,
+  loading: state.loading,
+  error: state.error
+});
+
+export default connect(mapStateToProps)(LoginForm);

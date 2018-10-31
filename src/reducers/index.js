@@ -6,7 +6,8 @@ const initialState = {
     chatHistory: [],
     loading: false,
     currentVideo: '',
-    videoId: 'M4Ufs7-FpvU'
+    videoId: 'M4Ufs7-FpvU',
+    authToken: ''
 };
 
 export const reducer = (state=initialState, action) => {
@@ -42,7 +43,6 @@ export const reducer = (state=initialState, action) => {
         });
     }
 
-
     if (action.type === actions.APPEND_RESULTS) {
         console.log('Running APPEND_RESULTS action', action.videos);
         return Object.assign({}, state, {
@@ -60,6 +60,20 @@ export const reducer = (state=initialState, action) => {
             error: null
         });
     }
+
+    if (action.type === actions.SET_AUTH_TOKEN) {
+        return Object.assign({}, state, {
+            authToken: action.authToken
+        });
+    }
+
+    if (action.type === actions.AUTH_SUCCESS) {
+        return Object.assign({}, state, {
+            loading: false,
+            user: action.currentUser.username
+        });
+    }
+
 
     return state;
 };
