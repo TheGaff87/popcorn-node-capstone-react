@@ -5,7 +5,7 @@ import Player from "./Player";
 import Spinner from "react-spinkit";
 
 import { connect } from "react-redux";
-import { searchVideos, selectVideo, clearResults } from "../actions";
+import { searchVideos, selectVideo, clearResults, addToWatchlist } from "../actions";
 
 import './Main.css';
 
@@ -27,8 +27,10 @@ export class Main extends React.Component {
   }
 
   onAdd() {
-    alert('hi');
-    // As a user, I should be able to add a video to my favorites (create) so that I can access them later.
+    // As a user, I should be able to add a video to my
+    // favorites (create) so that I can access them later.
+    // this.props.dispatch(addVideo());
+    // videoID, title, thumbnail
   }
 
   renderResults() {

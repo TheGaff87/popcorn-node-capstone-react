@@ -5,13 +5,12 @@ import { API_ORIGIN } from "../config";
 */
 
 export const LOG_USER = "LOG_USER";
-export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
+export const REQUEST = "REQUEST";
 export const SELECT_VIDEO = "SELECT_VIDEO";
 export const UPDATE_TIME = "UPDATE_TIME";
 export const GET_WATCHLIST = "GET_WATCHLIST";
 export const DELETE_VIDEO = "DELETE_VIDEO";
 export const ADD_VIDEO = "ADD_VIDEO";
-export const SEARCH_VIDEOS_REQUEST = 'SEARCH_VIDEOS_REQUEST';
 export const APPEND_RESULTS = "APPEND_RESULTS";
 export const CLEAR_RESULTS = "CLEAR_RESULTS";
 
@@ -19,8 +18,8 @@ export const CLEAR_RESULTS = "CLEAR_RESULTS";
  * action creators
  */
 
-export const signupRequest =  () => ({
-  type: SIGNUP_REQUEST
+export const request =  () => ({
+  type: REQUEST
 });
 
 export const logUser = user => ({
@@ -53,9 +52,6 @@ export const addToWatchlist = (videos) => ({
   videos
 });
 
-export const searchVideosRequest = () => ({
-    type: SEARCH_VIDEOS_REQUEST
-});
 
 export const appendResults = (videos) => ({
   type: APPEND_RESULTS,
@@ -67,9 +63,15 @@ export const clearResults = (videos) => ({
   videos
 });
 
+export const addVideo = () => dispatch => {
+  dispatch(request());
+  // fetch POST a resource, video information, to the endpoint
+  // /videos/:id
+};
+
 export const signupUser = user => dispatch => {
   console.log('signupUser is dispatched!');
-  dispatch(signupRequest());
+  dispatch(request());
   console.log('LINE 61, actions file: ', user);
   fetch(`${API_ORIGIN}/auth/signup`, {
     method: 'POST',
@@ -96,7 +98,7 @@ export const signupUser = user => dispatch => {
 
 export const searchVideos = text => dispatch => {
   console.log('searchVideos is dispatched!');
-  dispatch(searchVideosRequest());
+  dispatch(request());
 
   fetch(`${API_ORIGIN}/videos/${text}`, {
       mode: 'cors',
