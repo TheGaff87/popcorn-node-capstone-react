@@ -81,17 +81,16 @@ export const authSuccess = currentUser => ({
     currentUser
 });
 
-export const addVideo = obj => dispatch => {
+export const addVideo = (obj, userID) => dispatch => {
   console.log('addVideo is dispatched!');
-  console.log(obj);
-  console.log(JSON.stringify(obj));
+  const userVideo = {video: obj, id: userID};
   dispatch(request());
   fetch(`${API_ORIGIN}/videos`, {
     method: 'POST',
     headers: {
       "content-type": "application/json"
     },
-    body: JSON.stringify(obj)
+    body: JSON.stringify(userVideo)
   })
     .then(res => {
       if (!res.ok) {

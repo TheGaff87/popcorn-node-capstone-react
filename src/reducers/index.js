@@ -7,7 +7,8 @@ const initialState = {
     loading: false,
     currentVideo: '',
     videoId: 'M4Ufs7-FpvU',
-    authToken: ''
+    authToken: '',
+    userID: ''
 };
 
 export const reducer = (state=initialState, action) => {
@@ -70,7 +71,8 @@ export const reducer = (state=initialState, action) => {
     if (action.type === actions.AUTH_SUCCESS) {
         return Object.assign({}, state, {
             loading: false,
-            user: action.currentUser.username
+            user: action.currentUser.username,
+            userID: action.currentUser._id
         });
     }
 

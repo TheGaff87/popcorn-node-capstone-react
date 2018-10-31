@@ -38,7 +38,7 @@ export class Main extends React.Component {
       title: video.title,
       thumbnail: video.thumbnails.medium.url
     };
-    this.props.dispatch(addVideo(videoObj));
+    this.props.dispatch(addVideo(videoObj, this.props.userID));
   }
 
   renderResults() {
@@ -97,7 +97,8 @@ export const mapStateToProps = state => ({
   loading: state.loading,
   error: state.error,
   currentVideo: state.currentVideo,
-  videoId: state.videoId
+  videoId: state.videoId,
+  userID: state.userID
 });
 
 export default connect(mapStateToProps)(Main);
