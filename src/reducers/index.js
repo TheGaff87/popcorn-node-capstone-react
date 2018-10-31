@@ -5,7 +5,7 @@ const initialState = {
     videos: [],
     chatHistory: [],
     loading: false,
-    videoId: null
+    videoId: 'M4Ufs7-FpvU'
 };
 
 export const reducer = (state=initialState, action) => {
