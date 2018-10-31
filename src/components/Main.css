@@ -32,3 +32,10 @@
 .results-dropdown button {
     background: transparent;
 }
+
+.watchlist-btn {
+    background: var(--bluet);
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px 0 20px;
+}

@@ -26,6 +26,11 @@ export class Main extends React.Component {
     }
   }
 
+  onAdd() {
+    alert('hi');
+    // As a user, I should be able to add a video to my favorites (create) so that I can access them later.
+  }
+
   renderResults() {
     console.log("Inside Main search form: ", this.props);
     if (this.props.loading) {
@@ -50,6 +55,19 @@ export class Main extends React.Component {
   }
 
   render() {
+    if (this.props.videoId) {
+      console.log('line 54: ', this.props.videoId);
+      return (
+        <main>
+          <SearchForm onSearch={text=> this.onSearch(text)} results={this.renderResults()} />
+            <section className="interactive">
+              <Player videoId={this.props.videoId} />
+              <div className="watchlist-btn"><button type="button" onClick={this.onAdd}>Add to Watchlist</button></div>
+              <Chat />
+            </section>
+        </main>
+      );
+    }
     return (
       <main>
         <SearchForm onSearch={text => this.onSearch(text)} results={this.renderResults()} />
