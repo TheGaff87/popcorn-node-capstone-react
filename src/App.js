@@ -23,14 +23,15 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          <Route exact path="/" render={() => <Welcome person={this.props.loggedIn} />}/>
+          <Route exact path="/user" render={() => <Welcome person={this.props.loggedIn} />}/>
           <header>
             <h1><Link to="/">Popcorn</Link></h1>
-            <Route exact path="/" component={Nav} />
+            {/* <Nav /> */}
+            <Route exact path="/user" component={Nav} />
           </header>
-          <Route exact path="/landing" component={Landing} />
-          <Route exact path="/" component={Main} />
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/user" component={Main} />
+          <Route exact path="/auth/login" component={Login} />
           <Route exact path="/auth/signup" component={Signup} />
           <Route exact path="/search" component={SearchPage} />
           <Route exact path="/watchlist" component={Watchlist} />

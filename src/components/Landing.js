@@ -3,17 +3,20 @@ import Benefits from "./InfoBene";
 import Details from "./InfoDetail";
 
 import { Link } from "react-router-dom";
+import './Landing.css';
 
 export default function Landing() {
   return (
-    <div>
+    <section className="landing">
       <Benefits />
-      <div>
-        <h2>My landing page content</h2>
-        <p>Welcome to Popcorn!</p>
-        <Link to="/login">Demo</Link>
+      <div className="landing-container">
+        <h2>Welcome to Popcorn!</h2>
+        <p>Popcorn is an entertainment app that allows users to chat with each other and watch YouTube videos together!</p>
+        <nav>
+          <Link to="/login">Demo</Link>
+        </nav>
       </div>
       <Details />
-    </div>
+    </section>
   );
 }

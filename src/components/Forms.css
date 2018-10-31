@@ -6,7 +6,7 @@ form {
     justify-content: center;
   }
 
-.form-landing {
+.form-landing, .landing {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -18,23 +18,26 @@ form {
 }
 
 .form-container {
-    background: var(--pinkt);
-    display: flex;
-    flex-direction: column;
     padding: .5px;
 }
 
-.form-container nav {
+.form-container, .landing-container {
+    background: var(--pinkt);
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container nav, .landing-container nav {
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
 }
 
-.form-container nav a {
+.form-container nav a, .landing-container nav a {
     color: black;
 }
 
-.form-container nav span {
+.form-container nav span, .landing-container nav span {
     color: var(--green);
 }
 
@@ -65,7 +68,7 @@ label[for="video-title"] {
     position: relative;
 }
 
-.form-container, .info-bene, .info-detail {
+.form-container, .info-bene, .info-detail, .landing-container {
     height: 400px;
     width: 100%;
     overflow: hidden;
@@ -134,7 +137,7 @@ label[for="video-title"] {
         width: 25%;
     }
 
-    .form-container {
+    .form-container, .landing-container {
         flex-grow: 2;
         width: 30%;
     }
@@ -146,7 +149,7 @@ label[for="video-title"] {
 
 @media (min-width: 1040px) {
 
-    .info-bene, .info-detail, .form-container {
+    .info-bene, .info-detail, .form-container, .landing-container {
         box-shadow: 0px 0px 14px -3px black;
         border-radius: 5px;
         margin: 10px;
