@@ -6,13 +6,14 @@ import { API_ORIGIN } from "../config";
 
 export const LOG_USER = "LOG_USER";
 export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
-export const PLAY_VIDEO = "PLAY_VIDEO";
+export const SELECT_VIDEO = "SELECT_VIDEO";
 export const UPDATE_TIME = "UPDATE_TIME";
 export const GET_WATCHLIST = "GET_WATCHLIST";
 export const DELETE_VIDEO = "DELETE_VIDEO";
 export const ADD_VIDEO = "ADD_VIDEO";
 export const SEARCH_VIDEOS_REQUEST = 'SEARCH_VIDEOS_REQUEST';
 export const APPEND_RESULTS = "APPEND_RESULTS";
+export const CLEAR_RESULTS = "CLEAR_RESULTS";
 
 /*
  * action creators
@@ -27,8 +28,8 @@ export const logUser = user => ({
   user
 });
 
-export const playVideo = id => ({
-  type: PLAY_VIDEO,
+export const selectVideo = id => ({
+  type: SELECT_VIDEO,
   id
 });
 
@@ -58,6 +59,11 @@ export const searchVideosRequest = () => ({
 
 export const appendResults = (videos) => ({
   type: APPEND_RESULTS,
+  videos
+});
+
+export const clearResults = (videos) => ({
+  type: CLEAR_RESULTS,
   videos
 });
 

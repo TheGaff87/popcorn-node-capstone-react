@@ -5,7 +5,7 @@ import Player from "./Player";
 import Spinner from "react-spinkit";
 
 import { connect } from "react-redux";
-import { searchVideos, playVideo } from "../actions";
+import { searchVideos, selectVideo, clearResults } from "../actions";
 
 import './Main.css';
 
@@ -16,18 +16,24 @@ export class Main extends React.Component {
 
   getVideo(target) {
     const id = target[0].id;
-    this.props.dispatch(playVideo(id));
+    this.props.dispatch(selectVideo(id));
+    this.clearDropdown();
+  }
+
+  clearDropdown() {
+    if (this.refs.dropdown) {
+      this.props.dispatch(clearResults());
+    }
   }
 
   renderResults() {
     console.log("Inside Main search form: ", this.props);
-
     if (this.props.loading) {
       return (
         <Spinner className="spinner'" name="three-bounce" color="fuchsia" />
       );
     }
-    
+
     if (this.props.videos.items) {
       const videos = this.props.videos.items.map((video, index) => {
         return (
@@ -39,7 +45,7 @@ export class Main extends React.Component {
         );
       });
 
-      return <ul className="results-dropdown">{videos}</ul>;
+      return <ul className="results-dropdown" ref='dropdown'>{videos}</ul>;
     }
   }
 

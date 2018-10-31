@@ -17,7 +17,7 @@ export const reducer = (state=initialState, action) => {
         });
     }
 
-    if (action.type === actions.PLAY_VIDEO) {
+    if (action.type === actions.SELECT_VIDEO) {
         console.log("play video!", action.id)
         return Object.assign({}, state, {
             videoId: action.id
@@ -45,6 +45,15 @@ export const reducer = (state=initialState, action) => {
         console.log('Running APPEND_RESULTS action', action.videos);
         return Object.assign({}, state, {
             videos: action.videos,
+            loading: false,
+            error: null
+        });
+    }
+
+    if (action.type === actions.CLEAR_RESULTS) {
+        console.log('Running CLEAR_RESULTS action', action.videos);
+        return Object.assign({}, state, {
+            videos: [],
             loading: false,
             error: null
         });
