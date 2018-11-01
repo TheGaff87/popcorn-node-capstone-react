@@ -47,7 +47,7 @@ export class SignupForm extends React.Component {
             <button>Signup</button>
           </form>
           <nav>
-            <Link to="/login">Have an account? <span>Login!</span></Link>
+          <Link to="/auth/login">Have an account? <span>Login!</span></Link>
           </nav>
         </div>
         <Details />
