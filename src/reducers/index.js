@@ -20,7 +20,6 @@ export const reducer = (state=initialState, action) => {
     }
 
     if (action.type === actions.SELECT_VIDEO) {
-        console.log("%%%%%%%%%%%%%%%%%%%%%% SELECT_VIDEO RAN!!!!!!");
         return Object.assign({}, state, {
             videoId: action.currentVideo.id.videoId,
             currentVideo: action.currentVideo
@@ -29,14 +28,12 @@ export const reducer = (state=initialState, action) => {
 
 
     if (action.type === actions.ADD_VIDEO) {
-        console.log("%%%%%%%%%%%%%%%%%%%%%% ADD_VIDEO RAN!!!!!!");
         return Object.assign({}, state, {
             loading: false
         });
     }
 
     if (action.type === actions.LOG_USER) {
-        console.log(action.user);
         return Object.assign({}, state, {
             user: action.user,
             loading: false,
@@ -45,7 +42,6 @@ export const reducer = (state=initialState, action) => {
     }
 
     if (action.type === actions.LOG_OUT) {
-        console.log('LOGGING OUT!');
         return Object.assign({}, {
             user: null,
             videos: [],
@@ -59,7 +55,6 @@ export const reducer = (state=initialState, action) => {
     }
 
     if (action.type === actions.APPEND_RESULTS) {
-        console.log('Running APPEND_RESULTS action', action.videos);
         return Object.assign({}, state, {
             videos: action.videos,
             loading: false,
@@ -68,7 +63,6 @@ export const reducer = (state=initialState, action) => {
     }
 
     if (action.type === actions.CLEAR_RESULTS) {
-        console.log('Running CLEAR_RESULTS action', action.videos);
         return Object.assign({}, state, {
             videos: [],
             loading: false,

@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 
-import LoginForm from '../components/LoginForm';
+import {LoginForm} from '../components/LoginForm';
 
 
 describe('<LoginForm />', () => {
