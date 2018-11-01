@@ -6,6 +6,7 @@ import { API_ORIGIN } from "../config";
 */
 
 export const LOG_USER = "LOG_USER";
+export const LOG_OUT = "LOG_OUT";
 export const REQUEST = "REQUEST";
 export const SELECT_VIDEO = "SELECT_VIDEO";
 export const UPDATE_TIME = "UPDATE_TIME";
@@ -27,6 +28,10 @@ export const request = () => ({
 export const logUser = user => ({
   type: LOG_USER,
   user
+});
+
+export const logout = () => ({
+  type: LOG_OUT
 });
 
 export const selectVideo = currentVideo => ({

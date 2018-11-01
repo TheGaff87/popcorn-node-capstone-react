@@ -28,6 +28,7 @@ export class LoginForm extends React.Component {
 
   render() {
     if (this.props.loggedIn) {
+      console.log(this.props.loggedIn, 'this.props.loggedIn');
       return <Redirect to="/user" />;
     }
     return (

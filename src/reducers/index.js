@@ -44,6 +44,20 @@ export const reducer = (state=initialState, action) => {
         });
     }
 
+    if (action.type === actions.LOG_OUT) {
+        console.log('LOGGING OUT!');
+        return Object.assign({}, {
+            user: null,
+            videos: [],
+            chatHistory: [],
+            loading: false,
+            currentVideo: '',
+            videoId: 'M4Ufs7-FpvU',
+            authToken: '',
+            userID: ''
+        });
+    }
+
     if (action.type === actions.APPEND_RESULTS) {
         console.log('Running APPEND_RESULTS action', action.videos);
         return Object.assign({}, state, {
