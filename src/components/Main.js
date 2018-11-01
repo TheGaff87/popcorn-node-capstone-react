@@ -11,7 +11,7 @@ import './Main.css';
 
 export class Main extends React.Component {
   onSearch(text) {
-    this.props.dispatch(searchVideos(text));
+    this.props.dispatch(searchVideos(text, this.props.authToken));
   }
 
   getVideo(target) {
@@ -38,7 +38,7 @@ export class Main extends React.Component {
       title: video.title,
       thumbnail: video.thumbnails.medium.url
     };
-    this.props.dispatch(addVideo(videoObj, this.props.userID));
+    this.props.dispatch(addVideo(videoObj, this.props.userID, this.props.authToken));
   }
 
   renderResults() {
@@ -98,7 +98,8 @@ export const mapStateToProps = state => ({
   error: state.error,
   currentVideo: state.currentVideo,
   videoId: state.videoId,
-  userID: state.userID
+  userID: state.userID,
+  authToken: state.authToken
 });
 
 export default connect(mapStateToProps)(Main);

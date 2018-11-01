@@ -86,14 +86,15 @@ export const authSuccess = currentUser => ({
     currentUser
 });
 
-export const addVideo = (obj, userID) => dispatch => {
+export const addVideo = (obj, userID, token) => dispatch => {
   console.log('addVideo is dispatched!');
   const userVideo = {video: obj, id: userID};
   dispatch(request());
   fetch(`${API_ORIGIN}/videos`, {
     method: 'POST',
     headers: {
-      "content-type": "application/json"
+      "content-type": "application/json",
+      "Authorization": `Bearer ${token}`
     },
     body: JSON.stringify(userVideo)
   })
@@ -163,12 +164,13 @@ export const signupUser = user => dispatch => {
     });
 };
 
-export const searchVideos = text => dispatch => {
+export const searchVideos = (text, token) => dispatch => {
   dispatch(request());
   fetch(`${API_ORIGIN}/videos/${text}`, {
     mode: "cors",
     headers: {
-      "Access-Control-Allow-Origin": "*"
+      "Access-Control-Allow-Origin": "*",
+      "Authorization": `Bearer ${token}`
     }
   })
     .then(res => {
