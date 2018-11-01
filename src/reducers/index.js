@@ -4,6 +4,7 @@ const initialState = {
     user: null,
     videos: [],
     chatHistory: [],
+    watchlist: [],
     loading: false,
     currentVideo: '',
     videoId: 'M4Ufs7-FpvU',
@@ -29,6 +30,15 @@ export const reducer = (state=initialState, action) => {
 
     if (action.type === actions.ADD_VIDEO) {
         return Object.assign({}, state, {
+            loading: false
+        });
+    }
+
+    if (action.type === actions.GEN_WATCHLIST) {
+        console.log('GEN_WATCHLIST is running');
+        console.log(action);
+        return Object.assign({}, state, {
+            watchlist: action.videos,
             loading: false
         });
     }

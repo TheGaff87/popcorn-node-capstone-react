@@ -12,7 +12,7 @@ import "./VideoPages.css";
 export class SearchPage extends React.Component {
   onSearch(text) {
     console.log("onSearch!");
-    this.props.dispatch(searchVideos(text));
+    this.props.dispatch(searchVideos(text, this.props.authToken));
   }
 
   renderResults() {
@@ -28,13 +28,15 @@ export class SearchPage extends React.Component {
     if (this.props.videos.items) {
       const videos = this.props.videos.items.map((video, index) => {
         return (
-          <button key={index} className="item" id={video.id.videoId}>
+          <div className="item" key={index} id={video.id.videoId}>
             <h3>{video.snippet.title}</h3>
+            <button>
             <img
               src={video.snippet.thumbnails.medium.url}
               alt={video.snippet.thumbnails.title}
             />
-          </button>
+            </button>
+          </div>
         );
       });
 
@@ -60,7 +62,8 @@ export const mapStateToProps = state => ({
   videos: state.videos,
   user: state.user,
   loading: state.loading,
-  error: state.error
+  error: state.error,
+  authToken: state.authToken
 });
 
 export default connect(mapStateToProps)(SearchPage);

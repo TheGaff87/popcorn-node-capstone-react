@@ -1,5 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import { API_ORIGIN } from "../config";
+import { resolve } from 'path';
 
 /*
  * action types
@@ -10,7 +11,7 @@ export const LOG_OUT = "LOG_OUT";
 export const REQUEST = "REQUEST";
 export const SELECT_VIDEO = "SELECT_VIDEO";
 export const UPDATE_TIME = "UPDATE_TIME";
-export const GET_WATCHLIST = "GET_WATCHLIST";
+export const GEN_WATCHLIST = "GEN_WATCHLIST";
 export const DELETE_VIDEO = "DELETE_VIDEO";
 export const ADD_VIDEO = "ADD_VIDEO";
 export const APPEND_RESULTS = "APPEND_RESULTS";
@@ -44,8 +45,8 @@ export const updateTime = time => ({
   time
 });
 
-export const getWatchlist = videos => ({
-  type: GET_WATCHLIST,
+export const genWatchlist = videos => ({
+  type: GEN_WATCHLIST,
   videos
 });
 
@@ -86,34 +87,6 @@ export const authSuccess = currentUser => ({
     currentUser
 });
 
-export const addVideo = (obj, userID, token) => dispatch => {
-  console.log('addVideo is dispatched!');
-  const userVideo = {video: obj, id: userID};
-  dispatch(request());
-  fetch(`${API_ORIGIN}/videos`, {
-    method: 'POST',
-    headers: {
-      "content-type": "application/json",
-      "Authorization": `Bearer ${token}`
-    },
-    body: JSON.stringify(userVideo)
-  })
-    .then(res => {
-      if (!res.ok) {
-        return Promise.reject(res.statusText);
-        // const err = new Error('Missing `title` in request body');
-        // err.status = 400;
-      }
-      return res.json();
-    })
-    .then(res => {
-      console.log(res);
-      dispatch(addToWatchlist(res));
-    })
-    .catch(err => {
-      console.log("actions index.js line 94", err);
-    });
-};
 
 const storeAuthInfo = (authToken, dispatch) => {
   console.log(authToken);
@@ -164,9 +137,11 @@ export const signupUser = user => dispatch => {
     });
 };
 
+
+// searchVideos finds videos using YouTube API
 export const searchVideos = (text, token) => dispatch => {
   dispatch(request());
-  fetch(`${API_ORIGIN}/videos/${text}`, {
+  fetch(`${API_ORIGIN}/videos/search/${text}`, {
     mode: "cors",
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -184,5 +159,53 @@ export const searchVideos = (text, token) => dispatch => {
     })
     .catch(err => {
       console.log("actions index.js line 94", err);
+    });
+};
+
+// addVideo adds a video to the watchlist (favorites)
+export const addVideo = (obj, userID, token) => dispatch => {
+  const userVideo = {video: obj, id: userID};
+  dispatch(request());
+  fetch(`${API_ORIGIN}/videos`, {
+    method: 'POST',
+    headers: {
+      "content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(userVideo)
+  })
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+        // const err = new Error('Missing `title` in request body');
+        // err.status = 400;
+      }
+      return res.json();
+    })
+    .then(res => {
+      console.log(res);
+      dispatch(addToWatchlist(res));
+    })
+    .catch(err => {
+      console.log("actions index.js line 94", err);
+    });
+};
+
+// getWatchlist gets user's video list and generates on the page
+export const getWatchlist = (token, id) => dispatch => {
+  dispatch(request());
+  fetch(`${API_ORIGIN}/videos/${id}`, {
+    mode: "cors",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Authorization": `Bearer ${token}`
+    }
+  })
+    .then(res => res.json())
+    .then(res => {
+      dispatch(genWatchlist(res.videos));
+    })
+    .catch(err => {
+      console.log(err);
     });
 };

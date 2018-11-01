@@ -18,14 +18,20 @@
     transition: .4s;
 }
 
-.item:hover img {
-    opacity: .1;
+.item:hover h3, .item:hover .remove-btn {
+    opacity: 1;
     transition: .4s;
 }
 
-.item:hover h3 {
-    opacity: 1;
-    transition: .4s;
+.item h3, .item .remove-btn {
+    position: absolute;
+    opacity: 0;
+}
+
+.item h3 {
+    color: var(--ltgray);
+    margin: 0;
+    padding: 20px;
 }
 
 .item img {
@@ -33,12 +39,9 @@
     width: 100%;
 }
 
-.item h3 {
-    color: var(--ltgray);
-    position: absolute;
-    margin: 0;
-    padding: 20px;
-    opacity: 0;
+.item:hover img {
+    opacity: .1;
+    transition: .4s;
 }
 
 .item button {
@@ -46,4 +49,13 @@
     margin: 0;
     padding: 0;
     border: 0;
+}
+
+.item .remove-btn {
+    background: var(--pink);
+    color: white;
+    bottom: 10px;
+    right: 10px;
+    padding: 3px;
+    z-index: 2;
 }
