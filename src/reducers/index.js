@@ -80,7 +80,7 @@ export const reducer = (state=initialState, action) => {
         return Object.assign({}, state, {
             loading: false,
             user: action.currentUser.username,
-            userID: action.currentUser._id
+            userID: action.currentUser.id
         });
     }
 
