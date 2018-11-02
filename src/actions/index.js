@@ -50,9 +50,9 @@ export const genWatchlist = videos => ({
   videos
 });
 
-export const deleteFromWatchlist = videos => ({
+export const deleteFromWatchlist = id => ({
   type: DELETE_VIDEO,
-  videos
+  id
 });
 
 export const addToWatchlist = video => ({
@@ -191,8 +191,26 @@ export const addVideo = (obj, userID, token) => dispatch => {
     });
 };
 
+export const deleteVideo = (id, token) => dispatch => {
+  dispatch(request);
+  fetch(`${API_ORIGIN}/videos/${id}`, {
+    method: 'DELETE',
+    mode: "cors",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Authorization": `Bearer ${token}`
+    }
+  })
+    .then(res => {
+      dispatch(deleteFromWatchlist(id));
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
 // getWatchlist gets user's video list and generates on the page
-export const getWatchlist = (token, id) => dispatch => {
+export const getWatchlist = (id, token) => dispatch => {
   dispatch(request());
   fetch(`${API_ORIGIN}/videos/${id}`, {
     mode: "cors",

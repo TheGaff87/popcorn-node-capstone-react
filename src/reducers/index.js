@@ -34,9 +34,15 @@ export const reducer = (state=initialState, action) => {
         });
     }
 
+    if (action.type === actions.DELETE_VIDEO) {
+        console.log(action.id);
+        return Object.assign({}, state, {
+            loading: false,
+            watchlist: state.watchlist.filter(video => video._id !== action.id)
+        });
+    }
+
     if (action.type === actions.GEN_WATCHLIST) {
-        console.log('GEN_WATCHLIST is running');
-        console.log(action);
         return Object.assign({}, state, {
             watchlist: action.videos,
             loading: false

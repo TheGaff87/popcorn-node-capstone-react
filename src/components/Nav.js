@@ -13,7 +13,7 @@ export class Nav extends React.Component {
   }
 
   getVideoList() {
-    this.props.dispatch(getWatchlist(this.props.authToken, this.props.userID));
+    this.props.dispatch(getWatchlist(this.props.userID, this.props.authToken));
   }
 
   render() {
@@ -21,7 +21,7 @@ export class Nav extends React.Component {
       <nav>
         <ul className="nav-items">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/user">Home</Link>
           </li>
           <li>
             <Link to="/search">Search</Link>
