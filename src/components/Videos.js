@@ -20,15 +20,19 @@ export class Videos extends React.Component {
         <Spinner className="spinner'" name="three-bounce" color="fuchsia" />
       );
     }
-    const videos = this.props.watchlist.map((video, index) => {
-      return (<div className="item" key={index}>
-        <h3>{video.title}</h3>
-        <button type="button" id={video._id} className="remove-btn" onClick={(e) => this.deleteVideo(e.currentTarget)}>Remove</button>
-        <button type="button">
-          <img src={video.thumbnail} alt={video.title} />
-        </button>
-      </div>)
-    });
+
+    let videos = [];
+    if (this.props.watchlist.length > 0) {
+      videos = this.props.watchlist.map((video, index) => {
+        return (<div className="item" key={index}>
+          <h3>{video.title}</h3>
+          <button type="button" id={video._id} className="remove-btn" onClick={(e) => this.deleteVideo(e.currentTarget)}>Remove</button>
+          <button type="button">
+            <img src={video.thumbnail} alt={video.title} />
+          </button>
+        </div>)
+      });
+    }
     return (<div className="video-container">{videos}</div>)
   }
 }
