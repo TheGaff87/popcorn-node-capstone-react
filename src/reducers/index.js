@@ -8,7 +8,7 @@ const initialState = {
     user: null,
     userID: '',
     videos: [],
-    videoId: 'M4Ufs7-FpvU',
+    videoId: '',
     watchlist: []
 };
 
@@ -66,7 +66,7 @@ export const reducer = (state=initialState, action) => {
             user: null,
             userID: '',
             videos: [],
-            videoId: 'M4Ufs7-FpvU',
+            videoId: '',
             watchlist: []
         });
     }
