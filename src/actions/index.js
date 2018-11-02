@@ -96,12 +96,9 @@ export const authSuccess = currentUser => ({
 
 
 const storeAuthInfo = (authToken, dispatch) => {
-  console.log(authToken);
   const decodedToken = jwtDecode(authToken);
-  console.log(decodedToken);
   dispatch(setAuthToken(authToken));
   dispatch(authSuccess(decodedToken));
-  // saveAuthToken(authToken);
 };
 
 export const login = user => dispatch => {
@@ -130,15 +127,8 @@ export const signupUser = user => dispatch => {
     },
     body: JSON.stringify(user)
   })
-    .then(res => {
-      if (!res.ok) {
-        return Promise.reject(res.statusText);
-      }
-      return res.json();
-    })
-    .then(res => {
-      dispatch(logUser(user.username));
-    })
+    .then(res => res.json())
+    .then(authToken => storeAuthInfo(authToken.token, dispatch))
     .catch((res, err) => {
       console.log("res: ", res);
     });
