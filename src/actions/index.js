@@ -1,13 +1,14 @@
 import jwtDecode from 'jwt-decode';
 import { API_ORIGIN } from "../config";
 import { resolve } from 'path';
-
+import io from 'socket.io-client';
 /*
  * action types
 */
 
 export const LOG_USER = "LOG_USER";
 export const LOG_OUT = "LOG_OUT";
+export const CHAT = "CHAT";
 export const REQUEST = "REQUEST";
 export const SELECT_VIDEO = "SELECT_VIDEO";
 export const UPDATE_TIME = "UPDATE_TIME";
@@ -33,6 +34,11 @@ export const logUser = user => ({
 
 export const logout = () => ({
   type: LOG_OUT
+});
+
+export const saveChat = (text) => ({
+  type: CHAT,
+  text
 });
 
 export const selectVideo = (currentVideo, id) => ({
@@ -138,6 +144,34 @@ export const signupUser = user => dispatch => {
     });
 };
 
+
+export const testChat = text => dispatch => {
+  const socket = io.connect('http://localhost:8080');
+  fetch(`${API_ORIGIN}/user/chat`, {
+    method: 'POST',
+    mode: "cors",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YmQ4YmU1MzdjNjNjYmNjMGI1OTgzOWIiLCJlbWFpbCI6ImJvc3RvbkBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImJvc3RvbiIsInRlc3QiOiJIT1dEWSEiLCJpYXQiOjE1NDEwOTczOTF9.g1BN902doUml6tpVv1EbgCpDiKxlkoWO7D3txo_Vf0o`
+    }
+  })
+  .then(res => {
+    if (!res.ok) {
+      return Promise.reject(res.statusText);
+    }
+    return res.json();
+  })
+  .then(res => {
+    console.log(res);
+    socket.emit('chat message', text);
+    socket.on('chat message', function (msg) {
+      // this needs to be dispatched to the reducer
+      dispatch(saveChat(msg));
+      console.log(msg);
+    });
+
+  })
+};
 
 // searchVideos finds videos using YouTube API
 export const searchVideos = (text, token) => dispatch => {

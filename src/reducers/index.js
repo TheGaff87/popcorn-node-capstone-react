@@ -80,6 +80,13 @@ export const reducer = (state=initialState, action) => {
         });
     }
 
+    if (action.type === actions.CHAT) {
+        console.log(action, state.chatHistory);
+        return Object.assign({}, state, {
+            chatHistory: [...state.chatHistory, action.text]
+        });
+    }
+
     if (action.type === actions.APPEND_RESULTS) {
         return Object.assign({}, state, {
             error: null,
