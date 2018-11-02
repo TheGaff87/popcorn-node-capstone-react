@@ -1,29 +1,29 @@
 import * as actions from '../actions';
 
 const initialState = {
-    user: null,
-    videos: [],
-    chatHistory: [],
-    watchlist: [],
-    loading: false,
-    currentVideo: '',
-    videoId: 'M4Ufs7-FpvU',
     authToken: '',
-    userID: ''
+    chatHistory: [],
+    currentVideo: '',
+    loading: false,
+    user: null,
+    userID: '',
+    videos: [],
+    videoId: 'M4Ufs7-FpvU',
+    watchlist: []
 };
 
 export const reducer = (state=initialState, action) => {
     if (action.type === actions.REQUEST) {
         return Object.assign({}, state, {
-            loading: true,
-            error: null
+            error: null,
+            loading: true
         });
     }
 
     if (action.type === actions.SELECT_VIDEO) {
         return Object.assign({}, state, {
-            videoId: action.currentVideo.id.videoId,
-            currentVideo: action.currentVideo
+            currentVideo: action.currentVideo,
+            videoId: action.currentVideo.id.videoId
         });
     }
 
@@ -44,51 +44,53 @@ export const reducer = (state=initialState, action) => {
 
     if (action.type === actions.GEN_WATCHLIST) {
         return Object.assign({}, state, {
-            watchlist: action.videos,
-            loading: false
+            loading: false,
+            watchlist: action.videos
         });
     }
 
     if (action.type === actions.LOG_USER) {
         return Object.assign({}, state, {
-            user: action.user,
+            error: null,
             loading: false,
-            error: null
+            user: action.user
         });
     }
 
     if (action.type === actions.LOG_OUT) {
         return Object.assign({}, {
-            user: null,
-            videos: [],
-            chatHistory: [],
-            loading: false,
-            currentVideo: '',
-            videoId: 'M4Ufs7-FpvU',
             authToken: '',
-            userID: ''
+            chatHistory: [],
+            currentVideo: '',
+            loading: false,
+            user: null,
+            userID: '',
+            videos: [],
+            videoId: 'M4Ufs7-FpvU',
+            watchlist: []
         });
     }
 
     if (action.type === actions.APPEND_RESULTS) {
         return Object.assign({}, state, {
-            videos: action.videos,
+            error: null,
             loading: false,
-            error: null
+            videos: action.videos
         });
     }
 
     if (action.type === actions.CLEAR_RESULTS) {
         return Object.assign({}, state, {
-            videos: [],
+            error: null,
             loading: false,
-            error: null
+            videos: []
         });
     }
 
     if (action.type === actions.SET_AUTH_TOKEN) {
         return Object.assign({}, state, {
-            authToken: action.authToken
+            authToken: action.authToken,
+            loading: false
         });
     }
 

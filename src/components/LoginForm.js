@@ -1,6 +1,7 @@
 import React from "react";
 import Benefits from "./InfoBene";
 import Details from "./InfoDetail";
+import Spinner from "react-spinkit";
 
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -27,10 +28,19 @@ export class LoginForm extends React.Component {
   }
 
   render() {
+    
+    if (this.props.loading) {
+      return (
+        <Spinner className="spinner'" name="three-bounce" color="fuchsia" />
+      );
+    }
+
     if (this.props.loggedIn) {
       console.log(this.props.loggedIn, 'this.props.loggedIn');
       return <Redirect to="/user" />;
     }
+
+
     return (
       <section className="form-landing">
         <Benefits />
