@@ -88,7 +88,7 @@ export class Main extends React.Component {
       <main>
         <SearchForm onSearch={text => this.onSearch(text)} results={this.renderResults()} />
         <section className="interactive">
-          <Player videoId={this.props.videoId}/>
+          <Player />
           <Chat />
         </section>
       </main>
