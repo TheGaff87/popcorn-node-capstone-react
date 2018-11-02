@@ -17,7 +17,7 @@ export class Main extends React.Component {
 
   getVideo(target) {
     const id = target[0].id;
-    const currentVideo = this.props.videos.items.find((video) => {
+    const currentVideo = this.props.videos[0].items.find((video) => {
       return video.id.videoId === id;
     });
     this.props.dispatch(selectVideo(currentVideo, currentVideo.id.videoId));
@@ -51,8 +51,8 @@ export class Main extends React.Component {
       );
     }
 
-    if (this.props.videos.items) {
-      const videos = this.props.videos.items.map((video, index) => {
+    if (this.props.videos.length > 0) {
+      const videos = this.props.videos[0].items.map((video, index) => {
         return (
           <li key={index}>
             <button type="button" onClick={(e) => this.getVideo(e.currentTarget.children)}>

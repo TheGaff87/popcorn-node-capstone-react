@@ -84,7 +84,7 @@ export const reducer = (state=initialState, action) => {
         return Object.assign({}, state, {
             error: null,
             loading: false,
-            videos: action.videos,
+            videos: [...state.videos, action.videos],
             onMain: false
         });
     }

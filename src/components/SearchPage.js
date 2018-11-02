@@ -15,6 +15,12 @@ export class SearchPage extends React.Component {
     this.props.dispatch(searchVideos(text, this.props.authToken));
   }
 
+  playVideo(target) {
+    console.log(target)
+    // const currentVideo = this.props.watchlist.find(video => video.videoID === target.id);
+    // this.props.dispatch(selectVideo(currentVideo, target.id));
+  }
+
   renderResults() {
     console.log("In Search Page. Props: ", this.props);
 
@@ -24,17 +30,14 @@ export class SearchPage extends React.Component {
       );
     }
 
-    console.log("****************Videos****************", this.props.videos);
-    if (this.props.videos.items) {
-      const videos = this.props.videos.items.map((video, index) => {
+    if (this.props.videos.length > 0) {
+      const videos = this.props.videos[0].items.map((video, index) => {
         return (
-          <div className="item" key={index} id={video.id.videoId}>
+          <div className="item" key={index}>
             <h3>{video.snippet.title}</h3>
-            <button>
-            <img
-              src={video.snippet.thumbnails.medium.url}
-              alt={video.snippet.thumbnails.title}
-            />
+            <button type="button" id={video.id.videoId} onClick={(e) => this.playVideo(e.currentTarget)}>
+              <img
+                src={video.snippet.thumbnails.medium.url} alt={video.snippet.thumbnails.title} />
             </button>
           </div>
         );
