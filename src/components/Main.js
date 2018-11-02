@@ -20,7 +20,7 @@ export class Main extends React.Component {
     const currentVideo = this.props.videos.items.find((video) => {
       return video.id.videoId === id;
     });
-    this.props.dispatch(selectVideo(currentVideo));
+    this.props.dispatch(selectVideo(currentVideo, currentVideo.id.videoId));
     this.clearDropdown();
   }
 
@@ -31,13 +31,17 @@ export class Main extends React.Component {
   }
 
   onAdd(props) {
-    const video = this.props.currentVideo.snippet;
-    const videoObj = {
-      id: this.props.videoId,
-      title: video.title,
-      thumbnail: video.thumbnails.medium.url
-    };
-    this.props.dispatch(addVideo(videoObj, this.props.userID, this.props.authToken));
+    // if it's a video from the main search, it will have a snippet, so continue
+    // if it's from the watchlist, do nothing -- as you can't re-add to watchlist anyway
+    if (this.props.currentVideo.hasOwnProperty('snippet')) {
+      const video = this.props.currentVideo.snippet;
+      const videoObj = {
+        id: this.props.videoId,
+        title: video.title,
+        thumbnail: video.thumbnails.medium.url
+      };
+      this.props.dispatch(addVideo(videoObj, this.props.userID, this.props.authToken));
+    }
   }
 
   renderResults() {

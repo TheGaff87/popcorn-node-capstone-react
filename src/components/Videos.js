@@ -2,19 +2,27 @@ import React from "react";
 import Spinner from "react-spinkit";
 import { connect } from "react-redux";
 
-import { deleteVideo } from "../actions";
+import { selectVideo, deleteVideo } from "../actions";
+import { Redirect } from "react-router-dom";
 
 import "./Video.css";
 
 export class Videos extends React.Component {
 
+  playVideo(target) {
+    const currentVideo = this.props.watchlist.find(video => video.videoID === target.id);
+    this.props.dispatch(selectVideo(currentVideo, target.id));
+  }
+
   deleteVideo(target) {
-    console.log(target.id);
     this.props.dispatch(deleteVideo(target.id, this.props.authToken));
   }
 
   render() {
-    console.log(this.props.watchlist);
+    if (this.props.onMain) {
+      return <Redirect to="/user" />;
+    }
+
     if (this.props.loading) {
       return (
         <Spinner className="spinner'" name="three-bounce" color="fuchsia" />
@@ -27,8 +35,8 @@ export class Videos extends React.Component {
         return (<div className="item" key={index}>
           <h3>{video.title}</h3>
           <button type="button" id={video._id} className="remove-btn" onClick={(e) => this.deleteVideo(e.currentTarget)}>Remove</button>
-          <button type="button">
-            <img src={video.thumbnail} alt={video.title} />
+          <button type="button" id={video.videoID} onClick={(e) => this.playVideo(e.currentTarget)}>
+            <img src={video.thumbnail} alt={video.title}/>
           </button>
         </div>)
       });
@@ -40,7 +48,8 @@ export class Videos extends React.Component {
 export const mapStateToProps = state => ({
   watchlist: state.watchlist,
   loading: state.loading,
-  authToken: state.authToken
+  authToken: state.authToken,
+  onMain: state.onMain
 });
 
 export default connect(mapStateToProps)(Videos);

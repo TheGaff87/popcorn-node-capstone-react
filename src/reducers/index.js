@@ -5,6 +5,7 @@ const initialState = {
     chatHistory: [],
     currentVideo: '',
     loading: false,
+    onMain: false,
     user: null,
     userID: '',
     videos: [],
@@ -16,21 +17,24 @@ export const reducer = (state=initialState, action) => {
     if (action.type === actions.REQUEST) {
         return Object.assign({}, state, {
             error: null,
-            loading: true
+            loading: true,
+            onMain: false
         });
     }
 
     if (action.type === actions.SELECT_VIDEO) {
         return Object.assign({}, state, {
             currentVideo: action.currentVideo,
-            videoId: action.currentVideo.id.videoId
+            videoId: action.id,
+            onMain: true
         });
     }
 
 
     if (action.type === actions.ADD_VIDEO) {
         return Object.assign({}, state, {
-            loading: false
+            loading: false,
+            onMain: false
         });
     }
 
@@ -38,14 +42,17 @@ export const reducer = (state=initialState, action) => {
         console.log(action.id);
         return Object.assign({}, state, {
             loading: false,
-            watchlist: state.watchlist.filter(video => video._id !== action.id)
+            watchlist: state.watchlist.filter(video => video._id !== action.id),
+            onMain: false
         });
     }
 
     if (action.type === actions.GEN_WATCHLIST) {
+        console.log('watchlist:', action.videos);
         return Object.assign({}, state, {
             loading: false,
-            watchlist: action.videos
+            watchlist: action.videos,
+            onMain: false
         });
     }
 
@@ -53,7 +60,8 @@ export const reducer = (state=initialState, action) => {
         return Object.assign({}, state, {
             error: null,
             loading: false,
-            user: action.user
+            user: action.user,
+            onMain: false
         });
     }
 
@@ -67,7 +75,8 @@ export const reducer = (state=initialState, action) => {
             userID: '',
             videos: [],
             videoId: '',
-            watchlist: []
+            watchlist: [],
+            onMain: false
         });
     }
 
@@ -75,7 +84,8 @@ export const reducer = (state=initialState, action) => {
         return Object.assign({}, state, {
             error: null,
             loading: false,
-            videos: action.videos
+            videos: action.videos,
+            onMain: false
         });
     }
 
@@ -83,14 +93,16 @@ export const reducer = (state=initialState, action) => {
         return Object.assign({}, state, {
             error: null,
             loading: false,
-            videos: []
+            videos: [],
+            onMain: false
         });
     }
 
     if (action.type === actions.SET_AUTH_TOKEN) {
         return Object.assign({}, state, {
             authToken: action.authToken,
-            loading: false
+            loading: false,
+            onMain: false
         });
     }
 
@@ -98,7 +110,8 @@ export const reducer = (state=initialState, action) => {
         return Object.assign({}, state, {
             loading: false,
             user: action.currentUser.username,
-            userID: action.currentUser.id
+            userID: action.currentUser.id,
+            onMain: false
         });
     }
 

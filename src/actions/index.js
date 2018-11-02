@@ -35,9 +35,10 @@ export const logout = () => ({
   type: LOG_OUT
 });
 
-export const selectVideo = currentVideo => ({
+export const selectVideo = (currentVideo, id) => ({
   type: SELECT_VIDEO,
-  currentVideo
+  currentVideo,
+  id
 });
 
 export const updateTime = time => ({
