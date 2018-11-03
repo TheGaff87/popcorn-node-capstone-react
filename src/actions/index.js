@@ -8,7 +8,8 @@ import io from 'socket.io-client';
 
 export const LOG_USER = "LOG_USER";
 export const LOG_OUT = "LOG_OUT";
-export const CHAT = "CHAT";
+export const SAVE_MESS = "SAVE_MESS";
+export const SEND_MESS = 'SEND_MESS';
 export const REQUEST = "REQUEST";
 export const SELECT_VIDEO = "SELECT_VIDEO";
 export const UPDATE_TIME = "UPDATE_TIME";
@@ -36,9 +37,15 @@ export const logout = () => ({
   type: LOG_OUT
 });
 
-export const saveChat = (text) => ({
-  type: CHAT,
-  text
+export const saveMess = (data) => ({
+  type: SAVE_MESS,
+  data
+});
+
+export const sendMess = (text, user) => ({
+    type: SEND_MESS,
+    text,
+    user
 });
 
 export const selectVideo = (currentVideo, id) => ({
@@ -135,32 +142,23 @@ export const signupUser = user => dispatch => {
 };
 
 
-export const testChat = text => dispatch => {
-  const socket = io.connect('http://localhost:8080');
-  fetch(`${API_ORIGIN}/user/chat`, {
-    method: 'POST',
-    mode: "cors",
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YmQ4YmU1MzdjNjNjYmNjMGI1OTgzOWIiLCJlbWFpbCI6ImJvc3RvbkBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImJvc3RvbiIsInRlc3QiOiJIT1dEWSEiLCJpYXQiOjE1NDEwOTczOTF9.g1BN902doUml6tpVv1EbgCpDiKxlkoWO7D3txo_Vf0o`
-    }
-  })
-  .then(res => {
-    if (!res.ok) {
-      return Promise.reject(res.statusText);
-    }
-    return res.json();
-  })
-  .then(res => {
-    console.log(res);
-    socket.emit('chat message', text);
-    socket.on('chat message', function (msg) {
-      // this needs to be dispatched to the reducer
-      dispatch(saveChat(msg));
-      console.log(msg);
-    });
+const socket = io.connect('http://localhost:8080');
+console.log('Connecting socket to API ORIGIN');
 
-  })
+export const sendMessage = (text, user) => dispatch => {
+  socket.emit('SEND_MESSAGE', {
+    text,
+    user
+  });
+  dispatch(sendMess(text, user));
+};
+
+export const capture = () => dispatch => {
+  socket.on('RECEIVE_MESSAGE', function (data) {
+    console.log('action.js 2. chat', data);
+    // this needs to be dispatched to the reducer
+    dispatch(saveMess(data));
+  });
 };
 
 // searchVideos finds videos using YouTube API

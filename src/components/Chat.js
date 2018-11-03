@@ -1,28 +1,43 @@
 import React from "react";
 
-import { testChat } from "../actions";
+import { sendMessage } from "../actions";
 import { connect } from "react-redux";
-import './Chat.css';
+import io from "socket.io-client";
+import "./Chat.css";
 
 export class Chat extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      chatHistory: []
+    };
+
     this.onSubmit = this.onSubmit.bind(this);
-}
 
+    this.socket = io("localhost:8080");
 
-onSubmit(e) {
-  e.preventDefault();
-  console.log('Submitting line 15!', this.textInput.value);
-  this.props.dispatch(testChat(this.textInput.value));
-}
+    this.socket.on("RECEIVE_MESSAGE", function(data) {
+      addMessage(data);
+    });
 
+    const addMessage = data => {
+      this.setState({ chatHistory: [...this.state.chatHistory, data] });
+    };
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    this.props.dispatch(sendMessage(this.textInput.value, this.props.user));
+    this.textInput.value = "";
+  }
 
   render() {
-    const messages = this.props.chatHistory.map((msg, index) => {
+    const messages = this.state.chatHistory.map((data, index) => {
       return (
         <li key={index}>
-          {msg}
+          <span className="user">{data.user}</span>{" "}
+          <span className="msg">{data.text}</span>
         </li>
       );
     });
@@ -32,7 +47,7 @@ onSubmit(e) {
         <div className="chat-box">
           <ul id="messages">{messages}</ul>
           <form id="chat-form" onSubmit={this.onSubmit}>
-            <input type="text" ref={input => this.textInput = input}/>
+            <input type="text" ref={input => (this.textInput = input)} />
             <button>Send</button>
           </form>
         </div>
@@ -42,7 +57,7 @@ onSubmit(e) {
 }
 
 export const mapStateToProps = state => ({
-  chatHistory: state.chatHistory
+  user: state.user
 });
 
 export default connect(mapStateToProps)(Chat);

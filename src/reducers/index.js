@@ -2,9 +2,11 @@ import * as actions from '../actions';
 
 const initialState = {
     authToken: '',
+    chatMsg: '',
     chatHistory: [],
     currentVideo: '',
     loading: false,
+    messSent: false,
     onMain: false,
     user: null,
     userID: '',
@@ -19,6 +21,21 @@ export const reducer = (state=initialState, action) => {
             error: null,
             loading: true,
             onMain: false
+        });
+    }
+
+    if (action.type === actions.SEND_MESS) {
+        console.log(action);
+        return Object.assign({}, state, {
+            messSent: true
+        });
+    }
+
+    if (action.type === actions.SAVE_MESS) {
+        console.log(state.chatHistory);
+        return Object.assign({}, state, {
+            chatHistory: [...state.chatHistory, action.data.text],
+
         });
     }
 
@@ -77,13 +94,6 @@ export const reducer = (state=initialState, action) => {
             videoId: '',
             watchlist: [],
             onMain: false
-        });
-    }
-
-    if (action.type === actions.CHAT) {
-        console.log(action, state.chatHistory);
-        return Object.assign({}, state, {
-            chatHistory: [...state.chatHistory, action.text]
         });
     }
 
