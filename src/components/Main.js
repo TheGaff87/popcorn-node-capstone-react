@@ -4,7 +4,7 @@ import Chat from "./Chat";
 import Player from "./Player";
 import Spinner from "react-spinkit";
 
-import { searchVideos, selectVideo, clearResults, addVideo } from "../actions";
+import { searchVideos, selectVideo, addVideo } from "../actions";
 import { clearDropdown } from "../custom";
 
 import { connect } from "react-redux";
@@ -20,9 +20,10 @@ export class Main extends React.Component {
 
   getVideo(target) {
     const id = target[0].id;
-    const currentVideo = this.props.videos[0].items.find((video) => {
+    const currentVideo = this.props.videos.find((video) => {
       return video.id.videoId === id;
     });
+    console.log(currentVideo);
     this.props.dispatch(selectVideo(currentVideo, currentVideo.id.videoId));
     clearDropdown(this.refs.dropdown, this.props.dispatch);
   }
@@ -30,13 +31,7 @@ export class Main extends React.Component {
   onAdd(props) {
     // Only results from search can dispatch addVideo -- default video
     if (this.props.currentVideo.hasOwnProperty('snippet')) {
-      const video = this.props.currentVideo.snippet;
-      const videoObj = {
-        id: this.props.videoId,
-        title: video.title,
-        thumbnail: video.thumbnails.medium.url
-      };
-      this.props.dispatch(addVideo(videoObj, this.props.userID, this.props.authToken));
+      this.props.dispatch(addVideo(this.props.currentVideo, this.props.userID, this.props.authToken));
     }
   }
 
@@ -48,7 +43,7 @@ export class Main extends React.Component {
     }
 
     if (this.props.videos.length > 0) {
-      const videos = this.props.videos[0].items.map((video, index) => {
+      const videos = this.props.videos.map((video, index) => {
         return (
           <li key={index}>
             <button type="button" onClick={(e) => this.getVideo(e.currentTarget.children)}>

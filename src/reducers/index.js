@@ -98,10 +98,15 @@ export const reducer = (state=initialState, action) => {
     }
 
     if (action.type === actions.APPEND_RESULTS) {
+        console.log(action, action.videos.nextPageToken, action.videos.pageInfo);
+        const videos = action.videos.items;
+        console.log(videos);
         return Object.assign({}, state, {
             error: null,
             loading: false,
-            videos: [...state.videos, action.videos],
+            nextPageToken: action.videos.nextPageToken,
+            pageInfo: action.videos.pageInfo,
+            videos: videos,
             onMain: false
         });
     }

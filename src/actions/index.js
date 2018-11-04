@@ -186,8 +186,16 @@ export const searchVideos = (text, token) => dispatch => {
 };
 
 // addVideo adds a video to the watchlist (favorites)
-export const addVideo = (obj, userID, token) => dispatch => {
-  const userVideo = {video: obj, id: userID};
+export const addVideo = (video, userID, token) => dispatch => {
+  // Extracts properties for database
+  const videoObj = {
+    id: video.id.videoId,
+    title: video.snippet.title,
+    thumbnail: video.snippet.thumbnails.medium.url
+  };
+
+  const userVideo = {video: videoObj, id: userID};
+
   dispatch(request());
   fetch(`${API_ORIGIN}/videos`, {
     method: 'POST',
