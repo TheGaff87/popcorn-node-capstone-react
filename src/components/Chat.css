@@ -3,12 +3,12 @@
     min-height: 360px;
 }
 
-.chat-container button {
+.chat-container > button {
     margin-bottom: 5px;
     position: relative;
 }
 
-.chat-container button:hover::after {
+.chat-container > button:hover::after {
     content: 'Sync up your videos';
     position: absolute;
     width: 160px;
@@ -17,9 +17,30 @@
 
 .chat-box {
     background: white;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0 0 0;
     position: relative;
     z-index: 2;
-    height: calc(360px - 40px);
+}
+
+.chat-box ul {
+    height: 260px;
+    padding: 0 10px 10px 10px;
+    overflow: scroll;
+}
+
+.chat-box input {
+    flex-grow: 5;
+}
+
+.chat-box button {
+    flex-grow: 1;
+}
+
+.chat-box form {
+    padding: 0;
 }
 
 .chat-box div {
@@ -30,15 +51,25 @@
     margin: 0;
 }
 
-.chat-box div:nth-child(1) {
+.chat-box ul li {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 12px;
+}
+
+.chat-box ul li:nth-child(2n) {
     background: var(--gray);
 }
 
-.chat-box div:nth-child(2) {
-    background: var(--ltgray);
-}
-
-.chat-container, .chat-box {
+.chat-container {
     padding: 20px;
     overflow: hidden;
+}
+
+.chat-box ul li:nth-child(2n) .user {
+    color: var(--blue);
+}
+
+.chat-box ul li:nth-child(odd) .user {
+    color: var(--pink);
 }

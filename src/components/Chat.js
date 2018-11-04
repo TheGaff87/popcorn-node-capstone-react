@@ -24,6 +24,11 @@ export class Chat extends React.Component {
 
     const addMessage = data => {
       this.setState({ chatHistory: [...this.state.chatHistory, data] });
+      // From the container's top, scroll to the height of the document
+      this.refs.chatbox.scrollTo(0, document.body.scrollHeight*10);
+      if (this.refs.chatbox.scrollHeight > document.body.scrollHeight*10) {
+        this.setState({ chatHistory: [] });
+      }
     };
   }
 
@@ -46,7 +51,7 @@ export class Chat extends React.Component {
       <div className="chat-container">
         <button id="sync">Sync</button>
         <div className="chat-box">
-          <ul id="messages">{messages}</ul>
+          <ul id="messages" ref="chatbox">{messages}</ul>
           <form id="chat-form" onSubmit={this.onSubmit}>
             <input type="text" ref={input => (this.textInput = input)} />
             <button>Send</button>

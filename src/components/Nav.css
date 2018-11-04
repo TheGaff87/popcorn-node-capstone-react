@@ -12,11 +12,6 @@ nav,
     width: 100%;
 }
 
-nav ul {
-    margin: 0;
-    padding: 0;
-}
-
 .nav-items {
     align-items: center;
     display: flex;

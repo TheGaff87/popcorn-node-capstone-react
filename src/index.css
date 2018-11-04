@@ -4,6 +4,7 @@
   --green: rgb(0, 255, 3);
   --mint: rgb(191, 255, 252);
   --pink: rgb(255, 48, 172);
+  --pinkh: rgb(255, 137, 208);
   --pinkt: rgba(255, 48, 172, .5);
   --yellow: rgba(255, 227, 29, 1);
   --yellowt: rgba(255, 227, 29, .5);
@@ -44,6 +45,8 @@ code {
 
 ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 button {
@@ -51,6 +54,10 @@ button {
   border: 0;
   border-radius: 2px;
   cursor: pointer;
+}
+
+button:hover {
+  background: var(--pinkh);
 }
 
 h1,
