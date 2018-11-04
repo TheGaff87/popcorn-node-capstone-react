@@ -1,3 +1,7 @@
 .landing-container {
     padding: 20px;
 }
+
+.landing-container p {
+    line-height: 30px;
+}

@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import './Main.css';
+import "./Components.css";
 
 export class Main extends React.Component {
 

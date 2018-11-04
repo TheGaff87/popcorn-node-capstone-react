@@ -8,9 +8,6 @@ import { connect } from "react-redux";
 import { searchVideos } from "../actions";
 import { clearDropdown } from "../custom";
 
-import "./Video.css";
-import "./VideoPages.css";
-
 export class SearchPage extends React.Component {
 
   // Clear the videos list if moving between pages

@@ -1,7 +1,7 @@
 :root {
   --gray: rgba(234, 234, 234, 1);
   --ltgray: rgb(248, 248, 248, 1);
-  --green: rgb(169, 255, 69);
+  --green: rgb(0, 255, 3);
   --mint: rgb(191, 255, 252);
   --pink: rgb(255, 48, 172);
   --pinkt: rgba(255, 48, 172, .5);
@@ -10,8 +10,6 @@
   --blue: rgb(42, 166, 255);
   --bluet: rgba(42, 166, 255, .3);
   --turqt: rgba(75, 255, 231, 0.2);
-
-
 }
 
 html {
@@ -78,6 +76,8 @@ label, input {
   display: flex;
   align-items: center;
 }
+
+/* Forms and Landing page */
 
 
 @media (min-width: 480px) {

@@ -1,0 +1,152 @@
+.welcome {
+    color: black;
+    margin: 0;
+    padding: 10px;
+}
+
+.form-search, .watchlist {
+    background: var(--bluet);
+    padding: 20px;
+}
+
+.form-search h2, .watchlist h2 {
+    color: var(--blue);
+}
+
+.form-landing,
+.landing {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 1400px;
+    min-height: calc(100vh - 100px);
+    margin: 0 auto;
+}
+
+.form-container,
+.landing-container {
+    background: var(--pinkt);
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container nav,
+.landing-container nav {
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.form-container nav a,
+.landing-container nav a {
+    color: black;
+}
+
+.form-container nav span,
+.landing-container nav span {
+    color: var(--yellow);
+}
+
+.form-container,
+.info-bene,
+.info-detail,
+.landing-container {
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.circle {
+    background: var(--blue);
+    border-radius: 50%;
+    padding: 30px;
+    position: relative;
+}
+
+.info-bene,
+.info-detail {
+    background: var(--turqt);
+}
+
+.info-bene,
+.info-detail ul {
+    display: flex;
+}
+
+.info-bene {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.info-detail ul {
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
+    height: inherit;
+    font-size: 25px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.info-detail ul li:nth-child(1) {
+    color: var(--green);
+}
+
+.info-detail ul li:nth-child(2) {
+    color: var(--yellow);
+}
+
+.info-detail ul li:nth-child(3) {
+    color: var(--pink);
+}
+
+.fa-comments,
+.fa-film {
+    font-size: 80px;
+}
+
+.fa-comments {
+    color: var(--green);
+}
+
+.fa-film {
+    color: var(--pink);
+}
+
+@media (min-width: 758px) {
+
+    .info-bene,
+    .info-detail {
+        flex-grow: 1;
+        width: 25%;
+    }
+
+    .form-container,
+    .landing-container {
+        flex-grow: 2;
+        width: 30%;
+    }
+
+    .fa-comments,
+    .fa-film {
+        font-size: 100px;
+    }
+}
+
+@media (min-width: 1040px) {
+
+    .info-bene,
+    .info-detail,
+    .form-container,
+    .landing-container {
+        box-shadow: 0px 0px 14px -3px black;
+        border-radius: 5px;
+        margin: 10px;
+    }
+
+}
