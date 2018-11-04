@@ -45,7 +45,7 @@ export class Videos extends React.Component {
         return (
           <div className="item" key={index}>
             <h3>{video.snippet.title}</h3>
-            <button type="button" id={video.id.videoId} onClick={(e) => this.playVideo(e.currentTarget, 'search')}>
+            <button className="thumbnail" type="button" id={video.id.videoId} onClick={(e) => this.playVideo(e.currentTarget, 'search')}>
               <img
                 src={video.snippet.thumbnails.medium.url} alt={video.snippet.thumbnails.title} />
             </button>

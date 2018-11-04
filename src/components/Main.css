@@ -26,6 +26,7 @@
 }
 
 .results-dropdown button:hover {
+    background: initial;
     color: var(--pink);
 }
 
