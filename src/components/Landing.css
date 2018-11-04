@@ -2,6 +2,7 @@
     padding: 20px;
 }
 
-.landing-container p {
+.landing-container aside {
     line-height: 30px;
+    margin-bottom: 10px;
 }
