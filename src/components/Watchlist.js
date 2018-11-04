@@ -2,7 +2,7 @@ import React from "react";
 import Nav from "./Nav";
 import Videos from './Videos';
 
-export default function SearchPage(props) {
+export default function Watchlist () {
   return (
     <div>
       <Nav />

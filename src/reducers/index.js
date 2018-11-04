@@ -40,6 +40,7 @@ export const reducer = (state=initialState, action) => {
     }
 
     if (action.type === actions.SELECT_VIDEO) {
+        console.log('action curent video', action.currentVideo);
         return Object.assign({}, state, {
             currentVideo: action.currentVideo,
             videoId: action.id,
@@ -116,6 +117,7 @@ export const reducer = (state=initialState, action) => {
             error: null,
             loading: false,
             videos: [],
+            watchlist: [],
             onMain: false
         });
     }

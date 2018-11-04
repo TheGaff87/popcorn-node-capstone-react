@@ -13,19 +13,28 @@ import { Redirect } from "react-router-dom";
 import './Main.css';
 
 export class Main extends React.Component {
-  // Interacts with SearchForm
-  onSearch(text) {
-    this.props.dispatch(searchVideos(text, this.props.authToken));
+
+  // Clear the videos list if moving between pages
+  componentWillUnmount() {
+    clearDropdown(this.refs.dropdown, this.props.dispatch);
   }
 
+  // Interacts with SearchForm and adds results to videos prop
+  onSearch(term) {
+    this.props.dispatch(searchVideos(term, this.props.authToken));
+  }
+
+  // Find the selected video from the videos prop and pass id to Player
   getVideo(target) {
     const id = target[0].id;
     const currentVideo = this.props.videos.find((video) => {
       return video.id.videoId === id;
     });
-    console.log(currentVideo);
-    this.props.dispatch(selectVideo(currentVideo, currentVideo.id.videoId));
-    clearDropdown(this.refs.dropdown, this.props.dispatch);
+
+    if (currentVideo !== undefined) {
+      this.props.dispatch(selectVideo(currentVideo, currentVideo.id.videoId));
+      clearDropdown(this.refs.dropdown, this.props.dispatch);
+    }
   }
 
   onAdd(props) {
@@ -42,6 +51,7 @@ export class Main extends React.Component {
       );
     }
 
+    // Display list of videos matching search term and pass result to SearchForm
     if (this.props.videos.length > 0) {
       const videos = this.props.videos.map((video, index) => {
         return (
@@ -63,10 +73,10 @@ export class Main extends React.Component {
     }
 
     if (this.props.videoId) {
-      // renders 'Add to Watchlist' btn only if there is a non-default video selected
+      // Renders 'Add to Watchlist' btn only if there is a non-default video selected
       return (
         <main>
-          <SearchForm onSearch={text=> this.onSearch(text)} results={this.renderResults()} />
+          <SearchForm onSearch={term=> this.onSearch(term)} results={this.renderResults()} />
             <section className="interactive">
               <Player videoId={this.props.videoId} />
               <div className="watchlist-btn"><button type="button" onClick={() => this.onAdd(this.props)}>Add to Watchlist</button></div>
@@ -77,7 +87,7 @@ export class Main extends React.Component {
     }
     return (
       <main>
-        <SearchForm onSearch={text => this.onSearch(text)} results={this.renderResults()} />
+        <SearchForm onSearch={term => this.onSearch(term)} results={this.renderResults()} />
         <section className="interactive">
           <Player />
           <Chat />

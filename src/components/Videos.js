@@ -9,8 +9,16 @@ import "./Video.css";
 
 export class Videos extends React.Component {
 
-  playVideo(target) {
-    const currentVideo = this.props.watchlist.find(video => video.videoID === target.id);
+  playVideo(target, group) {
+    let currentVideo;
+    if (group === 'search') {
+      currentVideo = this.props.videos.find(video => video.id.videoId === target.id);
+    }
+
+    if (group === 'watchlist') {
+      currentVideo = this.props.watchlist.find(video => video.videoID === target.id);
+    }
+
     this.props.dispatch(selectVideo(currentVideo, target.id));
   }
 
@@ -29,23 +37,41 @@ export class Videos extends React.Component {
       );
     }
 
-    let videos = [];
+    let videoGallery = [];
+
+    // for rendering search list
+    if (this.props.videos.length > 0) {
+      videoGallery = this.props.videos.map((video, index) => {
+        return (
+          <div className="item" key={index}>
+            <h3>{video.snippet.title}</h3>
+            <button type="button" id={video.id.videoId} onClick={(e) => this.playVideo(e.currentTarget, 'search')}>
+              <img
+                src={video.snippet.thumbnails.medium.url} alt={video.snippet.thumbnails.title} />
+            </button>
+          </div>
+        );
+      });
+    }
+
+    // for rendering watchlist
     if (this.props.watchlist.length > 0) {
-      videos = this.props.watchlist.map((video, index) => {
+      videoGallery = this.props.watchlist.map((video, index) => {
         return (<div className="item" key={index}>
           <h3>{video.title}</h3>
           <button type="button" id={video._id} className="remove-btn" onClick={(e) => this.deleteVideo(e.currentTarget)}>Remove</button>
-          <button type="button" id={video.videoID} onClick={(e) => this.playVideo(e.currentTarget)}>
+          <button type="button" id={video.videoID} onClick={(e) => this.playVideo(e.currentTarget, 'watchlist')}>
             <img src={video.thumbnail} alt={video.title}/>
           </button>
         </div>)
       });
     }
-    return (<div className="video-container">{videos}</div>)
+    return (<div className="video-container">{videoGallery}</div>)
   }
 }
 
 export const mapStateToProps = state => ({
+  videos: state.videos,
   watchlist: state.watchlist,
   loading: state.loading,
   authToken: state.authToken,

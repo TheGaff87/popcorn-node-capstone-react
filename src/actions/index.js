@@ -141,8 +141,8 @@ export const signupUser = user => dispatch => {
     });
 };
 
-// const socket = io.connect('https://popcorn-capstone-node.herokuapp.com');
-const socket = io.connect('http://localhost:8080');
+const socket = io.connect('https://popcorn-capstone-node.herokuapp.com');
+// const socket = io.connect('http://localhost:8080');
 console.log('Connecting socket to API ORIGIN');
 
 export const sendMessage = (text, user) => dispatch => {
@@ -162,9 +162,9 @@ export const capture = () => dispatch => {
 };
 
 // searchVideos finds videos using YouTube API
-export const searchVideos = (text, token) => dispatch => {
+export const searchVideos = (term, token) => dispatch => {
   dispatch(request());
-  fetch(`${API_ORIGIN}/videos/search/${text}`, {
+  fetch(`${API_ORIGIN}/videos/search/${term}`, {
     mode: "cors",
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -240,10 +240,10 @@ export const deleteVideo = (id, token) => dispatch => {
     });
 };
 
-// getWatchlist gets user's video list and generates on the page
-export const getWatchlist = (id, token) => dispatch => {
+// getWatchlist gets saved videos
+export const getWatchlist = (userId, token) => dispatch => {
   dispatch(request());
-  fetch(`${API_ORIGIN}/videos/${id}`, {
+  fetch(`${API_ORIGIN}/videos/${userId}`, {
     mode: "cors",
     headers: {
       "Access-Control-Allow-Origin": "*",

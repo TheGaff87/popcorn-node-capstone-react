@@ -12,7 +12,7 @@ export class Nav extends React.Component {
     this.props.dispatch(logout());
   }
 
-  getVideoList() {
+  getWatchList() {
     this.props.dispatch(getWatchlist(this.props.userID, this.props.authToken));
   }
 
@@ -27,7 +27,7 @@ export class Nav extends React.Component {
             <Link to="/search">Search</Link>
           </li>
           <li>
-            <Link to="/watchlist" onClick={() => this.getVideoList()}>Watchlist</Link>
+            <Link to="/watchlist" onClick={() => this.getWatchList()}>Watchlist</Link>
           </li>
           <li>
             <Link className="account" to="/auth/login" onClick={() => this.logOut()}>Logout</Link>
@@ -39,7 +39,6 @@ export class Nav extends React.Component {
 }
 
 export const mapStateToProps = state => ({
-  loggedIn: state.user,
   authToken: state.authToken,
   userID: state.userID
 });
