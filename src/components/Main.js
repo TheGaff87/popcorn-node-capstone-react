@@ -1,6 +1,5 @@
 import React from "react";
 import SearchForm from "./SearchForm";
-import Chat from "./Chat";
 import Player from "./Player";
 import Spinner from "react-spinkit";
 
@@ -81,7 +80,6 @@ export class Main extends React.Component {
             <section className="interactive">
               <Player videoId={this.props.videoId} />
               <div className="watchlist-btn"><button type="button" onClick={() => this.onAdd(this.props)}>Add to Watchlist</button></div>
-              <Chat />
             </section>
         </main>
       );
@@ -91,7 +89,6 @@ export class Main extends React.Component {
         <SearchForm onSearch={term => this.onSearch(term)} placeholder='Search by title' results={this.renderResults()} />
         <section className="interactive">
           <Player />
-          <Chat />
         </section>
       </main>
     );

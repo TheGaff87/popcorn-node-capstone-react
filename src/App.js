@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import Main from "./components/Main";
 import Welcome from "./components/Welcome";
 import Nav from "./components/Nav";
+import Chatbox from "./components/Chatbox";
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -33,6 +34,7 @@ class App extends Component {
           <Route exact path="/auth/signup" component={Signup} />
           <Route exact path="/search" component={SearchPage} />
           <Route exact path="/watchlist" component={Watchlist} />
+          <Chatbox />
           <Footer />
         </div>
       </Router>
