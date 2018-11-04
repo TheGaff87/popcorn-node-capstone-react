@@ -57,7 +57,6 @@ export class SignupForm extends React.Component {
 }
 
 export const mapStateToProps = state => ({
-  videos: state.videos,
   loggedIn: state.user,
   loading: state.loading,
   error: state.error

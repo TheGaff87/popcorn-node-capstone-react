@@ -1,6 +1,6 @@
-import jwtDecode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 import { API_ORIGIN } from "../config";
-import io from 'socket.io-client';
+import io from "socket.io-client";
 /*
  * action types
 */
@@ -8,7 +8,7 @@ import io from 'socket.io-client';
 export const LOG_USER = "LOG_USER";
 export const LOG_OUT = "LOG_OUT";
 export const SAVE_MESS = "SAVE_MESS";
-export const SEND_MESS = 'SEND_MESS';
+export const SEND_MESS = "SEND_MESS";
 export const REQUEST = "REQUEST";
 export const SELECT_VIDEO = "SELECT_VIDEO";
 export const UPDATE_TIME = "UPDATE_TIME";
@@ -17,7 +17,10 @@ export const DELETE_VIDEO = "DELETE_VIDEO";
 export const ADD_VIDEO = "ADD_VIDEO";
 export const APPEND_RESULTS = "APPEND_RESULTS";
 export const CLEAR_RESULTS = "CLEAR_RESULTS";
-
+export const AUTH_REQUEST = "AUTH_REQUEST";
+export const SET_AUTH_TOKEN = "SET_AUTH_TOKEN";
+export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const ERROR = "ERROR";
 
 /*
  * action creators
@@ -36,15 +39,15 @@ export const logout = () => ({
   type: LOG_OUT
 });
 
-export const saveMess = (data) => ({
+export const saveMess = data => ({
   type: SAVE_MESS,
   data
 });
 
 export const sendMess = (text, user) => ({
-    type: SEND_MESS,
-    text,
-    user
+  type: SEND_MESS,
+  text,
+  user
 });
 
 export const selectVideo = (currentVideo, id) => ({
@@ -83,22 +86,25 @@ export const clearResults = videos => ({
   videos
 });
 
-export const AUTH_REQUEST = 'AUTH_REQUEST';
 export const authRequest = () => ({
   type: AUTH_REQUEST
 });
 
-export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
-export const setAuthToken = (authToken) => ({
-    type: SET_AUTH_TOKEN,
-    authToken
+export const setAuthToken = authToken => ({
+  type: SET_AUTH_TOKEN,
+  authToken
 });
 
-export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const authSuccess = currentUser => ({
-    type: AUTH_SUCCESS,
-    currentUser
+  type: AUTH_SUCCESS,
+  currentUser
 });
+
+export const fetchErr = err => ({
+  type: ERROR,
+  err
+});
+
 
 
 const storeAuthInfo = (authToken, dispatch) => {
@@ -116,10 +122,15 @@ export const login = user => dispatch => {
     },
     body: JSON.stringify(user)
   })
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
+      return res.json();
+    })
     .then(authToken => storeAuthInfo(authToken.token, dispatch))
-    .catch((res, err) => {
-      console.log("res: ", res);
+    .catch((err) => {
+      dispatch(fetchErr(err));
     });
 };
 
@@ -139,12 +150,12 @@ export const signupUser = user => dispatch => {
     });
 };
 
-const socket = io.connect('https://popcorn-capstone-node.herokuapp.com');
-// const socket = io.connect('http://localhost:8080');
-console.log('Connecting socket to API ORIGIN');
+// const socket = io.connect('https://popcorn-capstone-node.herokuapp.com');
+const socket = io.connect("http://localhost:8080");
+console.log("Connecting socket to API ORIGIN");
 
 export const sendMessage = (text, user) => dispatch => {
-  socket.emit('SEND_MESSAGE', {
+  socket.emit("SEND_MESSAGE", {
     text,
     user
   });
@@ -152,7 +163,7 @@ export const sendMessage = (text, user) => dispatch => {
 };
 
 export const capture = () => dispatch => {
-  socket.on('RECEIVE_MESSAGE', function (data) {
+  socket.on("RECEIVE_MESSAGE", function(data) {
     // this needs to be dispatched to the reducer
     dispatch(saveMess(data));
   });
@@ -165,7 +176,7 @@ export const searchVideos = (term, token) => dispatch => {
     mode: "cors",
     headers: {
       "Access-Control-Allow-Origin": "*",
-      "Authorization": `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     }
   })
     .then(res => {
@@ -178,7 +189,7 @@ export const searchVideos = (term, token) => dispatch => {
       dispatch(appendResults(res.response.body));
     })
     .catch(err => {
-      console.log("actions index.js line 94", err);
+      console.log(err);
     });
 };
 
@@ -191,22 +202,20 @@ export const addVideo = (video, userID, token) => dispatch => {
     thumbnail: video.snippet.thumbnails.medium.url
   };
 
-  const userVideo = {video: videoObj, id: userID};
+  const userVideo = { video: videoObj, id: userID };
 
   dispatch(request());
   fetch(`${API_ORIGIN}/videos`, {
-    method: 'POST',
+    method: "POST",
     headers: {
       "content-type": "application/json",
-      "Authorization": `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify(userVideo)
   })
     .then(res => {
       if (!res.ok) {
         return Promise.reject(res.statusText);
-        // const err = new Error('Missing `title` in request body');
-        // err.status = 400;
       }
       return res.json();
     })
@@ -214,18 +223,18 @@ export const addVideo = (video, userID, token) => dispatch => {
       dispatch(addToWatchlist(res));
     })
     .catch(err => {
-      console.log("actions index.js line 94", err);
+      console.log(err);
     });
 };
 
 export const deleteVideo = (id, token) => dispatch => {
   dispatch(request);
   fetch(`${API_ORIGIN}/videos/${id}`, {
-    method: 'DELETE',
+    method: "DELETE",
     mode: "cors",
     headers: {
       "Access-Control-Allow-Origin": "*",
-      "Authorization": `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     }
   })
     .then(res => {
@@ -243,7 +252,7 @@ export const getWatchlist = (userId, token) => dispatch => {
     mode: "cors",
     headers: {
       "Access-Control-Allow-Origin": "*",
-      "Authorization": `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     }
   })
     .then(res => res.json())

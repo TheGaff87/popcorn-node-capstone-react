@@ -5,6 +5,7 @@ const initialState = {
     chatMsg: '',
     chatHistory: [],
     currentVideo: '',
+    error: null,
     loading: false,
     messSent: false,
     onMain: false,
@@ -16,6 +17,14 @@ const initialState = {
 };
 
 export const reducer = (state=initialState, action) => {
+    if (action.type === actions.ERROR) {
+        console.log(action.err);
+        return Object.assign({}, state, {
+            error: action.err,
+            loading: false
+        });
+    }
+
     if (action.type === actions.REQUEST) {
         return Object.assign({}, state, {
             error: null,

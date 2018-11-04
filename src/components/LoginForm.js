@@ -43,6 +43,7 @@ export class LoginForm extends React.Component {
       <section className="form-landing">
         <Benefits />
         <div className="form-container">
+          <span className="error">{this.props.error}</span>
           <form className="login" onSubmit={this.onSubmit}>
             <fieldset>
               <div className="flex">
