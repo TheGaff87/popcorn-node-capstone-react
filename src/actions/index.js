@@ -44,12 +44,6 @@ export const saveMess = data => ({
   data
 });
 
-export const sendMess = (text, user) => ({
-  type: SEND_MESS,
-  text,
-  user
-});
-
 export const selectVideo = (currentVideo, id) => ({
   type: SELECT_VIDEO,
   currentVideo,
@@ -151,25 +145,6 @@ export const signupUser = user => dispatch => {
     .catch(err => {
       dispatch(fetchErr(err));
     });
-};
-
-const socket = io.connect('https://popcorn-capstone-node.herokuapp.com');
-// const socket = io.connect("http://localhost:8080");
-console.log("Connecting socket to API ORIGIN");
-
-export const sendMessage = (text, user) => dispatch => {
-  socket.emit("SEND_MESSAGE", {
-    text,
-    user
-  });
-  dispatch(sendMess(text, user));
-};
-
-export const capture = () => dispatch => {
-  socket.on("RECEIVE_MESSAGE", function(data) {
-    // this needs to be dispatched to the reducer
-    dispatch(saveMess(data));
-  });
 };
 
 // searchVideos finds videos using YouTube API

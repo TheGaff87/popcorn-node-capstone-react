@@ -1,6 +1,6 @@
 import React from "react";
 
-import { sendMessage } from "../actions";
+import { saveMess } from "../actions";
 import { connect } from "react-redux";
 import io from "socket.io-client";
 import "./Chat.css";
@@ -9,37 +9,35 @@ export class Chat extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      chatHistory: []
-    };
-
+    const Chat = this;
     this.onSubmit = this.onSubmit.bind(this);
 
     this.socket = io("https://popcorn-capstone-node.herokuapp.com");
     // this.socket = io('http://localhost:8080');
 
+    // dispatch action when socket announces user sent message
     this.socket.on("RECEIVE_MESSAGE", function(data) {
-      addMessage(data);
+      Chat.props.dispatch(saveMess(data));
     });
-
-    const addMessage = data => {
-      this.setState({ chatHistory: [...this.state.chatHistory, data] });
-      // From the container's top, scroll to the height of the document
-      this.refs.chatbox.scrollTo(0, document.body.scrollHeight*10);
-      if (this.refs.chatbox.scrollHeight > document.body.scrollHeight*10) {
-        this.setState({ chatHistory: [] });
-      }
-    };
   }
 
+  // close socket when user leaves
+  componentWillUnmount() {
+    this.socket.close();
+  }
+
+  // emit chat message on Submit
   onSubmit(e) {
     e.preventDefault();
-    this.props.dispatch(sendMessage(this.textInput.value, this.props.user));
+    this.socket.emit("SEND_MESSAGE", {
+      text: this.textInput.value,
+      user: this.props.user
+    });
     this.textInput.value = "";
   }
 
   render() {
-    const messages = this.state.chatHistory.map((data, index) => {
+    const messages = this.props.chatHistory.map((data, index) => {
       return (
         <li key={index}>
           <span className="user">{data.user}</span>{" "}
@@ -63,7 +61,8 @@ export class Chat extends React.Component {
 }
 
 export const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  chatHistory: state.chatHistory
 });
 
 export default connect(mapStateToProps)(Chat);

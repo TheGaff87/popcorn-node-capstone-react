@@ -7,7 +7,6 @@ const initialState = {
     currentVideo: '',
     error: null,
     loading: false,
-    messSent: false,
     onMain: false,
     user: null,
     userID: '',
@@ -33,16 +32,10 @@ export const reducer = (state=initialState, action) => {
         });
     }
 
-    if (action.type === actions.SEND_MESS) {
-        return Object.assign({}, state, {
-            messSent: true
-        });
-    }
-
     if (action.type === actions.SAVE_MESS) {
+        console.log(action)
         return Object.assign({}, state, {
-            chatHistory: [...state.chatHistory, action.data.text],
-
+            chatHistory: [...state.chatHistory, action.data]
         });
     }
 
