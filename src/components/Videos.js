@@ -60,7 +60,7 @@ export class Videos extends React.Component {
         return (<div className="item" key={index}>
           <h3>{video.title}</h3>
           <button type="button" id={video._id} className="remove-btn" onClick={(e) => this.deleteVideo(e.currentTarget)}>Remove</button>
-          <button type="button" id={video.videoID} onClick={(e) => this.playVideo(e.currentTarget, 'watchlist')}>
+          <button className="thumbnail" type="button" id={video.videoID} onClick={(e) => this.playVideo(e.currentTarget, 'watchlist')}>
             <img src={video.thumbnail} alt={video.title}/>
           </button>
         </div>)
