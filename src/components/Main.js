@@ -4,13 +4,16 @@ import Chat from "./Chat";
 import Player from "./Player";
 import Spinner from "react-spinkit";
 
+import { searchVideos, selectVideo, clearResults, addVideo } from "../actions";
+import { clearDropdown } from "../custom";
+
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { searchVideos, selectVideo, clearResults, addVideo } from "../actions";
 
 import './Main.css';
 
 export class Main extends React.Component {
+  // Interacts with SearchForm
   onSearch(text) {
     this.props.dispatch(searchVideos(text, this.props.authToken));
   }
@@ -21,18 +24,11 @@ export class Main extends React.Component {
       return video.id.videoId === id;
     });
     this.props.dispatch(selectVideo(currentVideo, currentVideo.id.videoId));
-    this.clearDropdown();
-  }
-
-  clearDropdown() {
-    if (this.refs.dropdown) {
-      this.props.dispatch(clearResults());
-    }
+    clearDropdown(this.refs.dropdown, this.props.dispatch);
   }
 
   onAdd(props) {
-    // if it's a video from the main search, it will have a snippet, so continue
-    // if it's from the watchlist, do nothing -- as you can't re-add to watchlist anyway
+    // Only results from search can dispatch addVideo -- default video
     if (this.props.currentVideo.hasOwnProperty('snippet')) {
       const video = this.props.currentVideo.snippet;
       const videoObj = {
@@ -72,7 +68,7 @@ export class Main extends React.Component {
     }
 
     if (this.props.videoId) {
-      // renders 'Add to Watchlist' btn only if there is a video selected
+      // renders 'Add to Watchlist' btn only if there is a non-default video selected
       return (
         <main>
           <SearchForm onSearch={text=> this.onSearch(text)} results={this.renderResults()} />
@@ -102,7 +98,6 @@ export const mapStateToProps = state => ({
   error: state.error,
   loading: state.loading,
   loggedIn: state.user,
-  user: state.user,
   userID: state.userID,
   videos: state.videos,
   videoId: state.videoId

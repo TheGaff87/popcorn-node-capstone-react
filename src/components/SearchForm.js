@@ -8,9 +8,7 @@ export default class SearchForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log('props:', this.props);
     const input = this.textInput.value.trim();
-    console.log(this);
     if (input && this.props.onSearch) {
         this.props.onSearch(this.textInput.value);
     }

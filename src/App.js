@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import {connect} from 'react-redux';
-import {logUser} from './actions';
 
 import Landing from "./components/Landing";
 import Login from "./components/LoginForm";
