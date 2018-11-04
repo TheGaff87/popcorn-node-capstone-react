@@ -4,7 +4,7 @@ import Details from "./InfoDetail";
 
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { signupUser, logUser } from "../actions";
+import { signupUser } from "../actions";
 
 export class SignupForm extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export class SignupForm extends React.Component {
 
   render() {
     if (this.props.loggedIn) {
-      return <Redirect to="/user" />;
+      return <Redirect to="/dashboard/user" />;
     }
     return (
       <section className="form-landing">

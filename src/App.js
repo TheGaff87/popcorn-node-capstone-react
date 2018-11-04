@@ -26,15 +26,15 @@ class App extends Component {
           <header>
             <h1><Link to="/">Popcorn</Link></h1>
             {/* <Nav /> */}
-            <Route exact path="/user" component={Nav} />
+            <Route exact path="/dashboard/user" component={Nav} />
           </header>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/user" component={Main} />
+          <Route exact path="/dashboard/user" component={Main} />
           <Route exact path="/auth/login" component={Login} />
           <Route exact path="/auth/signup" component={Signup} />
-          <Route exact path="/search" component={SearchPage} />
-          <Route exact path="/watchlist" component={Watchlist} />
-          <Chatbox />
+          <Route exact path="/dashboard/search" component={SearchPage} />
+          <Route exact path="/dashboard/watchlist" component={Watchlist} />
+          <Route path="/dashboard" component={Chatbox} />
           <Footer />
         </div>
       </Router>

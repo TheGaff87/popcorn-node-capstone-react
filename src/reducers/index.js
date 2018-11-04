@@ -25,14 +25,12 @@ export const reducer = (state=initialState, action) => {
     }
 
     if (action.type === actions.SEND_MESS) {
-        console.log(action);
         return Object.assign({}, state, {
             messSent: true
         });
     }
 
     if (action.type === actions.SAVE_MESS) {
-        console.log(state.chatHistory);
         return Object.assign({}, state, {
             chatHistory: [...state.chatHistory, action.data.text],
 
@@ -40,7 +38,6 @@ export const reducer = (state=initialState, action) => {
     }
 
     if (action.type === actions.SELECT_VIDEO) {
-        console.log('action curent video', action.currentVideo);
         return Object.assign({}, state, {
             currentVideo: action.currentVideo,
             videoId: action.id,
@@ -57,7 +54,6 @@ export const reducer = (state=initialState, action) => {
     }
 
     if (action.type === actions.DELETE_VIDEO) {
-        console.log(action.id);
         return Object.assign({}, state, {
             loading: false,
             watchlist: state.watchlist.filter(video => video._id !== action.id),
@@ -66,7 +62,6 @@ export const reducer = (state=initialState, action) => {
     }
 
     if (action.type === actions.GEN_WATCHLIST) {
-        console.log('watchlist:', action.videos);
         return Object.assign({}, state, {
             loading: false,
             watchlist: action.videos,
@@ -99,9 +94,7 @@ export const reducer = (state=initialState, action) => {
     }
 
     if (action.type === actions.APPEND_RESULTS) {
-        console.log(action, action.videos.nextPageToken, action.videos.pageInfo);
         const videos = action.videos.items;
-        console.log(videos);
         return Object.assign({}, state, {
             error: null,
             loading: false,

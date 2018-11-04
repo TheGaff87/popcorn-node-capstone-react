@@ -1,6 +1,5 @@
 import jwtDecode from 'jwt-decode';
 import { API_ORIGIN } from "../config";
-import { resolve } from 'path';
 import io from 'socket.io-client';
 /*
  * action types
@@ -109,7 +108,6 @@ const storeAuthInfo = (authToken, dispatch) => {
 };
 
 export const login = user => dispatch => {
-  console.log(user);
   dispatch(request());
   fetch(`${API_ORIGIN}/auth/login`, {
     method: "POST",
@@ -155,7 +153,6 @@ export const sendMessage = (text, user) => dispatch => {
 
 export const capture = () => dispatch => {
   socket.on('RECEIVE_MESSAGE', function (data) {
-    console.log('action.js 2. chat', data);
     // this needs to be dispatched to the reducer
     dispatch(saveMess(data));
   });
@@ -214,7 +211,6 @@ export const addVideo = (video, userID, token) => dispatch => {
       return res.json();
     })
     .then(res => {
-      console.log(res);
       dispatch(addToWatchlist(res));
     })
     .catch(err => {

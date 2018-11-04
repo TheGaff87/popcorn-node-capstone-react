@@ -23,7 +23,6 @@ export class LoginForm extends React.Component {
       password: this.password.value,
     };
     this.props.dispatch(login(user));
-    console.log(this.props);
     inputs.map(input => input.value = '');
   }
 
@@ -36,8 +35,7 @@ export class LoginForm extends React.Component {
     }
 
     if (this.props.loggedIn) {
-      console.log(this.props.loggedIn, 'this.props.loggedIn');
-      return <Redirect to="/user" />;
+      return <Redirect to="/dashboard/user" />;
     }
 
 

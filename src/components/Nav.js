@@ -21,13 +21,13 @@ export class Nav extends React.Component {
       <nav className="main-nav">
         <ul className="nav-items">
           <li>
-            <Link to="/user">Home</Link>
+            <Link to="/dashboard/user">Home</Link>
           </li>
           <li>
-            <Link to="/search">Search</Link>
+            <Link to="/dashboard/search">Search</Link>
           </li>
           <li>
-            <Link to="/watchlist" onClick={() => this.getWatchList()}>Watchlist</Link>
+            <Link to="/dashboard/watchlist" onClick={() => this.getWatchList()}>Watchlist</Link>
           </li>
           <li>
             <Link className="account" to="/auth/login" onClick={() => this.logOut()}>Logout</Link>

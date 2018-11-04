@@ -28,7 +28,7 @@ export class Videos extends React.Component {
 
   render() {
     if (this.props.onMain) {
-      return <Redirect to="/user" />;
+      return <Redirect to="/dashboard/user" />;
     }
 
     if (this.props.loading) {
