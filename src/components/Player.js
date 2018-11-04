@@ -1,15 +1,27 @@
 import React from "react";
 import YouTube from "react-youtube";
 
+import { searchVideosInitial } from "../actions";
 import { connect } from "react-redux";
 
 import "./Player.css";
 
 export class Player extends React.Component {
+  constructor(props) {
+    super(props)
+    this.syncUp = this.syncUp.bind(this);
+  }
 
   getTime(e) {
     var time = e.target.getCurrentTime();
+    console.log(e.target);
     console.log(time);
+  }
+
+  syncUp(e) {
+    e.preventDefault();
+    const player = this.refs.player.internalPlayer;
+    player.pauseVideo();
   }
 
   render() {
@@ -21,24 +33,32 @@ export class Player extends React.Component {
       }
     };
 
-    let currentVid = "M4Ufs7-FpvU";
-    if (this.props.videoId) {
-      currentVid = this.props.videoId;
-
+    if (this.props.loadNumber < 1) {
+      this.props.dispatch(searchVideosInitial("soundtrack", this.props.authToken));
     }
 
     return (
       <div className="player-container">
         <div id="player" className="player">
-          <YouTube videoId={currentVid} opts={opts} onPause={(e) => this.getTime(e)}/>
+          <YouTube
+            videoId={this.props.videoId}
+            opts={opts}
+            onPause={e => this.getTime(e)}
+            ref="player"
+          />
         </div>
+        <button id="sync" onClick={this.syncUp}>
+          Sync
+        </button>
       </div>
     );
   }
 }
 
 export const mapStateToProps = state => ({
-  videoId: state.videoId
+  videoId: state.videoId,
+  loadNumber: state.loadNumber,
+  authToken: state.authToken
 });
 
 export default connect(mapStateToProps)(Player);

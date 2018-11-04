@@ -171,6 +171,32 @@ export const searchVideos = (term, token) => dispatch => {
     });
 };
 
+// searchVideos finds videos using YouTube API
+export const searchVideosInitial = (term, token) => dispatch => {
+  dispatch(request());
+  fetch(`${API_ORIGIN}/videos/search/${term}`, {
+    mode: "cors",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
+      return res.json();
+    })
+    .then(res => {
+      const number = Math.floor(Math.random() * 26);
+      const currentVideo = res.response.body.items.find((item, index) => index === number);
+      dispatch(selectVideo(currentVideo, currentVideo.id.videoId));
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
 // addVideo adds a video to the watchlist (favorites)
 export const addVideo = (video, userID, token) => dispatch => {
   // Extracts properties for database

@@ -47,7 +47,6 @@ export class Chat extends React.Component {
     });
     return (
       <div className="chat-container">
-        <button id="sync">Sync</button>
         <div className="chat-box">
           <ul id="messages" ref="chatbox">{messages}</ul>
           <form id="chat-form" onSubmit={this.onSubmit}>
