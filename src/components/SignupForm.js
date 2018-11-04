@@ -38,7 +38,7 @@ export class SignupForm extends React.Component {
               <div className="flex">
                 <label htmlFor="username">Username</label>
                 <input type="text" id="username" ref={input=> (this.username = input)}
-                required
+                required autoFocus
                 />
                 <label htmlFor="email">Email</label>
                 <input type="email" id="email" ref={input=> (this.email = input)}

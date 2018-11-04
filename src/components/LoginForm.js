@@ -48,9 +48,9 @@ export class LoginForm extends React.Component {
             <fieldset>
               <div className="flex">
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" ref={input => this.email = input}/>
+                <input type="email" id="email" ref={input => this.email = input} required autoFocus/>
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" ref={input => this.password = input}/>
+                <input type="password" id="password" ref={input => this.password = input} required/>
               </div>
             </fieldset>
             <button>Submit</button>
