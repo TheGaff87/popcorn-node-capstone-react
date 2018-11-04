@@ -18,7 +18,7 @@ export class Nav extends React.Component {
 
   render() {
     return (
-      <nav>
+      <nav className="main-nav">
         <ul className="nav-items">
           <li>
             <Link to="/user">Home</Link>

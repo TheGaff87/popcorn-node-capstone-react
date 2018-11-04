@@ -7,25 +7,29 @@
 }
 
 /* actually for iframe; need placeholder */
-.player, iframe {
+.player,
+iframe {
     background: var(--ltgray);
-    border: 2px solid black;
     height: 180px;
     width: 320px;
     margin: 0 auto;
 }
 
 @media (min-width: 420px) {
-/* actually for iframe; need placeholder */
-    .player, iframe {
+
+    /* actually for iframe; need placeholder */
+    .player,
+    iframe {
         height: 360px;
         width: 100%;
     }
 }
 
-@media (min-width: 640px) {
+@media (min-width: 690px) {
+
     /* actually for iframe; need placeholder */
-    .player, iframe {
+    .player,
+    iframe {
         width: 640px;
         height: 360px;
     }

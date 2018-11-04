@@ -19,7 +19,7 @@ html {
 body {
   background-color: var(--dkgre);
   background-image: url('assets/topography.svg'),
-  linear-gradient(160deg, rgb(160, 7, 142), rgb(61, 150, 121));
+    linear-gradient(160deg, rgb(160, 7, 142), rgb(61, 150, 121));
   background-size: 340px, auto;
   background-attachment: fixed;
   margin: 0;
@@ -53,12 +53,13 @@ button {
   cursor: pointer;
 }
 
-h1, h1 a {
+h1,
+h1 a {
   color: var(--pink);
   margin: 0;
 }
 
-a, nav a {
+a {
   color: var(--blue);
   text-decoration: none;
 }
@@ -71,7 +72,8 @@ fieldset {
   border: 0;
 }
 
-label, input {
+label,
+input {
   height: 40px;
   display: flex;
   align-items: center;
