@@ -105,8 +105,6 @@ export const fetchErr = err => ({
   err
 });
 
-
-
 const storeAuthInfo = (authToken, dispatch) => {
   const decodedToken = jwtDecode(authToken);
   dispatch(setAuthToken(authToken));
@@ -129,7 +127,7 @@ export const login = user => dispatch => {
       return res.json();
     })
     .then(authToken => storeAuthInfo(authToken.token, dispatch))
-    .catch((err) => {
+    .catch(err => {
       dispatch(fetchErr(err));
     });
 };
@@ -143,10 +141,15 @@ export const signupUser = user => dispatch => {
     },
     body: JSON.stringify(user)
   })
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
+      return res.json();
+    })
     .then(authToken => storeAuthInfo(authToken.token, dispatch))
-    .catch((res, err) => {
-      console.log("res: ", res);
+    .catch(err => {
+      dispatch(fetchErr(err));
     });
 };
 

@@ -18,11 +18,10 @@ export class SignupForm extends React.Component {
     const user = {
       username: this.username.value,
       email: this.email.value,
-      password: this.password.value,
+      password: this.password.value
     };
     this.props.dispatch(signupUser(user));
-    console.log(this.props);
-    inputs.map(input => input.value = '');
+    inputs.map(input => (input.value = ""));
   }
 
   render() {
@@ -33,21 +32,30 @@ export class SignupForm extends React.Component {
       <section className="form-landing">
         <Benefits />
         <div className="form-container">
+          <span className="error">{this.props.error}</span>
           <form className="signup" onSubmit={this.onSubmit}>
             <fieldset>
               <div className="flex">
                 <label htmlFor="username">Username</label>
-                <input type="text" id="username" ref={input => this.username = input}/>
+                <input type="text" id="username" ref={input=> (this.username = input)}
+                required
+                />
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" ref={input => this.email = input}/>
+                <input type="email" id="email" ref={input=> (this.email = input)}
+                required
+                />
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" ref={input => this.password = input}/>
+                <input type="password" id="password" ref={input=> (this.password = input)}
+                required
+                />
               </div>
             </fieldset>
             <button>Signup</button>
           </form>
           <nav>
-          <Link to="/auth/login">Have an account? <span>Login!</span></Link>
+            <Link to="/auth/login">
+              Have an account? <span>Login!</span>
+            </Link>
           </nav>
         </div>
         <Details />
