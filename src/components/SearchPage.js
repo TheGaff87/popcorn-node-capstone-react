@@ -37,7 +37,7 @@ export class SearchPage extends React.Component {
         <Nav />
         <section className="form-search">
           <h2>Search</h2>
-          <SearchForm onSearch={term => this.onSearch(term)} />
+          <SearchForm placeholder='Search by video' onSearch={term => this.onSearch(term)} />
           <div className="video-outer" ref='videos'><Videos /></div>
         </section>
       </div>

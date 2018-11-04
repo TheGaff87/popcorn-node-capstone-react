@@ -88,7 +88,7 @@ export class Main extends React.Component {
     }
     return (
       <main>
-        <SearchForm onSearch={term => this.onSearch(term)} results={this.renderResults()} />
+        <SearchForm onSearch={term => this.onSearch(term)} placeholder='Search by title' results={this.renderResults()} />
         <section className="interactive">
           <Player />
           <Chat />

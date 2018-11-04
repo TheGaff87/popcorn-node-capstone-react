@@ -22,7 +22,7 @@ export default class SearchForm extends React.Component {
           <input
             id="video-title"
             type="text"
-            placeholder="What do you want to watch right now?"
+            placeholder={this.props.placeholder}
             ref={input => this.textInput = input}
             autoComplete="off"
           />
