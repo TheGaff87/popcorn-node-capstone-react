@@ -32,6 +32,7 @@
 }
 
 .chat-box input {
+    border: 1px solid var(--bluet);
     flex-grow: 5;
 }
 
@@ -52,9 +53,7 @@
 }
 
 .chat-box ul li {
-    height: 40px;
-    line-height: 40px;
-    padding-left: 12px;
+    padding: 12px;
 }
 
 .chat-box ul li:nth-child(2n) {
@@ -64,6 +63,13 @@
 .chat-container {
     padding: 20px;
     overflow: hidden;
+}
+
+.user {
+    font-weight: bold;
+    display: block;
+    height: 30px;
+    line-height: 30px;
 }
 
 .chat-box ul li:nth-child(2n) .user {

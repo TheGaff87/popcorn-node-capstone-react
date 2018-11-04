@@ -86,8 +86,9 @@ input {
   align-items: center;
 }
 
-/* Forms and Landing page */
-
+input {
+  padding-left: 5px;
+}
 
 @media (min-width: 480px) {
   body {
