@@ -1,6 +1,6 @@
 import React from "react";
 
-import { saveMess, selectVideo } from "../actions";
+import { saveMess, selectVideo, clearMess } from "../actions";
 import { connect } from "react-redux";
 import io from "socket.io-client";
 import "./Chat.css";
@@ -18,6 +18,10 @@ export class Chat extends React.Component {
     // dispatch action when socket announces user sent message
     this.socket.on("RECEIVE_MESSAGE", function(data) {
       Chat.props.dispatch(saveMess(data));
+      Chat.refs.chatbox.scrollTo(0, document.body.scrollHeight*10);
+      if (Chat.refs.chatbox.scrollHeight > document.body.scrollHeight) {
+        Chat.props.dispatch(clearMess(data));
+      }
     });
   }
 

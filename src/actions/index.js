@@ -9,6 +9,7 @@ export const REQUEST = "REQUEST";
 export const LOG_USER = "LOG_USER";
 export const LOG_OUT = "LOG_OUT";
 export const SAVE_MESS = "SAVE_MESS";
+export const CLEAR_MESS = "CLEAR_MESS";
 export const SELECT_VIDEO = "SELECT_VIDEO";
 export const APPEND_RESULTS = "APPEND_RESULTS";
 export const GEN_WATCHLIST = "GEN_WATCHLIST";
@@ -40,6 +41,10 @@ export const logout = () => ({
 export const saveMess = data => ({
   type: SAVE_MESS,
   data
+});
+
+export const clearMess = () => ({
+  type: CLEAR_MESS
 });
 
 export const selectVideo = (currentVideo, id, time) => ({

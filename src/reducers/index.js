@@ -38,6 +38,12 @@ export const reducer = (state = initialState, action) => {
     });
   }
 
+  if (action.type === actions.CLEAR_MESS) {
+    return Object.assign({}, state, {
+      chatHistory: []
+    });
+  }
+
   if (action.type === actions.SELECT_VIDEO) {
     return Object.assign({}, state, {
       currentVideo: action.currentVideo,
