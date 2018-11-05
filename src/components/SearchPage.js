@@ -2,7 +2,6 @@ import React from "react";
 import Nav from "./Nav";
 import SearchForm from "./SearchForm";
 import Videos from './Videos';
-import Spinner from "react-spinkit";
 
 import requiresLogin from './requires-login';
 import { connect } from "react-redux";
@@ -24,14 +23,6 @@ export class SearchPage extends React.Component {
     this.props.dispatch(searchVideos(term, this.props.authToken));
   }
 
-  renderResults() {
-    if (this.props.loading) {
-      return (
-        <Spinner className="spinner'" name="three-bounce" color="fuchsia" />
-      );
-    }
-  }
-
   render() {
     return (
       <div>
@@ -48,7 +39,6 @@ export class SearchPage extends React.Component {
 
 export const mapStateToProps = state => ({
   videos: state.videos,
-  loading: state.loading,
   error: state.error,
   authToken: state.authToken
 });

@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import Spinner from "react-spinkit";
 
 // Component can be any component with the adopted redirect behavior
 
@@ -8,7 +9,12 @@ export default () => Component => {
     function RequiresLogin(props) {
         const {authenticating, loggedIn, error} = props;
         if (authenticating) {
-            return <div>Logging in!</div>;
+            return (
+                <div className="spinner-container">
+                    Searching in progress...
+                    <Spinner className="spinner" name="circle" />
+                </div>
+            );
         } else if (!loggedIn || error) {
             return <Redirect to = "/" /> ;
         }

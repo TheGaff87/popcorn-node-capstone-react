@@ -33,7 +33,9 @@ export class Videos extends React.Component {
 
     if (this.props.loading) {
       return (
-        <Spinner className="spinner'" name="three-bounce" color="fuchsia" />
+         <div className="spinner-container">
+            <Spinner className="spinner" name="circle" />
+         </div>
       );
     }
 
