@@ -1,7 +1,6 @@
 import React from "react";
 import YouTube from "react-youtube";
 
-import { searchVideosInitial } from "../actions";
 import { connect } from "react-redux";
 import io from "socket.io-client";
 
@@ -38,10 +37,6 @@ export class Player extends React.Component {
       }
     };
 
-    if (this.props.loadNumber < 1) {
-      this.props.dispatch(searchVideosInitial("soundtrack", this.props.authToken));
-    }
-
     if (this.props.time) {
       const player = this.refs.player.internalPlayer;
       const time = this.props.time;
@@ -56,27 +51,32 @@ export class Player extends React.Component {
       }
     }
 
-    return (
-      <div className="player-container">
-        <div id="player" className="player">
-          <YouTube
-            videoId={this.props.videoId}
-            opts={opts}
-            ref="player"
-          />
+    if (this.props.videoId) {
+      return (
+        <div className="player-container">
+          <div id="player" className="player">
+            <YouTube videoId={this.props.videoId} opts={opts} ref="player" />
+          </div>
+          <button onClick={this.shareVid}>
+            Share in Chat
+          </button>
         </div>
-        <button onClick={this.shareVid}>
-          Share in Chat
-        </button>
-      </div>
-    );
+      );
+    } else {
+        return (
+          <div className="player-container">
+            <div id="player" className="player">
+              <YouTube videoId="M4Ufs7-FpvU" opts={opts} ref="player" />
+            </div>
+          </div>
+        );
+    }
+
   }
 }
 
 export const mapStateToProps = state => ({
   videoId: state.videoId,
-  loadNumber: state.loadNumber,
-  authToken: state.authToken,
   user: state.user,
   currentVideo: state.currentVideo,
   time: state.time

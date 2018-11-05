@@ -7,7 +7,6 @@ const initialState = {
   currentVideo: "",
   error: null,
   loading: false,
-  loadNumber: 0,
   onMain: false,
   time: null,
   user: null,
@@ -44,7 +43,6 @@ export const reducer = (state = initialState, action) => {
       currentVideo: action.currentVideo,
       videoId: action.id,
       loading: false,
-      loadNumber: 1,
       onMain: true,
       time: action.time
     });
@@ -90,7 +88,6 @@ export const reducer = (state = initialState, action) => {
         chatHistory: [],
         currentVideo: "",
         loading: false,
-        loadNumber: 0,
         user: null,
         userID: "",
         videos: [],
