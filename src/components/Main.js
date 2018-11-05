@@ -1,7 +1,6 @@
 import React from "react";
 import SearchForm from "./SearchForm";
 import Player from "./Player";
-import Spinner from "react-spinkit";
 
 import { searchVideos, selectVideo, addVideo } from "../actions";
 import { clearDropdown } from "../custom";
@@ -45,12 +44,6 @@ export class Main extends React.Component {
   }
 
   renderResults() {
-    if (this.props.loading) {
-      return (
-        <Spinner className="spinner'" name="three-bounce" color="fuchsia" />
-      );
-    }
-
     // Display list of videos matching search term and pass result to SearchForm
     if (this.props.videos.length > 0) {
       const videos = this.props.videos.map((video, index) => {
@@ -94,7 +87,6 @@ export class Main extends React.Component {
 export const mapStateToProps = state => ({
   authToken: state.authToken,
   currentVideo: state.currentVideo,
-  loading: state.loading,
   userID: state.userID,
   videos: state.videos,
   videoId: state.videoId

@@ -7,7 +7,7 @@ const initialState = {
   currentVideo: "",
   error: null,
   loading: false,
-  onMain: false,
+  toMain: false,
   time: null,
   user: null,
   userID: "",
@@ -28,7 +28,7 @@ export const reducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       error: null,
       loading: true,
-      onMain: false
+      toMain: false
     });
   }
 
@@ -43,31 +43,28 @@ export const reducer = (state = initialState, action) => {
       currentVideo: action.currentVideo,
       videoId: action.id,
       loading: false,
-      onMain: true,
+      toMain: true,
       time: action.time
     });
   }
 
   if (action.type === actions.ADD_VIDEO) {
     return Object.assign({}, state, {
-      loading: false,
-      onMain: false
+      loading: false
     });
   }
 
   if (action.type === actions.DELETE_VIDEO) {
     return Object.assign({}, state, {
       loading: false,
-      watchlist: state.watchlist.filter(video => video._id !== action.id),
-      onMain: false
+      watchlist: state.watchlist.filter(video => video._id !== action.id)
     });
   }
 
   if (action.type === actions.GEN_WATCHLIST) {
     return Object.assign({}, state, {
       loading: false,
-      watchlist: action.videos,
-      onMain: false
+      watchlist: action.videos
     });
   }
 
@@ -75,8 +72,7 @@ export const reducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       error: null,
       loading: false,
-      user: action.user,
-      onMain: false
+      user: action.user
     });
   }
 
@@ -92,8 +88,7 @@ export const reducer = (state = initialState, action) => {
         userID: "",
         videos: [],
         videoId: "",
-        watchlist: [],
-        onMain: false
+        watchlist: []
       }
     );
   }
@@ -105,8 +100,7 @@ export const reducer = (state = initialState, action) => {
       loading: false,
       nextPageToken: action.videos.nextPageToken,
       pageInfo: action.videos.pageInfo,
-      videos: videos,
-      onMain: false
+      videos: videos
     });
   }
 
@@ -115,16 +109,14 @@ export const reducer = (state = initialState, action) => {
       error: null,
       loading: false,
       videos: [],
-      watchlist: [],
-      onMain: false
+      watchlist: []
     });
   }
 
   if (action.type === actions.SET_AUTH_TOKEN) {
     return Object.assign({}, state, {
       authToken: action.authToken,
-      loading: false,
-      onMain: false
+      loading: false
     });
   }
 
@@ -132,8 +124,7 @@ export const reducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       loading: false,
       user: action.currentUser.username,
-      userID: action.currentUser.id,
-      onMain: false
+      userID: action.currentUser.id
     });
   }
 

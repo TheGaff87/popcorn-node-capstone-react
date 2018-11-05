@@ -27,7 +27,7 @@ export class Videos extends React.Component {
   }
 
   render() {
-    if (this.props.onMain) {
+    if (this.props.toMain) {
       return <Redirect to="/dashboard/user" />;
     }
 
@@ -75,7 +75,7 @@ export const mapStateToProps = state => ({
   watchlist: state.watchlist,
   loading: state.loading,
   authToken: state.authToken,
-  onMain: state.onMain
+  toMain: state.toMain
 });
 
 export default connect(mapStateToProps)(Videos);
