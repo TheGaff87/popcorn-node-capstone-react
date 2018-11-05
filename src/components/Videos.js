@@ -41,6 +41,12 @@ export class Videos extends React.Component {
 
     let videoGallery = [];
 
+    if (this.props.videos.length === 0) {
+        return (
+          <div><p>There are currently no videos.</p></div>
+        );
+    }
+    
     // for rendering search list
     if (this.props.videos.length > 0) {
       videoGallery = this.props.videos.map((video, index) => {

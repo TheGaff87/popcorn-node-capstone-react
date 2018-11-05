@@ -65,7 +65,7 @@ export class Chat extends React.Component {
         <div className="chat-box">
           <ul id="messages" ref="chatbox">{messages}</ul>
           <form id="chat-form" onSubmit={this.onSubmit}>
-            <input type="text" ref={input => (this.textInput = input)} />
+            <input type="text" ref={input => (this.textInput = input)} placeholder="Start chatting..."/>
             <button>Send</button>
           </form>
         </div>
