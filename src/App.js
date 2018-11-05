@@ -33,8 +33,8 @@ class App extends Component {
           <Route exact path="/auth/login" component={Login} />
           <Route exact path="/auth/signup" component={Signup} />
           <Route exact path="/dashboard/search" component={SearchPage} />
-          <Route exact path="/dashboard/watchlist" component={Watchlist} />
-          <Route path="/dashboard" component={Chatbox} />
+          <Route exact path="/dashboard/watchlist" render={() => <Watchlist error={this.props.error} loggedIn={this.props.loggedIn} />} />
+          <Route path="/dashboard" render={() => <Chatbox error={this.props.error} />} />
           <Footer />
         </div>
       </Router>
@@ -43,7 +43,8 @@ class App extends Component {
 }
 
 export const mapStateToProps = state => ({
-  loggedIn: state.user
+  loggedIn: state.user,
+  error: state.error
 });
 
 export default connect(mapStateToProps)(App);

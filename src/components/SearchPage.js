@@ -4,6 +4,7 @@ import SearchForm from "./SearchForm";
 import Videos from './Videos';
 import Spinner from "react-spinkit";
 
+import requiresLogin from './requires-login';
 import { connect } from "react-redux";
 import { searchVideos } from "../actions";
 import { clearDropdown } from "../custom";
@@ -52,4 +53,4 @@ export const mapStateToProps = state => ({
   authToken: state.authToken
 });
 
-export default connect(mapStateToProps)(SearchPage);
+export default requiresLogin()(connect(mapStateToProps)(SearchPage));

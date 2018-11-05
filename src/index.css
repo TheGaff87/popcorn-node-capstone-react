@@ -96,6 +96,17 @@ input {
   position: absolute;
 }
 
+.unauthorized {
+  color: red;
+  font-size: 30px;
+  height: 200px;
+  width: 320px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (min-width: 480px) {
   body {
     padding: 25px;

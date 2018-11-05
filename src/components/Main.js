@@ -6,8 +6,8 @@ import Spinner from "react-spinkit";
 import { searchVideos, selectVideo, addVideo } from "../actions";
 import { clearDropdown } from "../custom";
 
+import requiresLogin from './requires-login';
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 
 import './Main.css';
 import "./Components.css";
@@ -68,10 +68,6 @@ export class Main extends React.Component {
   }
 
   render() {
-    if (!this.props.loggedIn) {
-      return <Redirect to="/" />;
-    }
-
     if (this.props.videoId) {
       // Renders 'Add to Watchlist' btn only if there is a non-default video selected
       return (
@@ -98,12 +94,10 @@ export class Main extends React.Component {
 export const mapStateToProps = state => ({
   authToken: state.authToken,
   currentVideo: state.currentVideo,
-  error: state.error,
   loading: state.loading,
-  loggedIn: state.user,
   userID: state.userID,
   videos: state.videos,
   videoId: state.videoId
 });
 
-export default connect(mapStateToProps)(Main);
+export default requiresLogin()(connect(mapStateToProps)(Main));
