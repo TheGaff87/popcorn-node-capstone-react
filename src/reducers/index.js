@@ -109,7 +109,8 @@ export const reducer = (state = initialState, action) => {
       error: null,
       loading: false,
       videos: [],
-      watchlist: []
+      watchlist: [],
+      toMain: false
     });
   }
 
