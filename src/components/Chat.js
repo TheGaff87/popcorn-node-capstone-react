@@ -12,8 +12,8 @@ export class Chat extends React.Component {
     const Chat = this;
     this.onSubmit = this.onSubmit.bind(this);
 
-    this.socket = io("https://popcorn-capstone-node.herokuapp.com");
-    // this.socket = io('http://localhost:8080');
+    // this.socket = io("https://popcorn-capstone-node.herokuapp.com");
+    this.socket = io('http://localhost:8080');
 
     // dispatch action when socket announces user sent message
     this.socket.on("RECEIVE_MESSAGE", function(data) {
@@ -23,6 +23,18 @@ export class Chat extends React.Component {
         Chat.props.dispatch(clearMess(data));
       }
     });
+
+    if (this.props.user || !this.props.user) {
+      this.socket.emit("USER_LOGGEDIN", {
+        user: this.props.user
+      });
+      this.socket.on("LOG_USER", function(user) {
+        Chat.socket.emit("SEND_MESSAGE", {
+          text: `${user.user} logged in!`,
+          user: user.user
+        });
+      });
+    }
   }
 
   // close socket when user leaves
