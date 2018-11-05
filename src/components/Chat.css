@@ -3,18 +3,6 @@
     min-height: 360px;
 }
 
-.chat-container > button {
-    margin-bottom: 5px;
-    position: relative;
-}
-
-.chat-container > button:hover::after {
-    content: 'Sync up your videos';
-    position: absolute;
-    width: 160px;
-    left: 55px;
-}
-
 .chat-box {
     background: white;
     height: 320px;

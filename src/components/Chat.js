@@ -1,6 +1,6 @@
 import React from "react";
 
-import { saveMess } from "../actions";
+import { saveMess, selectVideo } from "../actions";
 import { connect } from "react-redux";
 import io from "socket.io-client";
 import "./Chat.css";
@@ -38,10 +38,25 @@ export class Chat extends React.Component {
 
   render() {
     const messages = this.props.chatHistory.map((data, index) => {
+
+      const watchTogether = (e, data) => {
+        e.preventDefault();
+        this.props.dispatch(selectVideo(data.currentVideo, data.currentVideo.id.videoId, data.time));
+      };
+
+      // if time is included, add a button to watch with other users
+      function addShareButton() {
+        if (data.hasOwnProperty('time')) {
+          return (
+            <button className="sync-with" type="button" onClick={(e) => watchTogether(e, data)}>Watch</button>
+          );
+        }
+      }
+
       return (
         <li key={index}>
           <span className="user">{data.user}</span>{" "}
-          <span className="msg">{data.text}</span>
+          <span className="msg">{data.text} {addShareButton()}</span>
         </li>
       );
     });
@@ -61,7 +76,8 @@ export class Chat extends React.Component {
 
 export const mapStateToProps = state => ({
   user: state.user,
-  chatHistory: state.chatHistory
+  chatHistory: state.chatHistory,
+  time: state.time
 });
 
 export default connect(mapStateToProps)(Chat);

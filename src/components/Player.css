@@ -15,6 +15,11 @@ iframe {
     margin: 0 auto;
 }
 
+.player-container > button {
+    margin: 5px 0;
+    position: relative;
+}
+
 @media (min-width: 420px) {
 
     /* actually for iframe; need placeholder */

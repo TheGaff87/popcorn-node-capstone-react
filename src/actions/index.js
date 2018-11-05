@@ -1,22 +1,20 @@
 import jwtDecode from "jwt-decode";
 import { API_ORIGIN } from "../config";
-import io from "socket.io-client";
+
 /*
  * action types
 */
 
+export const REQUEST = "REQUEST";
 export const LOG_USER = "LOG_USER";
 export const LOG_OUT = "LOG_OUT";
 export const SAVE_MESS = "SAVE_MESS";
-export const SEND_MESS = "SEND_MESS";
-export const REQUEST = "REQUEST";
 export const SELECT_VIDEO = "SELECT_VIDEO";
-export const UPDATE_TIME = "UPDATE_TIME";
-export const GEN_WATCHLIST = "GEN_WATCHLIST";
-export const DELETE_VIDEO = "DELETE_VIDEO";
-export const ADD_VIDEO = "ADD_VIDEO";
 export const APPEND_RESULTS = "APPEND_RESULTS";
+export const GEN_WATCHLIST = "GEN_WATCHLIST";
 export const CLEAR_RESULTS = "CLEAR_RESULTS";
+export const ADD_VIDEO = "ADD_VIDEO";
+export const DELETE_VIDEO = "DELETE_VIDEO";
 export const AUTH_REQUEST = "AUTH_REQUEST";
 export const SET_AUTH_TOKEN = "SET_AUTH_TOKEN";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
@@ -44,14 +42,10 @@ export const saveMess = data => ({
   data
 });
 
-export const selectVideo = (currentVideo, id) => ({
+export const selectVideo = (currentVideo, id, time) => ({
   type: SELECT_VIDEO,
   currentVideo,
-  id
-});
-
-export const updateTime = time => ({
-  type: UPDATE_TIME,
+  id,
   time
 });
 
@@ -188,7 +182,7 @@ export const searchVideosInitial = (term, token) => dispatch => {
       return res.json();
     })
     .then(res => {
-      const number = Math.floor(Math.random() * 26);
+      const number = Math.floor(Math.random() * 25);
       const currentVideo = res.response.body.items.find((item, index) => index === number);
       dispatch(selectVideo(currentVideo, currentVideo.id.videoId));
     })
