@@ -25,6 +25,7 @@ export default class SearchForm extends React.Component {
             placeholder={this.props.placeholder}
             ref={input => this.textInput = input}
             autoComplete="off"
+            autoFocus
           />
         {this.props.results}
         </label>
