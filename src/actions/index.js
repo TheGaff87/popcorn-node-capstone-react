@@ -114,6 +114,7 @@ const storeAuthInfo = (authToken, dispatch) => {
 // Get list of users who logged in
 export const getLoggedUsers = (user) => dispatch => {
   fetch(`${API_ORIGIN}/auth/userLoggedIn`, {
+    mode: "cors",
     headers: {
       "content-type": "application/json"
     }
@@ -133,6 +134,7 @@ export const getLoggedUsers = (user) => dispatch => {
 export const logSession = (user) => dispatch => {
   fetch(`${API_ORIGIN}/auth/userLoggedIn`, {
     method: "POST",
+    mode: "cors",
     headers: {
       "content-type": "application/json"
     },
@@ -154,6 +156,7 @@ export const logoutSession = (user) => dispatch => {
   console.log('loggin out!!');
   fetch(`${API_ORIGIN}/auth/userLoggedIn`, {
     method: "DELETE",
+    mode: "cors",
     headers: {
       "content-type": "application/json"
     },
@@ -292,7 +295,7 @@ export const getWatchlist = (userId, token) => dispatch => {
     mode: "cors",
     headers: {
       "Access-Control-Allow-Origin": "*",
-      Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`
     }
   })
     .then(res => {
