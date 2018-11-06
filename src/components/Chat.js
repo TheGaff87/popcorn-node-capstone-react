@@ -1,6 +1,6 @@
 import React from "react";
 
-import { saveMess, selectVideo, clearMess } from "../actions";
+import { saveMess, selectVideo, clearMess, getLoggedUsers } from "../actions";
 import { connect } from "react-redux";
 import io from "socket.io-client";
 import "./Chat.css";
@@ -24,9 +24,12 @@ export class Chat extends React.Component {
       }
     });
 
-    if (this.props.user || !this.props.user) {
+    if (this.props.user) {
       this.socket.emit("USER_LOGGEDIN", {
         user: this.props.user
+      });
+      this.socket.on("LOG_USER", function(user) {
+        Chat.props.dispatch(getLoggedUsers());
       });
     }
   }

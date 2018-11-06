@@ -111,6 +111,24 @@ const storeAuthInfo = (authToken, dispatch) => {
   dispatch(logSession({user: decodedToken.username}));
 };
 
+// Get list of users who logged in
+export const getLoggedUsers = (user) => dispatch => {
+  fetch(`${API_ORIGIN}/auth/userLoggedIn`, {
+    headers: {
+      "content-type": "application/json"
+    }
+  })
+  .then(res => {
+    if (!res.ok) {
+      return Promise.reject(res.statusText);
+    }
+    return res.json();
+  })
+  .then(res => {
+    dispatch(chatUsers(res.loggedIn));
+  });
+};
+
 // Persist users who logged in
 export const logSession = (user) => dispatch => {
   fetch(`${API_ORIGIN}/auth/userLoggedIn`, {
