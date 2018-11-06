@@ -1,6 +1,9 @@
 .chat-container {
-    background-color: var(--bluet);
     min-height: 360px;
+}
+
+.chat-details {
+    background-color: var(--bluet);
 }
 
 .chat-box {

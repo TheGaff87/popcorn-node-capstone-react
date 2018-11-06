@@ -4,6 +4,7 @@ const initialState = {
   authToken: "",
   chatMsg: "",
   chatHistory: [],
+  chatUsers: [],
   currentVideo: "",
   error: null,
   loading: false,
@@ -79,6 +80,14 @@ export const reducer = (state = initialState, action) => {
       error: null,
       loading: false,
       user: action.user
+    });
+  }
+
+  if (action.type === actions.CHAT_USERS) {
+    return Object.assign({}, state, {
+      error: null,
+      loading: false,
+      chatUsers: action.users
     });
   }
 

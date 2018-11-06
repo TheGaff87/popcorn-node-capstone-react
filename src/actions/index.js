@@ -7,6 +7,7 @@ import { API_ORIGIN } from "../config";
 
 export const REQUEST = "REQUEST";
 export const LOG_USER = "LOG_USER";
+export const CHAT_USERS = "CHAT_USERS";
 export const LOG_OUT = "LOG_OUT";
 export const SAVE_MESS = "SAVE_MESS";
 export const CLEAR_MESS = "CLEAR_MESS";
@@ -32,6 +33,11 @@ export const request = () => ({
 export const logUser = user => ({
   type: LOG_USER,
   user
+});
+
+export const chatUsers = users => ({
+  type: CHAT_USERS,
+  users
 });
 
 export const logout = () => ({
@@ -102,7 +108,30 @@ const storeAuthInfo = (authToken, dispatch) => {
   const decodedToken = jwtDecode(authToken);
   dispatch(setAuthToken(authToken));
   dispatch(authSuccess(decodedToken));
+  dispatch(logSession({user: decodedToken.username}));
 };
+
+// Persist users who logged in
+export const logSession = (user) => dispatch => {
+  fetch(`${API_ORIGIN}/auth/userLoggedIn`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(user)
+  })
+  .then(res => {
+    if (!res.ok) {
+      return Promise.reject(res.statusText);
+    }
+    return res.json();
+  })
+  .then(res => {
+    dispatch(chatUsers(res.loggedIn));
+  });
+};
+
+// call when logout
 
 export const login = user => dispatch => {
   dispatch(request());
