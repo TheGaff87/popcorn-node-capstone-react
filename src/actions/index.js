@@ -263,6 +263,7 @@ export const addVideo = (video, userID, token) => dispatch => {
       return res.json();
     })
     .then(res => {
+      console.log(res);
       dispatch(addToWatchlist(res));
     })
     .catch(err => {
