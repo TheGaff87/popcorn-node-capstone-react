@@ -12,8 +12,8 @@ export class Chat extends React.Component {
     const Chat = this;
     this.onSubmit = this.onSubmit.bind(this);
 
-    // this.socket = io("https://popcorn-capstone-node.herokuapp.com");
-    this.socket = io('http://localhost:8080');
+    this.socket = io("https://popcorn-capstone-node.herokuapp.com");
+    // this.socket = io('http://localhost:8080');
 
     // dispatch action when socket announces user sent message
     this.socket.on("RECEIVE_MESSAGE", function(data) {
