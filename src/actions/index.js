@@ -153,7 +153,6 @@ export const logSession = (user) => dispatch => {
 
 // // remove users who log out and clean up
 export const logoutSession = (user) => dispatch => {
-  console.log('loggin out!!');
   fetch(`${API_ORIGIN}/auth/userLoggedIn`, {
     method: "DELETE",
     mode: "cors",
@@ -165,8 +164,8 @@ export const logoutSession = (user) => dispatch => {
   .then(res => {
     dispatch(logout());
   })
-  .then(res => {
-    dispatch(logout());
+  .catch(err => {
+    console(err);
   });
 };
 
