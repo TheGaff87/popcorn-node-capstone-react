@@ -28,12 +28,6 @@ export class Chat extends React.Component {
       this.socket.emit("USER_LOGGEDIN", {
         user: this.props.user
       });
-      this.socket.on("LOG_USER", function(user) {
-        Chat.socket.emit("SEND_MESSAGE", {
-          text: `${user.user} logged in!`,
-          user: user.user
-        });
-      });
     }
   }
 

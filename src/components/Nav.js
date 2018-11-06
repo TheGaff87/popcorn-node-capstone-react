@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout, getWatchlist} from "../actions";
+import { logout, logoutSession, getWatchlist} from "../actions";
 
 import "./Nav.css";
 
@@ -10,6 +10,7 @@ export class Nav extends React.Component {
 
   logOut() {
     this.props.dispatch(logout());
+    this.props.dispatch(logoutSession(this.props.user));
   }
 
   getWatchList() {
@@ -40,7 +41,8 @@ export class Nav extends React.Component {
 
 export const mapStateToProps = state => ({
   authToken: state.authToken,
-  userID: state.userID
+  userID: state.userID,
+  user: state.user
 });
 
 export default connect(mapStateToProps)(Nav);

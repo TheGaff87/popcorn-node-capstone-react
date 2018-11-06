@@ -7,13 +7,14 @@ export class UsersLoggedIn extends React.Component {
 
     render() {
         let userList;
-        console.log(this.props);
-        if (this.props.chatUsers.length > 0) {
-            userList = this.props.chatUsers.map((user, index) => {
-                return (
-                    <li key={index}>{user.usersLoggedIn}</li>
-                )
-            });
+        if (this.props.chatUsers !== undefined) {
+            if (this.props.chatUsers.length > 0) {
+                userList = this.props.chatUsers.map((user, index) => {
+                    return (
+                        <li key={index}>{user.usersLoggedIn}</li>
+                    )
+                });
+            }
         }
 
         return (

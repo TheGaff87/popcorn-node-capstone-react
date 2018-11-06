@@ -131,7 +131,23 @@ export const logSession = (user) => dispatch => {
   });
 };
 
-// call when logout
+// // remove users who log out and clean up
+export const logoutSession = (user) => dispatch => {
+  console.log('loggin out!!');
+  fetch(`${API_ORIGIN}/auth/userLoggedIn`, {
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify({user: user})
+  })
+  .then(res => {
+    dispatch(logout());
+  })
+  .then(res => {
+    dispatch(logout());
+  });
+};
 
 export const login = user => dispatch => {
   dispatch(request());
