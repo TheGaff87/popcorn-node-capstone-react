@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 
-import Player from '../components/Player';
+import {Player} from '../components/Player';
 
 
 describe('<Player />', () => {

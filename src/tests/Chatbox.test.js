@@ -4,12 +4,12 @@ import { expect } from 'chai';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 
-import SearchPage from '../components/SearchPage';
+import Chatbox from '../components/Chatbox';
 
 
-describe('<SearchPage />', () => {
-    it('renders <SearchPage /> components', () => {
-        shallow(<SearchPage />);
+describe('<Chatbox />', () => {
+    it('renders <Chatbox /> components', () => {
+        shallow(<Chatbox />);
     });
 });
 

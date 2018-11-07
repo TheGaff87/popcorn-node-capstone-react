@@ -11,9 +11,9 @@ import Player from "../components/Player";
 
 describe('<Main />', () => {
     it('renders <Main /> components', () => {
-        const wrapper = shallow(<Main />);
+        const videos = [{id: {videoId: 123}, snippet: {title: 'Test'}}];
+        const wrapper = shallow(<Main videos={videos}/>);
         expect(wrapper.find(SearchForm)).to.have.lengthOf(1);
-        expect(wrapper.find(Chat)).to.have.lengthOf(1);
         expect(wrapper.find(Player)).to.have.lengthOf(1);
     });
 });
