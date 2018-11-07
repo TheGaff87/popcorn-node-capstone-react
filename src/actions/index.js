@@ -165,7 +165,7 @@ export const logoutSession = (user) => dispatch => {
     dispatch(logout());
   })
   .catch(err => {
-    console(err);
+    console.log(err);
   });
 };
 
