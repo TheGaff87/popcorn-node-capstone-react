@@ -92,7 +92,6 @@ export const reducer = (state = initialState, action) => {
   }
 
   if (action.type === actions.LOG_OUT) {
-    console.log(action);
     return Object.assign(
       {},
       {

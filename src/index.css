@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Luckiest+Guy|Poppins');
+
 :root {
   --gray: rgba(234, 234, 234, 1);
   --ltgray: rgb(248, 248, 248, 1);
@@ -30,6 +32,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Poppins', sans-serif;
 }
 
 *,
@@ -60,10 +63,22 @@ button:hover {
   background: var(--pinkh);
 }
 
+h1 {
+  font-family: 'Luckiest Guy', cursive;
+  letter-spacing: 7px;
+  text-decoration-color: #904893;
+  text-shadow: 1px 1px 1px #611a44;
+}
+
 h1,
 h1 a {
+  font-size: 50px;
   color: var(--pink);
   margin: 0;
+}
+
+h2 {
+  color: var(--yellow);
 }
 
 a {
