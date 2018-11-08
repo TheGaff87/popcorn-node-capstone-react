@@ -8,6 +8,7 @@ import "./Nav.css";
 
 export class Nav extends React.Component {
 
+  // clear state and removed online user from database
   logOut() {
     this.props.dispatch(logout());
     this.props.dispatch(logoutSession(this.props.user));
