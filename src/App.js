@@ -25,7 +25,6 @@ class App extends Component {
           <Route exact path="/dashboard/user" render={() => <Welcome person={this.props.loggedIn} />}/>
           <header>
             <h1><Link to="/">Popcorn</Link></h1>
-            {/* <Nav /> */}
             <Route exact path="/dashboard/user" component={Nav} />
           </header>
           <Route exact path="/" component={Landing} />
