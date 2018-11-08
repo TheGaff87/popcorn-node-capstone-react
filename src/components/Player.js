@@ -37,7 +37,6 @@ export class Player extends React.Component {
       }
     };
 
-    console.log(this.props);
     if (this.props.time) {
       const player = this.refs.player.internalPlayer;
       const time = this.props.time;
