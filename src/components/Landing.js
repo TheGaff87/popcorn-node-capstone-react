@@ -11,7 +11,7 @@ export default function Landing() {
       <Benefits />
       <div role="region" aria-labelledby="introduction" className="landing-container">
         <h2 id="introduction">Welcome to Popcorn!</h2>
-        <aside>Popcorn is an entertainment app that allows users to chat with each other and watch YouTube videos together!</aside>
+        <aside>Popcorn is an entertainment app that allows users to chat with each other and watch YouTube videos together! <p>Visit the demo and login as demo@app.com | password1</p></aside>
         <nav>
           <Link to="/auth/login"><span>Demo</span></Link>
         </nav>
