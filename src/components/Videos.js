@@ -8,15 +8,18 @@ import { Redirect } from "react-router-dom";
 import "./Video.css";
 
 export class Videos extends React.Component {
-
   playVideo(target, group) {
     let currentVideo;
-    if (group === 'search') {
-      currentVideo = this.props.videos.find(video => video.id.videoId === target.id);
+    if (group === "search") {
+      currentVideo = this.props.videos.find(
+        video => video.id.videoId === target.id
+      );
     }
 
-    if (group === 'watchlist') {
-      currentVideo = this.props.watchlist.find(video => video.videoID === target.id);
+    if (group === "watchlist") {
+      currentVideo = this.props.watchlist.find(
+        video => video.videoID === target.id
+      );
     }
 
     this.props.dispatch(selectVideo(currentVideo, target.id));
@@ -33,25 +36,30 @@ export class Videos extends React.Component {
 
     if (this.props.loading) {
       return (
-         <div className="spinner-container">
-            <Spinner className="spinner" name="circle" />
-         </div>
+        <div className="spinner-container">
+          <Spinner className="spinner" name="circle" />
+        </div>
       );
     }
 
     let videoGallery = [];
 
-   
-    
     // for rendering search list
     if (this.props.videos.length > 0) {
       videoGallery = this.props.videos.map((video, index) => {
         return (
           <div className="item" key={index}>
             <h3>{video.snippet.title}</h3>
-            <button className="thumbnail" type="button" id={video.id.videoId} onClick={(e) => this.playVideo(e.currentTarget, 'search')}>
+            <button
+              className="thumbnail"
+              type="button"
+              id={video.id.videoId}
+              onClick={e => this.playVideo(e.currentTarget, "search")}
+            >
               <img
-                src={video.snippet.thumbnails.medium.url} alt={video.snippet.thumbnails.title} />
+                src={video.snippet.thumbnails.medium.url}
+                alt={video.snippet.thumbnails.title}
+              />
             </button>
           </div>
         );
@@ -61,16 +69,30 @@ export class Videos extends React.Component {
     // for rendering watchlist
     if (this.props.watchlist.length > 0) {
       videoGallery = this.props.watchlist.map((video, index) => {
-        return (<div className="item" key={index}>
-          <h3>{video.title}</h3>
-          <button type="button" id={video._id} className="remove-btn" onClick={(e) => this.deleteVideo(e.currentTarget)}>Remove</button>
-          <button className="thumbnail" type="button" id={video.videoID} onClick={(e) => this.playVideo(e.currentTarget, 'watchlist')}>
-            <img src={video.thumbnail} alt={video.title}/>
-          </button>
-        </div>)
+        return (
+          <div className="item" key={index}>
+            <h3>{video.title}</h3>
+            <button
+              type="button"
+              id={video._id}
+              className="remove-btn"
+              onClick={e => this.deleteVideo(e.currentTarget)}
+            >
+              Remove
+            </button>
+            <button
+              className="thumbnail"
+              type="button"
+              id={video.videoID}
+              onClick={e => this.playVideo(e.currentTarget, "watchlist")}
+            >
+              <img src={video.thumbnail} alt={video.title} />
+            </button>
+          </div>
+        );
       });
     }
-    return (<div className="video-container">{videoGallery}</div>)
+    return <div className="video-container">{videoGallery}</div>;
   }
 }
 

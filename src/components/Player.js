@@ -8,7 +8,7 @@ import "./Player.css";
 
 export class Player extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.shareVid = this.shareVid.bind(this);
     this.socket = io("https://popcorn-capstone-node.herokuapp.com");
   }
@@ -16,16 +16,15 @@ export class Player extends React.Component {
   shareVid(e) {
     e.preventDefault();
     const player = this.refs.player.internalPlayer;
-    player.getCurrentTime()
-      .then(time => {
-        const myCurrVid = this.props.currentVideo;
-        this.socket.emit("SEND_MESSAGE", {
-          text: `Watch ${myCurrVid.snippet.title} with me!`,
-          time,
-          currentVideo: this.props.currentVideo,
-          user: this.props.user
-        });
+    player.getCurrentTime().then(time => {
+      const myCurrVid = this.props.currentVideo;
+      this.socket.emit("SEND_MESSAGE", {
+        text: `Watch ${myCurrVid.snippet.title} with me!`,
+        time,
+        currentVideo: this.props.currentVideo,
+        user: this.props.user
       });
+    });
   }
 
   render() {
@@ -41,10 +40,9 @@ export class Player extends React.Component {
       const player = this.refs.player.internalPlayer;
       const time = this.props.time;
 
-      player.playVideo()
-        .then(item => {
-          seekto(time);
-        });
+      player.playVideo().then(item => {
+        seekto(time);
+      });
 
       function seekto(time) {
         player.seekTo(time);
@@ -57,21 +55,18 @@ export class Player extends React.Component {
           <div id="player" className="player">
             <YouTube videoId={this.props.videoId} opts={opts} ref="player" />
           </div>
-          <button onClick={this.shareVid}>
-            Share in Chat
-          </button>
+          <button onClick={this.shareVid}>Share in Chat</button>
         </div>
       );
     } else {
-        return (
-          <div className="player-container">
-            <div id="player" className="player">
-              <YouTube videoId="M4Ufs7-FpvU" opts={opts} ref="player" />
-            </div>
+      return (
+        <div className="player-container">
+          <div id="player" className="player">
+            <YouTube videoId="M4Ufs7-FpvU" opts={opts} ref="player" />
           </div>
-        );
+        </div>
+      );
     }
-
   }
 }
 

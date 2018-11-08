@@ -3,7 +3,7 @@ import { API_ORIGIN } from "../config";
 
 /*
  * action types
-*/
+ */
 
 export const REQUEST = "REQUEST";
 export const LOG_USER = "LOG_USER";
@@ -108,30 +108,30 @@ const storeAuthInfo = (authToken, dispatch) => {
   const decodedToken = jwtDecode(authToken);
   dispatch(setAuthToken(authToken));
   dispatch(authSuccess(decodedToken));
-  dispatch(logSession({user: decodedToken.username}));
+  dispatch(logSession({ user: decodedToken.username }));
 };
 
 // Get list of users who logged in
-export const getLoggedUsers = (user) => dispatch => {
+export const getLoggedUsers = user => dispatch => {
   fetch(`${API_ORIGIN}/auth/userLoggedIn`, {
     mode: "cors",
     headers: {
       "content-type": "application/json"
     }
   })
-  .then(res => {
-    if (!res.ok) {
-      return Promise.reject(res.statusText);
-    }
-    return res.json();
-  })
-  .then(res => {
-    dispatch(chatUsers(res.loggedIn));
-  });
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
+      return res.json();
+    })
+    .then(res => {
+      dispatch(chatUsers(res.loggedIn));
+    });
 };
 
 // Persist users who logged in
-export const logSession = (user) => dispatch => {
+export const logSession = user => dispatch => {
   fetch(`${API_ORIGIN}/auth/userLoggedIn`, {
     method: "POST",
     mode: "cors",
@@ -140,33 +140,33 @@ export const logSession = (user) => dispatch => {
     },
     body: JSON.stringify(user)
   })
-  .then(res => {
-    if (!res.ok) {
-      return Promise.reject(res.statusText);
-    }
-    return res.json();
-  })
-  .then(res => {
-    dispatch(chatUsers(res.loggedIn));
-  });
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
+      return res.json();
+    })
+    .then(res => {
+      dispatch(chatUsers(res.loggedIn));
+    });
 };
 
-// // remove users who log out and clean up
-export const logoutSession = (user) => dispatch => {
+// remove users who log out and clean up
+export const logoutSession = user => dispatch => {
   fetch(`${API_ORIGIN}/auth/userLoggedIn`, {
     method: "DELETE",
     mode: "cors",
     headers: {
       "content-type": "application/json"
     },
-    body: JSON.stringify({user: user})
+    body: JSON.stringify({ user: user })
   })
-  .then(res => {
-    dispatch(logout());
-  })
-  .catch(err => {
-    console.log(err);
-  });
+    .then(res => {
+      dispatch(logout());
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
 
 export const login = user => dispatch => {
@@ -295,7 +295,7 @@ export const getWatchlist = (userId, token) => dispatch => {
     mode: "cors",
     headers: {
       "Access-Control-Allow-Origin": "*",
-        Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     }
   })
     .then(res => {

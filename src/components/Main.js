@@ -5,15 +5,13 @@ import Player from "./Player";
 import { searchVideos, selectVideo, addVideo } from "../actions";
 import { clearDropdown } from "../custom";
 
-import Spinner from "react-spinkit";
-import requiresLogin from './requires-login';
+import requiresLogin from "./requires-login";
 import { connect } from "react-redux";
 
-import './Main.css';
+import "./Main.css";
 import "./Components.css";
 
 export class Main extends React.Component {
-
   // Clear the videos list if moving between pages
   componentWillUnmount() {
     clearDropdown(this.refs.dropdown, this.props.dispatch);
@@ -27,7 +25,7 @@ export class Main extends React.Component {
   // Find the selected video from the videos prop and pass id to Player
   getVideo(target) {
     const id = target[0].id;
-    const currentVideo = this.props.videos.find((video) => {
+    const currentVideo = this.props.videos.find(video => {
       return video.id.videoId === id;
     });
 
@@ -39,8 +37,14 @@ export class Main extends React.Component {
 
   onAdd(props) {
     // Only results from search can dispatch addVideo -- default video
-    if (this.props.currentVideo.hasOwnProperty('snippet')) {
-      this.props.dispatch(addVideo(this.props.currentVideo, this.props.userID, this.props.authToken));
+    if (this.props.currentVideo.hasOwnProperty("snippet")) {
+      this.props.dispatch(
+        addVideo(
+          this.props.currentVideo,
+          this.props.userID,
+          this.props.authToken
+        )
+      );
     }
   }
 
@@ -50,14 +54,21 @@ export class Main extends React.Component {
       const videos = this.props.videos.map((video, index) => {
         return (
           <li key={index}>
-            <button type="button" onClick={(e) => this.getVideo(e.currentTarget.children)}>
+            <button
+              type="button"
+              onClick={e => this.getVideo(e.currentTarget.children)}
+            >
               <h3 id={video.id.videoId}>{video.snippet.title}</h3>
             </button>
           </li>
         );
       });
 
-      return <ul className="results-dropdown" ref='dropdown'>{videos}</ul>;
+      return (
+        <ul className="results-dropdown" ref="dropdown">
+          {videos}
+        </ul>
+      );
     }
   }
 
@@ -67,16 +78,26 @@ export class Main extends React.Component {
     let wl_btn;
     if (this.props.videoId) {
       vidID = this.props.videoId;
-      wl_btn = <div className="watchlist-btn"><button type="button" onClick={() => this.onAdd(this.props)}>Add to Watchlist</button></div>
+      wl_btn = (
+        <div className="watchlist-btn">
+          <button type="button" onClick={() => this.onAdd(this.props)}>
+            Add to Watchlist
+          </button>
+        </div>
+      );
     }
 
     return (
       <main>
-        <SearchForm onSearch={term => this.onSearch(term)} placeholder='Search by title' results={this.renderResults()} />
+        <SearchForm
+          onSearch={term => this.onSearch(term)}
+          placeholder="Search by title"
+          results={this.renderResults()}
+        />
         {this.props.spinner}
         <section className="interactive">
-        <Player videoId={vidID} />
-        {wl_btn}
+          <Player videoId={vidID} />
+          {wl_btn}
         </section>
       </main>
     );

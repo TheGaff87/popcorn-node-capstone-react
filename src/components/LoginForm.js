@@ -19,10 +19,10 @@ export class LoginForm extends React.Component {
     const inputs = [this.email, this.password];
     const user = {
       email: this.email.value,
-      password: this.password.value,
+      password: this.password.value
     };
     this.props.dispatch(login(user));
-    inputs.map(input => input.value = '');
+    inputs.map(input => (input.value = ""));
   }
 
   render() {
@@ -39,15 +39,28 @@ export class LoginForm extends React.Component {
             <fieldset>
               <div className="flex">
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" ref={input => this.email = input} required autoFocus/>
+                <input
+                  type="email"
+                  id="email"
+                  ref={input => (this.email = input)}
+                  required
+                  autoFocus
+                />
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" ref={input => this.password = input} required/>
+                <input
+                  type="password"
+                  id="password"
+                  ref={input => (this.password = input)}
+                  required
+                />
               </div>
             </fieldset>
             <button>Submit</button>
           </form>
           <nav>
-            <Link to="/auth/signup">Don't have an account? <span>Sign up!</span> </Link>
+            <Link to="/auth/signup">
+              Don't have an account? <span>Sign up!</span>{" "}
+            </Link>
           </nav>
         </div>
         <Details />

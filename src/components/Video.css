@@ -18,12 +18,14 @@
     transition: .4s;
 }
 
-.item:hover h3, .item:hover .remove-btn {
+.item:hover h3,
+.item:hover .remove-btn {
     opacity: 1;
     transition: .4s;
 }
 
-.item h3, .item .remove-btn {
+.item h3,
+.item .remove-btn {
     position: absolute;
     opacity: 0;
 }

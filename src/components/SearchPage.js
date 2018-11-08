@@ -1,15 +1,14 @@
 import React from "react";
 import Nav from "./Nav";
 import SearchForm from "./SearchForm";
-import Videos from './Videos';
+import Videos from "./Videos";
 
-import requiresLogin from './requires-login';
+import requiresLogin from "./requires-login";
 import { connect } from "react-redux";
 import { searchVideos } from "../actions";
 import { clearDropdown } from "../custom";
 
 export class SearchPage extends React.Component {
-
   // Clear the videos list if moving between pages
   componentDidMount() {
     clearDropdown(this.refs.videos, this.props.dispatch);
@@ -29,8 +28,13 @@ export class SearchPage extends React.Component {
         <Nav />
         <section className="form-search">
           <h2>Search</h2>
-          <SearchForm placeholder='Search by video' onSearch={term => this.onSearch(term)} />
-          <div className="video-outer" ref='videos'><Videos /></div>
+          <SearchForm
+            placeholder="Search by video"
+            onSearch={term => this.onSearch(term)}
+          />
+          <div className="video-outer" ref="videos">
+            <Videos />
+          </div>
         </section>
       </div>
     );

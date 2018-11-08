@@ -2,12 +2,11 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout, logoutSession, getWatchlist} from "../actions";
+import { logout, logoutSession, getWatchlist } from "../actions";
 
 import "./Nav.css";
 
 export class Nav extends React.Component {
-
   // clear state and removed online user from database
   logOut() {
     this.props.dispatch(logout());
@@ -29,15 +28,23 @@ export class Nav extends React.Component {
             <Link to="/dashboard/search">Search</Link>
           </li>
           <li>
-            <Link to="/dashboard/watchlist" onClick={() => this.getWatchList()}>Watchlist</Link>
+            <Link to="/dashboard/watchlist" onClick={() => this.getWatchList()}>
+              Watchlist
+            </Link>
           </li>
           <li>
-            <Link className="account" to="/auth/login" onClick={() => this.logOut()}>Logout</Link>
+            <Link
+              className="account"
+              to="/auth/login"
+              onClick={() => this.logOut()}
+            >
+              Logout
+            </Link>
           </li>
         </ul>
       </nav>
     );
-  };
+  }
 }
 
 export const mapStateToProps = state => ({
