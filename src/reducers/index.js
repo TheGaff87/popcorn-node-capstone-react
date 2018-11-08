@@ -78,7 +78,7 @@ export const reducer = (state = initialState, action) => {
   if (action.type === actions.LOG_USER) {
     return Object.assign({}, state, {
       error: null,
-      loading: false,
+      loading: true,
       user: action.user
     });
   }

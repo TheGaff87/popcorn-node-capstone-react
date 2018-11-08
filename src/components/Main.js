@@ -5,6 +5,7 @@ import Player from "./Player";
 import { searchVideos, selectVideo, addVideo } from "../actions";
 import { clearDropdown } from "../custom";
 
+import Spinner from "react-spinkit";
 import requiresLogin from './requires-login';
 import { connect } from "react-redux";
 
@@ -61,23 +62,21 @@ export class Main extends React.Component {
   }
 
   render() {
+    // Renders 'Add to Watchlist' btn and pass prop videoId only if there is a non-default video selected
+    let vidID;
+    let wl_btn;
     if (this.props.videoId) {
-      // Renders 'Add to Watchlist' btn only if there is a non-default video selected
-      return (
-        <main>
-          <SearchForm onSearch={term=> this.onSearch(term)} results={this.renderResults()} />
-            <section className="interactive">
-              <Player videoId={this.props.videoId} />
-              <div className="watchlist-btn"><button type="button" onClick={() => this.onAdd(this.props)}>Add to Watchlist</button></div>
-            </section>
-        </main>
-      );
+      vidID = this.props.videoId;
+      wl_btn = <div className="watchlist-btn"><button type="button" onClick={() => this.onAdd(this.props)}>Add to Watchlist</button></div>
     }
+
     return (
       <main>
         <SearchForm onSearch={term => this.onSearch(term)} placeholder='Search by title' results={this.renderResults()} />
+        {this.props.spinner}
         <section className="interactive">
-          <Player />
+        <Player videoId={vidID} />
+        {wl_btn}
         </section>
       </main>
     );

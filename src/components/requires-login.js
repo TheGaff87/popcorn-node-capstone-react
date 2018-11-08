@@ -8,13 +8,10 @@ import Spinner from "react-spinkit";
 export default () => Component => {
     function RequiresLogin(props) {
         const {authenticating, loggedIn, error} = props;
+        let spinner;
         if (authenticating) {
-            return (
-                <div className="spinner-container">
-                    Searching in progress...
-                    <Spinner className="spinner" name="circle" />
-                </div>
-            );
+            spinner = <div className="spinner-container"><Spinner className="spinner" name="circle" /></div>
+            return <Component spinner={spinner}/> ;
         } else if (!loggedIn || error) {
             return <Redirect to = "/" /> ;
         }
